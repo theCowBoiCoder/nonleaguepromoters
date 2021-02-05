@@ -10,12 +10,14 @@
 </head>
 <body class="bg-gray-200 font-Ubuntu">
 <div class="mx-auto">
-    @include('layout.header')
-    <div class="container mx-auto">
-        @yield('content')
+    <div id="app">
+        @include('layout.header')
+        <div class="container mx-auto">
+            @yield('content')
+        </div>
+        @include('layout.footer')
     </div>
-    @include('layout.footer')
 </div>
-
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 

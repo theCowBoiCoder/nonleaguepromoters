@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed dob
+ */
 class Player extends Model
 {
     use HasFactory;
@@ -21,11 +25,26 @@ class Player extends Model
         'instagram_url',
         'youtube_url',
         'facebook_url',
-        'is_public'
+        'is_public',
+        'age'
     ];
+
+    protected $guarded = ['*'];
+
+    protected $appends = ['age'];
+
+    public function contracts()
+    {
+        return $this->hasMany(PlayerContract::class,'user_id','id');
+    }
 
     public function histories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(PlayerHistory::class,'user_id','id')->orderBy('season','DESC');
+        return $this->hasMany(PlayerHistory::class, 'user_id', 'id')->orderBy('season', 'DESC');
+    }
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->dob)->age;
     }
 }

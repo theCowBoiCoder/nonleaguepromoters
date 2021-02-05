@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PlayerContract;
 use App\Models\Player;
 use App\Models\PlayerHistory;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Player::factory(100)->create();
-        PlayerHistory::factory(500)->create();
+        PlayerContract::factory(80)->create();
+        PlayerHistory::factory(100)->create();
         $this->call(PositionsTableSeesder::class);
     }
 }
