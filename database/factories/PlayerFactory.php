@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Player;
+use App\Models\Position;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use function Symfony\Component\Translation\t;
@@ -26,8 +27,10 @@ class PlayerFactory extends Factory
     {
 
         $counties = ['Bedfordshire', 'Buckinghamshire', 'Cambridgeshire', 'Cheshire', 'Cleveland', 'Cornwall', 'Cumbria', 'Derbyshire', 'Devon', 'Dorset', 'Durham', 'East Sussex', 'Essex', 'Gloucestershire', 'Greater London', 'Greater Manchester', 'Hampshire', 'Hertfordshire', 'Kent', 'Lancashire', 'Leicestershire', 'Lincolnshire', 'Merseyside', 'Norfolk', 'North Yorkshire', 'Northamptonshire', 'Northumberland', 'Nottinghamshire', 'Oxfordshire', 'Shropshire', 'Somerset', 'South Yorkshire', 'Staffordshire', 'Suffolk', 'Surrey', 'Tyne and Wear', 'Warwickshire', 'West Berkshire', 'West Midlands', 'West Sussex', 'West Yorkshire', 'Wiltshire', 'Worcestershire', 'Flintshire', 'Glamorgan', 'Merionethshire', 'Monmouthshire', 'Montgomeryshire', 'Pembrokeshire', 'Radnorshire', 'Anglesey', 'Breconshire', 'Caernarvonshire', 'Cardiganshire', 'Carmarthenshire', 'Denbighshire', 'berdeen City', 'Aberdeenshire', 'Angus', 'Argyll and Bute', 'City of Edinburgh', 'Clackmannanshire', 'Dumfries and Galloway', 'Dundee City', 'East Ayrshire', 'East Dunbartonshire', 'East Lothian', 'East Renfrewshire', 'Eilean Siar', 'Falkirk', 'Fife', 'Glasgow City', 'Highland', 'Inverclyde', 'Midlothian', 'Moray', 'North Ayrshire', 'North Lanarkshire', 'Orkney Islands', 'Perth and Kinross', 'Renfrewshire', 'Scottish Borders', 'Shetland Islands', 'South Ayrshire', 'South Lanarkshire', 'Stirling', 'West Dunbartonshire', 'West Lothian', 'Antrim', 'Armagh', 'Down', 'Fermanagh', 'Derry and Londonderry', 'Tyrone'];
+        $positions = Position::query()->get();
         return [
             'name' => $this->faker->name,
+            'preferred_position' => $positions[random_int(0,16)]->name,
             'dob' => $this->faker->dateTimeBetween('1990-01-01', '2010-01-01'),
             'bio' => $this->faker->sentence,
             'county' => $counties[array_rand($counties)],

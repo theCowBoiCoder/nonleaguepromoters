@@ -25,6 +25,7 @@
                     <select v-model="contact_status" class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
                             v-on:change="changeContract">
                         <option value="0" selected>Please Select</option>
+                        <option value="free-agent">Free Agent</option>
                         <option value="professional">Professional</option>
                         <option value="semi-professional">Semi Professional</option>
                         <option value="non-contract">Non-Contract</option>
@@ -38,7 +39,9 @@
                     <thead>
                     <tr>
                         <th class="pl-2 border-gray-400 border-2 text-left text-gray-800 uppercase">Name</th>
+                        <th class="border-gray-400 border-2 uppercase">Preferred Postion</th>
                         <th class="border-gray-400 border-2 uppercase">Age</th>
+                        <th class="border-gray-400 border-2 uppercase">Contract Status</th>
                         <th class="border-gray-400 border-2 uppercase">County</th>
                         <th class="border-gray-400 border-2 uppercase">Country</th>
                         <th class="border-gray-400 border-2 w-32 uppercase"></th>
@@ -47,7 +50,12 @@
                     <tbody>
                     <tr v-for="player in filteredList">
                         <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.name }}</td>
+                        <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.preferred_position }}</td>
                         <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.age }}</td>
+                        <td class="border-gray-400 border-2 uppercase pl-2 font-light" v-if="player.contract">{{ player.contract.contract_type}}</td>
+                        <td class="border-gray-400 border-2 uppercase pl-2 font-light" v-if="!player.contract">
+                            Free Agent
+                        </td>
                         <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.county }}</td>
                         <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.country }}</td>
                         <td class="border-gray-400 border-2 p-2 text-center">

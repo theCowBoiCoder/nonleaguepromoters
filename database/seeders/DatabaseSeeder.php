@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(PositionsTableSeesder::class);
         Player::factory(100)->create();
         PlayerContract::factory(80)->create();
         PlayerHistory::factory(100)->create();
-        $this->call(PositionsTableSeesder::class);
+
     }
 }

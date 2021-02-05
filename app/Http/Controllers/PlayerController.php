@@ -9,7 +9,7 @@ class PlayerController extends Controller
 {
     public function index()
     {
-        $players = Player::query()->with('contracts')->where('is_public', 1)->get();
+        $players = Player::query()->with('contract')->where('is_public', 1)->get();
         return view('pages.players.players',compact('players'));
     }
 

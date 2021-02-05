@@ -17,6 +17,7 @@ class Player extends Model
         'name',
         'dob',
         'bio',
+        'preferred_position',
         'profile_image',
         'country',
         'county',
@@ -33,9 +34,9 @@ class Player extends Model
 
     protected $appends = ['age'];
 
-    public function contracts()
+    public function contract()
     {
-        return $this->hasMany(PlayerContract::class,'user_id','id');
+        return $this->hasOne(PlayerContract::class,'user_id','id');
     }
 
     public function histories(): \Illuminate\Database\Eloquent\Relations\HasMany

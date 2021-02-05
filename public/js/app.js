@@ -1945,6 +1945,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['players'],
   data: function data() {
@@ -37744,6 +37752,10 @@ var render = function() {
                   _vm._v("Please Select")
                 ]),
                 _vm._v(" "),
+                _c("option", { attrs: { value: "free-agent" } }, [
+                  _vm._v("Free Agent")
+                ]),
+                _vm._v(" "),
                 _c("option", { attrs: { value: "professional" } }, [
                   _vm._v("Professional")
                 ]),
@@ -37793,8 +37805,43 @@ var render = function() {
                         staticClass:
                           "border-gray-400 border-2 uppercase pl-2 font-light"
                       },
+                      [_vm._v(_vm._s(player.preferred_position))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-gray-400 border-2 uppercase pl-2 font-light"
+                      },
                       [_vm._v(_vm._s(player.age))]
                     ),
+                    _vm._v(" "),
+                    player.contract
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-gray-400 border-2 uppercase pl-2 font-light"
+                          },
+                          [_vm._v(_vm._s(player.contract.contract_type))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !player.contract
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-gray-400 border-2 uppercase pl-2 font-light"
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Free Agent\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -37843,7 +37890,15 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
+          _vm._v("Preferred Postion")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
           _vm._v("Age")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
+          _vm._v("Contract Status")
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
