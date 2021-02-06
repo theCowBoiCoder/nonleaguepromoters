@@ -12,9 +12,7 @@
 <div class="mx-auto">
     <div id="app">
         @include('layout.header')
-        <div class="container mx-auto">
             @yield('content')
-        </div>
         @include('layout.footer')
     </div>
 </div>
