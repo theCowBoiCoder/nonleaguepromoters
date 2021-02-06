@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="lg:bg-home-image md:bg-black bg-scroll bg-cover h-screen">
+    <div class="lg:bg-home-image bg-black bg-scroll bg-cover h-screen">
         <div class="container m-auto">
             <div class="pt-20 pb-20 pl-20">
                 <h1 class="uppercase text-white lg:text-7xl md:text-5xl font-italic font-Montserrat">The Non <br>League <br>Promoters</h1>
