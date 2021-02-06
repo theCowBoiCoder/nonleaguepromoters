@@ -7,6 +7,9 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
+            backgroundImage: theme => ({
+                'home-image' : "url('/images/home_background.jpg')",
+            }),
             fontFamily:{
               'Montserrat':['Montserrat','sans-serif'],
               'Ubuntu':['Ubuntu','sans-serif']
