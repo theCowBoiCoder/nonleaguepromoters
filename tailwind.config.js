@@ -9,10 +9,10 @@ module.exports = {
         extend: {
             backgroundImage: theme => ({
                 'home-image' : "url('/images/home_background.jpg')",
+                'about-image' : "url('/images/about.png')",
             }),
             fontFamily:{
-              'Montserrat':['Montserrat','sans-serif'],
-              'Ubuntu':['Ubuntu','sans-serif']
+              'Roboto':['Roboto','sans-serif'],
             },
             screens: {
                 'tablet': '640px',
@@ -21,7 +21,7 @@ module.exports = {
                 'laptop': '1024px',
                 // => @media (min-width: 1024px) { ... }
 
-                'desktop': '1280px',
+                'desktop': '1920',
                 // => @media (min-width: 1280px) { ... }
             },
         },
