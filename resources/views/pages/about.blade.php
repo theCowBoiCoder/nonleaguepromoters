@@ -1,12 +1,12 @@
 @extends('layout.main')
 @section('content')
-    <div class="md:bg-about-image bg-scroll bg-black">
+    <div class="bg-black md:bg-about-image bg-scroll">
         <div class="container m-auto">
-            <div class="pt-20 pb-20 pl-20">
-                <h1 class="uppercase text-white lg:text-8xl md:text-5xl bolder italic font-Roboto leading-8" style="color: orange; font-weight: 900;">About</h1>
+            <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
+                <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto leading-8" style="color: orange; font-weight: 900;">About</h1>
                 <p class="text-3xl uppercase text-white mt-4" style="font-weight: 700;">Here at tnlp we are looking to promote non league football</p>
             </div>
-            <div class="flex flex-col pl-20">
+            <div class="flex flex-col px-7 lg:pl-20 lg:px-3">
                 <div class="mb-3">
                     <h3 class="uppercase text-2xl mb-4" style="color: deepskyblue; font-weight: bold;">Player search platform</h3>
                     <p class="text-white uppercase italic leading-9" style="font-weight: 800;">we have created the chance for all players no matter the level to promote yourself on one simple player search platform, with your very own profile</p>
