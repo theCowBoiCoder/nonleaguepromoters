@@ -35,7 +35,7 @@
 
             </div>
             <div class="mt-6 flex-grow">
-                <table class="table-auto border-collapse border-2 border-blue-600 w-full">
+                <table class="table-auto border-collapse border-2 border-blue-600 bg-white w-full">
                     <thead>
                     <tr>
                         <th class="pl-2 border-gray-400 border-2 text-left text-gray-800 uppercase">Name</th>
@@ -79,7 +79,8 @@ export default {
             name: '',
             country: '',
             county: '',
-            contact_status: 0
+            contact_status: 0,
+            laravelData: {},
         }
     },
     methods: {

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('about', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('register',[\App\Http\Controllers\HomeController::class,'register'])->name('register');
 Route::group(['prefix' => 'player'], function () {
     Route::get('search', [\App\Http\Controllers\PlayerController::class, 'index'])->name('search');
     Route::get('{player}',[\App\Http\Controllers\PlayerController::class,'single'])->name('single');

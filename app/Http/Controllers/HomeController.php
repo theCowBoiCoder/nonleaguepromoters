@@ -15,4 +15,9 @@ class HomeController extends Controller
     {
         return view('pages.about');
     }
+
+    public function register()
+    {
+        return view('pages.register');
+    }
 }
