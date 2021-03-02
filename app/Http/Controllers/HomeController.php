@@ -15,6 +15,11 @@ use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
+
+    public function landing()
+    {
+        return view('pages.landing');
+    }
     public function index()
     {
         return view('pages.home');
