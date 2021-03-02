@@ -14,12 +14,15 @@ class Player extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
+        'gender',
         'dob',
         'bio',
         'preferred_position',
         'profile_image',
         'country',
+        'height',
         'county',
         'step_level',
         'twitter_url',
@@ -36,7 +39,7 @@ class Player extends Model
 
     public function contract()
     {
-        return $this->hasOne(PlayerContract::class,'user_id','id');
+        return $this->hasOne(PlayerContract::class, 'user_id', 'id');
     }
 
     public function histories(): \Illuminate\Database\Eloquent\Relations\HasMany

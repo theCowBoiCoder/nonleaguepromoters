@@ -15,8 +15,8 @@ class CreatePlayerHistoriesTable extends Migration
     {
         Schema::create('player_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('players');
+            $table->unsignedBigInteger('player_id');
+            $table->foreign('player_id')->references('id')->on('players');
             $table->string('season','11');
             $table->string('club','50');
             $table->integer('appearances');

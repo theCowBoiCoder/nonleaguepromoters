@@ -15,14 +15,14 @@ class CreateContractsTable extends Migration
     {
         Schema::create('player_contracts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('players');
+            $table->unsignedBigInteger('player_id');
+            $table->foreign('player_id')->references('id')->on('players');
             $table->string('contracted_club');
-            $table->enum('contract_type',['professional','semi-professional','non-contract','amateur-contract']);
+            $table->enum('contract_type',['professional','semi-professional','non-contract','amateur-contract'])->nullable();
             $table->date('contact_expiry_date')->nullable();
             $table->enum('job_role',['staff','player'])->default('player');
             $table->date('transfer_date')->nullable();
-            $table->string('wage');
+            $table->string('wage')->nullable();
             $table->string('goal_bonus')->nullable();
             $table->string('clean_sheet_bonus')->nullable();
             $table->string('top_goal_scorer_bonus')->nullable();

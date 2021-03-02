@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="bg-home-image bg-black bg-scroll bg-cover h-screen">
+    <div class="bg-home-image bg-black bg-scroll bg-cover bg-center h-screen">
         <div class="container m-auto">
             <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
                 <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto leading-8" style="color: orange; font-weight: 900;">The Non <br>League <br>Promoters</h1>
@@ -13,7 +13,7 @@
                     <a href="{{route('about')}}" class="uppercase text-white font-weight-bold"><strong>About</strong></a>
                 </div>
                 <div class="mb-1">
-                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Player Search Platform</strong></a>
+                    <a href="{{route('search')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Player Search Platform</strong></a>
                 </div>
                 <div class="mb-1">
                     <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Staff Search Platform</strong></a>

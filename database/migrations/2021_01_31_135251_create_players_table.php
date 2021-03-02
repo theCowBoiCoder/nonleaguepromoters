@@ -15,8 +15,13 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('name','75');
+            $table->string('gender');
             $table->string('preferred_position');
+            $table->string('height');
+            $table->string('address')->nullable();
             $table->date('dob')->nullable();
             $table->text('bio')->nullable();
             $table->string('profile_image')->nullable();
