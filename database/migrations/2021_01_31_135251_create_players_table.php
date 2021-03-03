@@ -20,6 +20,7 @@ class CreatePlayersTable extends Migration
             $table->string('name','75');
             $table->string('gender');
             $table->string('preferred_position');
+            $table->string('preferred_foot');
             $table->string('height');
             $table->string('address')->nullable();
             $table->date('dob')->nullable();

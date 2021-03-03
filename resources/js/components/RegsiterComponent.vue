@@ -88,7 +88,8 @@
                     <div class="flex flex-col mb-2">
                         <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Profile Picture</label>
-                        <input type="file" class="border py-2 px-3 text-grey-darkest" id="profile_image">
+                        <input type="file" id="file" ref="file" class="border py-2 px-3 text-grey-darkest"
+                               v-on:change="previewFiles()" multiple>
                     </div>
                 </div>
             </div>
@@ -138,7 +139,7 @@ export default {
             step_free: '',
             club: '',
             contract_end_date: '',
-            profile_image: '',
+            file: '',
             got_club: false,
             errors: [],
             success: '',
@@ -150,31 +151,38 @@ export default {
         DatePicker
     },
     methods: {
+        previewFiles(event) {
+            this.file = this.$refs.file.files[0];
+            console.log(this.file);
+        },
         register() {
+            let formData = new FormData();
+            formData.append('name', this.name);
+            formData.append('dob', this.dob);
+            formData.append('email_address', this.email_address);
+            formData.append('address', this.address);
+            formData.append('height', this.height);
+            formData.append('gender', this.gender);
+            formData.append('preferred_foot', this.preferred_foot);
+            formData.append('preferred_position', this.preferred_position);
+            formData.append('club', this.club);
+            formData.append('step_free', this.step_free);
+            formData.append('contract_end_date', this.contract_end_date);
+            formData.append('file', this.file);
             this.success = '';
             axios.defaults.headers.common = {
                 'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': window.csrf_token
-            };
+                'X-CSRF-TOKEN': window.csrf_token,
+                'Content-Type': 'multipart/form-data'
 
-            axios.post('/register', {
-                name: this.name,
-                dob: this.dob,
-                email: this.email_address,
-                address: this.address,
-                height: this.height,
-                gender: this.gender,
-                preferred_foot: this.preferred_foot,
-                step_free: this.step_free,
-                club: this.club,
-                contract_end_date: this.contract_end_date,
-                preferred_position: this.preferred_position
-            }).then(response => {
+            };
+            axios.post('/register',formData).then(response => {
                 if (response.status === 200) {
                     if (response.data.error) {
                         this.success = response.data.error;
                     }else{
-                        window.location.href='/';
+                        //window.location.href='/';
+
                     }
 
                 }

@@ -45,17 +45,22 @@ class HomeController extends Controller
     public function registerUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users,email',
+            'email_address' => 'required|email|unique:users,email',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => 'Sorry the email address is already in use']);
         }
 
+        if(isset($request->file)){
+            $imageName = time().'.'.$request->file->extension();
+            $request->file->move(public_path('images'), $imageName);
+        }
+
         $password = Str::random(8);
         $user = User::query()->create([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $request->email_address,
             'password' => Hash::make($password)
         ]);
 
@@ -68,7 +73,9 @@ class HomeController extends Controller
             'dob' => Carbon::parse($request->dob)->toDateString(),
             'step_level' => $request->step_free,
             'height' => $request->height ?? 0,
-            'preferred_position' => $request->preferred_position ?? ''
+            'preferred_position' => $request->preferred_position ?? '',
+            'preferred_foot' => $request->preferred_foot ?? '',
+            'profile_image' => $imageName ?? NULL
         ]);
 
         if (isset($request->club)) {

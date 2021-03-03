@@ -2130,6 +2130,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2147,7 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
       step_free: '',
       club: '',
       contract_end_date: '',
-      profile_image: '',
+      file: '',
       got_club: false,
       errors: [],
       success: ''
@@ -2157,32 +2158,37 @@ __webpack_require__.r(__webpack_exports__);
     DatePicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__.default
   },
   methods: {
+    previewFiles: function previewFiles(event) {
+      this.file = this.$refs.file.files[0];
+      console.log(this.file);
+    },
     register: function register() {
       var _this = this;
 
+      var formData = new FormData();
+      formData.append('name', this.name);
+      formData.append('dob', this.dob);
+      formData.append('email_address', this.email_address);
+      formData.append('address', this.address);
+      formData.append('height', this.height);
+      formData.append('gender', this.gender);
+      formData.append('preferred_foot', this.preferred_foot);
+      formData.append('preferred_position', this.preferred_position);
+      formData.append('club', this.club);
+      formData.append('step_free', this.step_free);
+      formData.append('contract_end_date', this.contract_end_date);
+      formData.append('file', this.file);
       this.success = '';
       (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common) = {
         'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': window.csrf_token
+        'X-CSRF-TOKEN': window.csrf_token,
+        'Content-Type': 'multipart/form-data'
       };
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/register', {
-        name: this.name,
-        dob: this.dob,
-        email: this.email_address,
-        address: this.address,
-        height: this.height,
-        gender: this.gender,
-        preferred_foot: this.preferred_foot,
-        step_free: this.step_free,
-        club: this.club,
-        contract_end_date: this.contract_end_date,
-        preferred_position: this.preferred_position
-      }).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/register', formData).then(function (response) {
         if (response.status === 200) {
           if (response.data.error) {
             _this.success = response.data.error;
-          } else {
-            window.location.href = '/';
+          } else {//window.location.href='/';
           }
         }
       })["catch"](function (e) {
@@ -38510,9 +38516,11 @@ var render = function() {
                   _vm._v("Please Select")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "0" } }, [_vm._v("Step")]),
+                _c("option", { attrs: { value: "step" } }, [_vm._v("Step")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "0" } }, [_vm._v("Free Agent")])
+                _c("option", { attrs: { value: "free_agent" } }, [
+                  _vm._v("Free Agent")
+                ])
               ]
             )
           ]),
@@ -38653,7 +38661,29 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "profile_image" }
+              },
+              [_vm._v("Profile Picture")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              ref: "file",
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "file", id: "file", multiple: "" },
+              on: {
+                change: function($event) {
+                  return _vm.previewFiles()
+                }
+              }
+            })
+          ])
         ])
       ])
     ]),
@@ -38768,27 +38798,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-col mb-2" }, [
-      _c(
-        "label",
-        {
-          staticClass: "mb-2 uppercase font-bold text-lg text-grey-darkest",
-          staticStyle: { color: "orange", "font-weight": "900" },
-          attrs: { for: "profile_image" }
-        },
-        [_vm._v("Profile Picture")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "border py-2 px-3 text-grey-darkest",
-        attrs: { type: "file", id: "profile_image" }
-      })
-    ])
   }
 ]
 render._withStripped = true
