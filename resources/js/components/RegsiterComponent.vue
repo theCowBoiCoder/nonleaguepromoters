@@ -62,8 +62,8 @@
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
                         <select class="border py-2 px-3 text-grey-darkest" v-model="step_free">
                             <option value="0">Please Select</option>
-                            <option value="0">Step</option>
-                            <option value="0">Free Agent</option>
+                            <option value="step">Step</option>
+                            <option value="free_agent">Free Agent</option>
                         </select>
                     </div>
                     <div class="flex flex-col mb-2">

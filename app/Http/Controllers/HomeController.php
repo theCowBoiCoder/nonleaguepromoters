@@ -6,15 +6,24 @@ use App\Models\Player;
 use App\Models\PlayerContract;
 use App\Models\Position;
 use App\Models\User;
+use App\Notifications\UserHasRegisteredNotification;
+use App\Notifications\UserRegisterNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
+
+    public function landing()
+    {
+        return view('pages.landing');
+    }
+
     public function index()
     {
         return view('pages.home');
@@ -35,11 +44,11 @@ class HomeController extends Controller
 
     public function registerUser(Request $request)
     {
-       $validator = Validator::make($request->all(),[
-           'email' => 'required|email|unique:users,email',
-       ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email',
+        ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json(['error' => 'Sorry the email address is already in use']);
         }
 
@@ -49,7 +58,6 @@ class HomeController extends Controller
             'email' => $request->email,
             'password' => Hash::make($password)
         ]);
-
 
 
         $player = Player::query()->create([
@@ -71,7 +79,9 @@ class HomeController extends Controller
             ]);
         }
 
-        Auth::attempt(['email' => $request->email,'password' => $password]);
+        Auth::attempt(['email' => $request->email, 'password' => $password]);
+        Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user,$player));
+        Notification::route('mail',$user->email)->notify(new UserRegisterNotification($user));
         return response()->json(['message' => 'Thanks You Have Now Registered']);
 
     }
