@@ -10,6 +10,7 @@ module.exports = {
             backgroundImage: theme => ({
                 'home-image' : "url('/images/home_background.jpg')",
                 'about-image' : "url('/images/about.png')",
+                'player-image' : "url('/images/player.png')",
             }),
             fontFamily:{
               'Roboto':['Roboto','sans-serif'],

@@ -39,25 +39,18 @@
                     <thead>
                     <tr>
                         <th class="pl-2 border-gray-400 border-2 text-left text-gray-800 uppercase">Name</th>
-                        <th class="border-gray-400 border-2 uppercase">Preferred Postion</th>
-                        <th class="border-gray-400 border-2 uppercase">Age</th>
-                        <th class="border-gray-400 border-2 uppercase">Contract Status</th>
-                        <th class="border-gray-400 border-2 uppercase">County</th>
-                        <th class="border-gray-400 border-2 uppercase">Country</th>
+                        <th class="border-gray-400 border-2 uppercase">Club</th>
+                        <th class="border-gray-400 border-2 uppercase">Contract Finish Date</th>
+                        <th class="border-gray-400 border-2 uppercase">Looking To Move</th>
                         <th class="border-gray-400 border-2 w-32 uppercase"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="player in filteredList">
+                    <tr v-for="player in players">
                         <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.name }}</td>
-                        <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.preferred_position }}</td>
+                        <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.name }}</td>
                         <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.age }}</td>
-                        <td class="border-gray-400 border-2 uppercase pl-2 font-light" v-if="player.contract">{{ player.contract.contract_type}}</td>
-                        <td class="border-gray-400 border-2 uppercase pl-2 font-light" v-if="!player.contract">
-                            Free Agent
-                        </td>
-                        <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.county }}</td>
-                        <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.country }}</td>
+                        <td class="border-gray-400 border-2 uppercase pl-2 font-light">{{ player.age }}</td>
                         <td class="border-gray-400 border-2 p-2 text-center">
                             <a href="/player/search/" class="text-sm border-1 bg-blue-400 p-1 rounded text-white uppercase font-light">
                                 View Details
@@ -87,24 +80,24 @@ export default {
         changeContract: function () {
             console.log(this.contact_status);
         },
-        filterPlayersByName: function (players) {
-            return players.filter(player => {
-                player.name.toLowerCase().includes(this.name.toLowerCase());
-            });
-        }
+        // filterPlayersByName: function (players) {
+        //     return players.filter(player => {
+        //         player.name.toLowerCase().includes(this.name.toLowerCase());
+        //     });
+        // }
     },
     mounted() {
 
     },
     computed: {
 
-        filteredList() {
-            const {name, county, country} = this;
-            return this.players
-                .filter(player => player.name.toLowerCase().includes(name.toLowerCase()))
-                .filter(player => player.county.toLowerCase().includes(county.toLowerCase()))
-                .filter(player => player.country.toLowerCase().includes(country.toLowerCase()))
-        }
+        // filteredList() {
+        //     const {name, county, country} = this;
+        //     return this.players
+        //         .filter(player => player.name.toLowerCase().includes(name.toLowerCase()))
+        //         .filter(player => player.county.toLowerCase().includes(county.toLowerCase()))
+        //         .filter(player => player.country.toLowerCase().includes(country.toLowerCase()))
+        // }
     }
 }
 </script>

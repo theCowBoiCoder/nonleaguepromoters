@@ -44,6 +44,7 @@ class UserRegisterNotification extends Notification
     {
         return (new MailMessage)
             ->bcc('hayden@togadevelopment.co.uk')
+            ->subject('Thank you for joining Non League Promoters')
             ->greeting("Hello {$this->user->name}")
             ->line('Welcome and thank you for joining Non League Promoters');
     }

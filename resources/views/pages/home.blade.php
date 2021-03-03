@@ -18,21 +18,21 @@
                 <div class="mb-1">
                     <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Staff Search Platform</strong></a>
                 </div>
-                <div class="mb-1">
-                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Club Promotion</strong></a>
-                </div>
-                <div class="mb-1">
-                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Best Of Non League social</strong></a>
-                </div>
-                <div class="mb-1">
-                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Non league Shop</strong></a>
-                </div>
-                <div class="mb-1">
-                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Advertise with us</strong></a>
-                </div>
-                <div class="mb-1">
-                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Contact us</strong></a>
-                </div>
+{{--                <div class="mb-1">--}}
+{{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Club Promotion</strong></a>--}}
+{{--                </div>--}}
+{{--                <div class="mb-1">--}}
+{{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Best Of Non League social</strong></a>--}}
+{{--                </div>--}}
+{{--                <div class="mb-1">--}}
+{{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Non league Shop</strong></a>--}}
+{{--                </div>--}}
+{{--                <div class="mb-1">--}}
+{{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Advertise with us</strong></a>--}}
+{{--                </div>--}}
+{{--                <div class="mb-1">--}}
+{{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Contact us</strong></a>--}}
+{{--                </div>--}}
                 <div class="mt-6">
                     <h2 class="text-3xl" style="color: orange; font-weight: 700;"><a href="{{route('register')}}">SIGN UP FREE NOW</a></h2>
                 </div>

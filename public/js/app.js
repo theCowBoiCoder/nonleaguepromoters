@@ -1946,13 +1946,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['players'],
   data: function data() {
@@ -1967,29 +1960,21 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     changeContract: function changeContract() {
       console.log(this.contact_status);
-    },
-    filterPlayersByName: function filterPlayersByName(players) {
-      var _this = this;
+    } // filterPlayersByName: function (players) {
+    //     return players.filter(player => {
+    //         player.name.toLowerCase().includes(this.name.toLowerCase());
+    //     });
+    // }
 
-      return players.filter(function (player) {
-        player.name.toLowerCase().includes(_this.name.toLowerCase());
-      });
-    }
   },
   mounted: function mounted() {},
-  computed: {
-    filteredList: function filteredList() {
-      var name = this.name,
-          county = this.county,
-          country = this.country;
-      return this.players.filter(function (player) {
-        return player.name.toLowerCase().includes(name.toLowerCase());
-      }).filter(function (player) {
-        return player.county.toLowerCase().includes(county.toLowerCase());
-      }).filter(function (player) {
-        return player.country.toLowerCase().includes(country.toLowerCase());
-      });
-    }
+  computed: {// filteredList() {
+    //     const {name, county, country} = this;
+    //     return this.players
+    //         .filter(player => player.name.toLowerCase().includes(name.toLowerCase()))
+    //         .filter(player => player.county.toLowerCase().includes(county.toLowerCase()))
+    //         .filter(player => player.country.toLowerCase().includes(country.toLowerCase()))
+    // }
   }
 });
 
@@ -2159,15 +2144,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     previewFiles: function previewFiles(event) {
-      this.file = this.$refs.file.files[0];
-      console.log(this.file);
+      this.file = this.$refs.file.files[0]; //console.log(this.file);
     },
     register: function register() {
       var _this = this;
 
       var formData = new FormData();
       formData.append('name', this.name);
-      formData.append('dob', this.dob);
+      formData.append('dob', this.dob.toDateString());
       formData.append('email_address', this.email_address);
       formData.append('address', this.address);
       formData.append('height', this.height);
@@ -2176,7 +2160,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('preferred_position', this.preferred_position);
       formData.append('club', this.club);
       formData.append('step_free', this.step_free);
-      formData.append('contract_end_date', this.contract_end_date);
+      formData.append('contract_end_date', this.contract_end_date.toDateString());
       formData.append('file', this.file);
       this.success = '';
       (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common) = {
@@ -2188,7 +2172,8 @@ __webpack_require__.r(__webpack_exports__);
         if (response.status === 200) {
           if (response.data.error) {
             _this.success = response.data.error;
-          } else {//window.location.href='/';
+          } else {
+            window.location.href = '/';
           }
         }
       })["catch"](function (e) {
@@ -38069,7 +38054,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.filteredList, function(player) {
+                _vm._l(_vm.players, function(player) {
                   return _c("tr", [
                     _c(
                       "td",
@@ -38086,7 +38071,7 @@ var render = function() {
                         staticClass:
                           "border-gray-400 border-2 uppercase pl-2 font-light"
                       },
-                      [_vm._v(_vm._s(player.preferred_position))]
+                      [_vm._v(_vm._s(player.name))]
                     ),
                     _vm._v(" "),
                     _c(
@@ -38098,48 +38083,13 @@ var render = function() {
                       [_vm._v(_vm._s(player.age))]
                     ),
                     _vm._v(" "),
-                    player.contract
-                      ? _c(
-                          "td",
-                          {
-                            staticClass:
-                              "border-gray-400 border-2 uppercase pl-2 font-light"
-                          },
-                          [_vm._v(_vm._s(player.contract.contract_type))]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    !player.contract
-                      ? _c(
-                          "td",
-                          {
-                            staticClass:
-                              "border-gray-400 border-2 uppercase pl-2 font-light"
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Free Agent\n                    "
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
                     _c(
                       "td",
                       {
                         staticClass:
                           "border-gray-400 border-2 uppercase pl-2 font-light"
                       },
-                      [_vm._v(_vm._s(player.county))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light"
-                      },
-                      [_vm._v(_vm._s(player.country))]
+                      [_vm._v(_vm._s(player.age))]
                     ),
                     _vm._v(" "),
                     _vm._m(1, true)
@@ -38171,23 +38121,15 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
-          _vm._v("Preferred Postion")
+          _vm._v("Club")
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
-          _vm._v("Age")
+          _vm._v("Contract Finish Date")
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
-          _vm._v("Contract Status")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
-          _vm._v("County")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-gray-400 border-2 uppercase" }, [
-          _vm._v("Country")
+          _vm._v("Looking To Move")
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "border-gray-400 border-2 w-32 uppercase" })
@@ -38459,7 +38401,14 @@ var render = function() {
               _vm._v(" "),
               _c("date-picker", {
                 class: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "dob" }
+                attrs: { name: "dob", format: "yyyy-MM-dd" },
+                model: {
+                  value: _vm.dob,
+                  callback: function($$v) {
+                    _vm.dob = $$v
+                  },
+                  expression: "dob"
+                }
               })
             ],
             1

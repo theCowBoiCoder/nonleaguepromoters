@@ -20,6 +20,7 @@ class Player extends Model
         'dob',
         'bio',
         'preferred_position',
+        'preferred_foot',
         'profile_image',
         'country',
         'height',
@@ -37,7 +38,12 @@ class Player extends Model
 
     protected $appends = ['age'];
 
-    public function contract()
+    public function currentContract()
+    {
+
+    }
+
+    public function contracts()
     {
         return $this->hasOne(PlayerContract::class, 'user_id', 'id');
     }
