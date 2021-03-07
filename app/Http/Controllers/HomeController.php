@@ -87,9 +87,11 @@ class HomeController extends Controller
         }
 
         Auth::attempt(['email' => $request->email, 'password' => $password]);
-        //Send the Notifications
-        Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user,$player));
-        Notification::route('mail',$user->email)->notify(new UserRegisterNotification($user));
+        if(env('APP_ENV') != 'local'){
+            //Send the Notifications
+            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user,$player));
+            Notification::route('mail',$user->email)->notify(new UserRegisterNotification($user));
+        }
 
         return response()->json(['message' => 'Thanks You Have Now Registered']);
 

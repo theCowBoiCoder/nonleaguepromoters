@@ -45,7 +45,7 @@ class Player extends Model
 
     public function contracts()
     {
-        return $this->hasOne(PlayerContract::class, 'user_id', 'id');
+        return $this->hasOne(PlayerContract::class, 'player_id', 'id');
     }
 
     public function histories(): \Illuminate\Database\Eloquent\Relations\HasMany

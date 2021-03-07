@@ -158,7 +158,9 @@ export default {
         register() {
             let formData = new FormData();
             formData.append('name', this.name);
-            formData.append('dob', this.dob.toDateString());
+            if (this.dob !== '') {
+                formData.append('dob', this.dob.toDateString());
+            }
             formData.append('email_address', this.email_address);
             formData.append('address', this.address);
             formData.append('height', this.height);
@@ -167,7 +169,10 @@ export default {
             formData.append('preferred_position', this.preferred_position);
             formData.append('club', this.club);
             formData.append('step_free', this.step_free);
-            formData.append('contract_end_date', this.contract_end_date.toDateString());
+            if (this.contract_end_date !== '') {
+                formData.append('contract_end_date', this.contract_end_date.toDateString());
+            }
+
             formData.append('file', this.file);
             this.success = '';
             axios.defaults.headers.common = {
