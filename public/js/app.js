@@ -1950,6 +1950,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['players'],
   data: function data() {
@@ -38059,60 +38065,72 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "flex-initial lg:flex-grow" }, [
-          _c(
-            "table",
-            {
-              staticClass:
-                "table-auto border-collapse border-2 border-blue-600 bg-white"
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.players, function(player) {
-                  return _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light p-2"
-                      },
-                      [_vm._v(_vm._s(player.name))]
-                    ),
+          _vm.players.length >= 1
+            ? _c("div", [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table-auto border-collapse border-2 border-blue-600 bg-white"
+                  },
+                  [
+                    _vm._m(0),
                     _vm._v(" "),
                     _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light p-2"
-                      },
-                      [_vm._v(_vm._s(player.contracts.contracted_club))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light p-2"
-                      },
-                      [_vm._v(_vm._s(player.contracts.contact_expiry_date))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light p-2"
-                      },
-                      [_vm._v("NO")]
+                      "tbody",
+                      _vm._l(_vm.players, function(player) {
+                        return _c("tr", [
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                            },
+                            [_vm._v(_vm._s(player.name))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                            },
+                            [_vm._v(_vm._s(player.contracts.contracted_club))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(player.contracts.contact_expiry_date)
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                            },
+                            [_vm._v("NO")]
+                          )
+                        ])
+                      }),
+                      0
                     )
-                  ])
-                }),
-                0
-              )
-            ]
-          )
+                  ]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.players.length === 0
+            ? _c("div", [_c("h2", [_vm._v("NO PLAYERS YET BE THE FIRST")])])
+            : _vm._e()
         ])
       ])
     ])

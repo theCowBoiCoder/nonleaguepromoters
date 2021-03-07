@@ -36,31 +36,37 @@
                     </div>
                 </div>
                     <div class="flex-initial lg:flex-grow">
-                        <table class="table-auto border-collapse border-2 border-blue-600 bg-white">
-                            <thead>
-                            <tr>
-                                <th class="pl-2 border-gray-400 border-2 text-left text-gray-800 uppercase p-2">Name</th>
-                                <th class="border-gray-400 border-2 uppercase p-2">Club</th>
-                                <th class="border-gray-400 border-2 uppercase p-2">Contract Finish Date</th>
-                                <th class="border-gray-400 border-2 uppercase p-2">Looking To Move</th>
-<!--                                <th class="border-gray-400 border-2 w-32 uppercase"></th>-->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="player in players">
-                                <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.name }}</td>
-                                <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.contracts.contracted_club }}</td>
-                                <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.contracts.contact_expiry_date }}</td>
-                                <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">NO</td>
-<!--                                <td class="border-gray-400 border-2 p-2 text-center">-->
-<!--&lt;!&ndash;                                    <a href="/player/search/"&ndash;&gt;-->
-<!--&lt;!&ndash;                                       class="text-sm border-1 bg-blue-400 p-1 rounded text-white uppercase font-light">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        View Details&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </a>&ndash;&gt;-->
-<!--                                </td>-->
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div v-if="players.length >=1">
+                            <table class="table-auto border-collapse border-2 border-blue-600 bg-white">
+                                <thead>
+                                <tr>
+                                    <th class="pl-2 border-gray-400 border-2 text-left text-gray-800 uppercase p-2">Name</th>
+                                    <th class="border-gray-400 border-2 uppercase p-2">Club</th>
+                                    <th class="border-gray-400 border-2 uppercase p-2">Contract Finish Date</th>
+                                    <th class="border-gray-400 border-2 uppercase p-2">Looking To Move</th>
+                                    <!--                                <th class="border-gray-400 border-2 w-32 uppercase"></th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="player in players">
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.name }}</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.contracts.contracted_club }}</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.contracts.contact_expiry_date }}</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">NO</td>
+                                    <!--                                <td class="border-gray-400 border-2 p-2 text-center">-->
+                                    <!--&lt;!&ndash;                                    <a href="/player/search/"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;                                       class="text-sm border-1 bg-blue-400 p-1 rounded text-white uppercase font-light">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;                                        View Details&ndash;&gt;-->
+                                    <!--&lt;!&ndash;                                    </a>&ndash;&gt;-->
+                                    <!--                                </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div v-if="players.length === 0">
+                            <h2>NO PLAYERS YET BE THE FIRST</h2>
+                        </div>
+
                     </div>
             </div>
         </div>
