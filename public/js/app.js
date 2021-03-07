@@ -37877,231 +37877,225 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container m-auto" }, [
-    _c(
-      "div",
-      {
-        staticClass: "flex lg:flex-row sm:flex-col md:flex-col xs:flex-col mb-9"
-      },
-      [
-        _c("div", { staticClass: "mt-6 flex-none w-75 mr-20" }, [
-          _c(
-            "h3",
-            {
-              staticClass:
-                "m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat"
-            },
-            [_vm._v("Search Filters")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center" }, [
-              _vm._v("Search By Name")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.name,
-                  expression: "name"
-                }
-              ],
-              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-              attrs: { type: "text", placeholder: "Search Name Contains" },
-              domProps: { value: _vm.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.name = $event.target.value
-                }
-              }
-            })
+    _c("div", { staticClass: "flex flex-col xs:flex-col lg:flex-row mb-9" }, [
+      _c("div", { staticClass: "mt-6 flex-none w-75 mr-20" }, [
+        _c(
+          "h3",
+          {
+            staticClass:
+              "m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat"
+          },
+          [_vm._v("Search Filters")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center" }, [
+            _vm._v("Search By Name")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center" }, [
-              _vm._v("Search By County")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.county,
-                  expression: "county"
-                }
-              ],
-              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-              attrs: { type: "text", placeholder: "Search Name Contains" },
-              domProps: { value: _vm.county },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.county = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center" }, [
-              _vm._v("Search By Country")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.country,
-                  expression: "country"
-                }
-              ],
-              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-              attrs: { type: "text", placeholder: "Search Name Contains" },
-              domProps: { value: _vm.country },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.country = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center" }, [
-              _vm._v("Contract Status")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
+          _c("input", {
+            directives: [
               {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.contact_status,
-                    expression: "contact_status"
-                  }
-                ],
-                staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.contact_status = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    },
-                    _vm.changeContract
-                  ]
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              },
-              [
-                _c("option", { attrs: { value: "0", selected: "" } }, [
-                  _vm._v("Please Select")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "free-agent" } }, [
-                  _vm._v("Free Agent")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "professional" } }, [
-                  _vm._v("Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "semi-professional" } }, [
-                  _vm._v("Semi Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "non-contract" } }, [
-                  _vm._v("Non-Contract")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "amateur-contract" } }, [
-                  _vm._v("Amateur Contract")
-                ])
-              ]
-            )
-          ])
+                _vm.name = $event.target.value
+              }
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "mt-6 flex-grow" }, [
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center" }, [
+            _vm._v("Search By County")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.county,
+                expression: "county"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.county },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.county = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center" }, [
+            _vm._v("Search By Country")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.country,
+                expression: "country"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.country },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.country = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center" }, [
+            _vm._v("Contract Status")
+          ]),
+          _vm._v(" "),
           _c(
-            "table",
+            "select",
             {
-              staticClass:
-                "table-auto border-collapse border-2 border-blue-600 bg-white w-full"
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.contact_status,
+                  expression: "contact_status"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.contact_status = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.changeContract
+                ]
+              }
             },
             [
-              _vm._m(0),
+              _c("option", { attrs: { value: "0", selected: "" } }, [
+                _vm._v("Please Select")
+              ]),
               _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.players, function(player) {
-                  return _c("tr", [
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light"
-                      },
-                      [_vm._v(_vm._s(player.name))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light"
-                      },
-                      [_vm._v(_vm._s(player.name))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light"
-                      },
-                      [_vm._v(_vm._s(player.age))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticClass:
-                          "border-gray-400 border-2 uppercase pl-2 font-light"
-                      },
-                      [_vm._v(_vm._s(player.age))]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(1, true)
-                  ])
-                }),
-                0
-              )
+              _c("option", { attrs: { value: "free-agent" } }, [
+                _vm._v("Free Agent")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "professional" } }, [
+                _vm._v("Professional")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "semi-professional" } }, [
+                _vm._v("Semi Professional")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "non-contract" } }, [
+                _vm._v("Non-Contract")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "amateur-contract" } }, [
+                _vm._v("Amateur Contract")
+              ])
             ]
           )
         ])
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-6 flex-grow" }, [
+        _c(
+          "table",
+          {
+            staticClass:
+              "table-auto border-collapse border-2 border-blue-600 bg-white w-full"
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.players, function(player) {
+                return _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      staticClass:
+                        "border-gray-400 border-2 uppercase pl-2 font-light"
+                    },
+                    [_vm._v(_vm._s(player.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass:
+                        "border-gray-400 border-2 uppercase pl-2 font-light"
+                    },
+                    [_vm._v(_vm._s(player.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass:
+                        "border-gray-400 border-2 uppercase pl-2 font-light"
+                    },
+                    [_vm._v(_vm._s(player.age))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass:
+                        "border-gray-400 border-2 uppercase pl-2 font-light"
+                    },
+                    [_vm._v(_vm._s(player.age))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1, true)
+                ])
+              }),
+              0
+            )
+          ]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [

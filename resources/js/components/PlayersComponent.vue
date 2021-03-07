@@ -1,6 +1,6 @@
 <template>
     <div class="container m-auto">
-        <div class="flex lg:flex-row sm:flex-col md:flex-col xs:flex-col mb-9">
+        <div class="flex flex-col xs:flex-col lg:flex-row mb-9">
             <div class="mt-6 flex-none w-75 mr-20">
                 <h3 class="m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat">Search Filters</h3>
                 <div class="m-2 p-2">
