@@ -38400,8 +38400,11 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("date-picker", {
-                class: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "dob", format: "yyyy-MM-dd" },
+                attrs: {
+                  name: "dob",
+                  "input-class": "border py-2 px-3 text-grey-darkest w-full",
+                  format: "yyyy-MM-dd"
+                },
                 model: {
                   value: _vm.dob,
                   callback: function($$v) {
@@ -38624,7 +38627,6 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               ref: "file",
-              staticClass: "border py-2 px-3 text-grey-darkest",
               attrs: { type: "file", id: "file", multiple: "" },
               on: {
                 change: function($event) {
@@ -38691,8 +38693,10 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("date-picker", {
-                class: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "contract_end_date" },
+                attrs: {
+                  name: "contract_end_date",
+                  "input-class": "border py-2 px-3 text-grey-darkest w-full"
+                },
                 model: {
                   value: _vm.contract_end_date,
                   callback: function($$v) {

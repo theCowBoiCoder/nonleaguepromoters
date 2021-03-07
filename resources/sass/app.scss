@@ -6,3 +6,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.vdp-datepicker>div>input{
+    .background-color:red;
+}

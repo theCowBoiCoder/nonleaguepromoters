@@ -46,7 +46,7 @@
                     <div class="flex flex-col mb-2">
                         <label for="dob" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Date Of Birth</label>
-                        <date-picker name="dob" :class="'border py-2 px-3 text-grey-darkest'" v-model="dob" format="yyyy-MM-dd"></date-picker>
+                        <date-picker name="dob" :input-class="'border py-2 px-3 text-grey-darkest w-full'" v-model="dob" format="yyyy-MM-dd"></date-picker>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     <div class="flex flex-col mb-2">
                         <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Profile Picture</label>
-                        <input type="file" id="file" ref="file" class="border py-2 px-3 text-grey-darkest"
+                        <input type="file" id="file" ref="file"
                                v-on:change="previewFiles()" multiple>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Contract End Date</label>
                         <date-picker name="contract_end_date"
-                                     :class="'border py-2 px-3 text-grey-darkest'"
+                                     :input-class="'border py-2 px-3 text-grey-darkest w-full'"
                                      v-model="contract_end_date"></date-picker>
                     </div>
                     <button class="btn btn-danger border text-white p-3 uppercase" @click="register()"
