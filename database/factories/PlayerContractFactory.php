@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Player;
 use App\Models\PlayerContract;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,8 +25,9 @@ class PlayerContractFactory extends Factory
     public function definition()
     {
         $contract_types = ['professional', 'semi-professional', 'non-contract', 'amateur-contract'];
+        $players = Player::query()->get();
         return [
-            'user_id' => $this->faker->unique(true)->numberBetween(1, 100),
+            'player_id' => $players[random_int(0, 99)]->id,
             'contracted_club' => $this->faker->company,
             'contract_type' => $contract_types[array_rand(['professional', 'semi-professional', 'non-contract', 'amateur-contract'])],
             'contact_expiry_date' => Carbon::today()->addDays(random_int(1, 365))->toDateString(),

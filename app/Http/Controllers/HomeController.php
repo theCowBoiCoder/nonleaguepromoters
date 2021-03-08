@@ -52,8 +52,8 @@ class HomeController extends Controller
             return response()->json(['error' => 'Sorry the email address is already in use']);
         }
 
-        if(isset($request->file)){
-            $imageName = time().'.'.$request->file->extension();
+        if (isset($request->file)) {
+            $imageName = time() . '.' . $request->file->extension();
             $request->file->move(public_path('images'), $imageName);
         }
 
@@ -87,13 +87,25 @@ class HomeController extends Controller
         }
 
         Auth::attempt(['email' => $request->email, 'password' => $password]);
-        if(env('APP_ENV') != 'local'){
+        if (env('APP_ENV') != 'local') {
             //Send the Notifications
-            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user,$player));
-            Notification::route('mail',$user->email)->notify(new UserRegisterNotification($user));
+            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user, $player));
+            Notification::route('mail', $user->email)->notify(new UserRegisterNotification($user));
         }
 
         return response()->json(['message' => 'Thanks You Have Now Registered']);
 
+    }
+
+    public function login()
+    {
+        return view('pages.login');
+    }
+
+    public function auth(Request $request)
+    {
+        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+
+        return redirect('/')->with('logged_in', 'Welcome back');
     }
 }

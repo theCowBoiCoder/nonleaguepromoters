@@ -18,10 +18,10 @@ class CreatePlayersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name','75');
-            $table->string('gender');
-            $table->string('preferred_position');
-            $table->string('preferred_foot');
-            $table->string('height');
+            $table->string('gender')->nullable();
+            $table->string('preferred_position')->nullable();
+            $table->string('preferred_foot')->nullable();
+            $table->string('height')->nullable();
             $table->string('address')->nullable();
             $table->date('dob')->nullable();
             $table->text('bio')->nullable();

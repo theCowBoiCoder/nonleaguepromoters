@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Player;
 use App\Models\PlayerHistory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -35,8 +36,9 @@ class PlayerHistoryFactory extends Factory
             '2010/2011',
             '2012/2013',
         ];
+        $players = Player::query()->get();
         return [
-            'user_id' => $this->faker->unique(true)->numberBetween(1,100),
+            'player_id' => $players[random_int(0, 99)]->id,
             'season' => $season[array_rand($season)],
             'club' => $this->faker->company,
             'appearances' => random_int(1,500),

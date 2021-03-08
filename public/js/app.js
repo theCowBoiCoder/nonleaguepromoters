@@ -1956,6 +1956,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['players'],
   data: function data() {
@@ -38071,7 +38073,7 @@ var render = function() {
                   "table",
                   {
                     staticClass:
-                      "table-auto border-collapse border-2 border-blue-600 bg-white"
+                      "table-auto border-collapse border-2 border-blue-600 bg-white bg-opacity-0"
                   },
                   [
                     _vm._m(0),
@@ -38089,27 +38091,49 @@ var render = function() {
                             [_vm._v(_vm._s(player.name))]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "border-gray-400 border-2 uppercase pl-2 font-light p-2"
-                            },
-                            [_vm._v(_vm._s(player.contracts.contracted_club))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "border-gray-400 border-2 uppercase pl-2 font-light p-2"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(player.contracts.contact_expiry_date)
+                          player.contracts != null
+                            ? _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(player.contracts.contracted_club)
+                                  )
+                                ]
                               )
-                            ]
-                          ),
+                            : _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                                },
+                                [_vm._v("No Club")]
+                              ),
+                          _vm._v(" "),
+                          player.contracts != null
+                            ? _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(player.contracts.contact_expiry_date)
+                                  )
+                                ]
+                              )
+                            : _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "border-gray-400 border-2 uppercase pl-2 font-light p-2"
+                                },
+                                [_vm._v("No Contract")]
+                              ),
                           _vm._v(" "),
                           _c(
                             "td",

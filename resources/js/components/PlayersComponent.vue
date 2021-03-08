@@ -37,7 +37,7 @@
                 </div>
                     <div class="flex-initial lg:flex-grow">
                         <div v-if="players.length >=1">
-                            <table class="table-auto border-collapse border-2 border-blue-600 bg-white">
+                            <table class="table-auto border-collapse border-2 border-blue-600 bg-white bg-opacity-0">
                                 <thead>
                                 <tr>
                                     <th class="pl-2 border-gray-400 border-2 text-left text-gray-800 uppercase p-2">Name</th>
@@ -50,8 +50,10 @@
                                 <tbody>
                                 <tr v-for="player in players">
                                     <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.name }}</td>
-                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.contracts.contracted_club }}</td>
-                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">{{ player.contracts.contact_expiry_date }}</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2" v-if="player.contracts != null">{{ player.contracts.contracted_club }}</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2" v-else>No Club</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2" v-if="player.contracts != null">{{ player.contracts.contact_expiry_date }}</td>
+                                    <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2" v-else>No Contract</td>
                                     <td class="border-gray-400 border-2 uppercase pl-2 font-light p-2">NO</td>
                                     <!--                                <td class="border-gray-400 border-2 p-2 text-center">-->
                                     <!--&lt;!&ndash;                                    <a href="/player/search/"&ndash;&gt;-->
