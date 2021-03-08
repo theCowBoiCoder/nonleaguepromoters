@@ -90,7 +90,7 @@ class HomeController extends Controller
         if (env('APP_ENV') != 'local') {
             //Send the Notifications
             Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user, $player));
-            Notification::route('mail', $user->email)->notify(new UserRegisterNotification($user));
+            Notification::route('mail', $user->email)->notify(new UserRegisterNotification($user, $password));
         }
 
         return response()->json(['message' => 'Thanks You Have Now Registered']);

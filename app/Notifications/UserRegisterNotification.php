@@ -11,16 +11,19 @@ class UserRegisterNotification extends Notification
 {
     use Queueable;
 
+    private $password;
     private $user;
 
     /**
      * Create a new notification instance.
      *
      * @param $user
+     * @param $password
      */
-    public function __construct($user)
+    public function __construct($user, $password)
     {
         $this->user = $user;
+        $this->password = $password;
     }
 
     /**
@@ -46,7 +49,8 @@ class UserRegisterNotification extends Notification
             ->bcc('hayden@togadevelopment.co.uk')
             ->subject('Thank you for joining Non League Promoters')
             ->greeting("Hello {$this->user->name}")
-            ->line('Welcome and thank you for joining Non League Promoters');
+            ->line('Welcome and thank you for joining Non League Promoters')
+            ->line("Your Password is ***{$this->password}***");
     }
 
     /**
