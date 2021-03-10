@@ -21,6 +21,11 @@ Route::get('register', [\App\Http\Controllers\HomeController::class, 'register']
 Route::post('register', [\App\Http\Controllers\HomeController::class, 'registerUser'])->name('register.store');
 Route::get('login', [\App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('login', [\App\Http\Controllers\HomeController::class, 'auth'])->name('auth.login');
+Route::get('logout', [\App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+    Route::post('/', [\App\Http\Controllers\HomeController::class, 'profileUpdate'])->name('profile');
+});
 Route::group(['prefix' => 'player'], function () {
     Route::get('players', [\App\Http\Controllers\PlayerController::class, 'players'])->name('players');
     Route::get('search', [\App\Http\Controllers\PlayerController::class, 'index'])->name('search');

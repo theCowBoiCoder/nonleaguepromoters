@@ -22,6 +22,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('players-component', require('./components/PlayersComponent').default);
 Vue.component('register-component', require('./components/RegsiterComponent').default);
+Vue.component('profile-component', require('./components/MyProfileComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

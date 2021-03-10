@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use MongoDB\Driver\Session;
 
 class HomeController extends Controller
 {
@@ -107,5 +108,27 @@ class HomeController extends Controller
         Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         return redirect('/')->with('logged_in', 'Welcome back');
+    }
+
+    public function logout(): \Illuminate\Http\RedirectResponse
+    {
+        \request()->session()->flush();
+        return redirect()->route('home');
+    }
+
+    public function profile()
+    {
+        $me = User::query()->with('player.contracts')->find(Auth::id());
+        $positions = Position::query()->get();
+        return view('pages.profile', [
+            'positions' => $positions,
+            'me' => $me
+        ]);
+    }
+
+    public function profileUpdate(Request $request)
+    {
+
+        dd($request->all(), Carbon::parse($request->dob)->toDateString());
     }
 }

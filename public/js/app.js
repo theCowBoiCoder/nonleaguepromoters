@@ -1869,6 +1869,223 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfileComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfileComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['positions', 'my_profile'],
+  data: function data() {
+    return {
+      name: this.my_profile.name,
+      dob: this.my_profile.player !== null ? this.my_profile.player.dob : '',
+      email_address: this.my_profile.email,
+      address: this.my_profile.player ? this.my_profile.player.address : '',
+      height: this.my_profile.player ? this.my_profile.player.height : '',
+      gender: this.my_profile.player ? this.my_profile.player.gender : '',
+      preferred_foot: this.my_profile.player ? this.my_profile.player.preferred_foot : '',
+      preferred_position: this.my_profile.player ? this.my_profile.player.preferred_position : '',
+      step_free: this.my_profile.player ? this.my_profile.player.step_level : '',
+      club: this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : '',
+      contract_end_date: this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : '',
+      file: '',
+      got_club: false,
+      errors: [],
+      success: ''
+    };
+  },
+  components: {
+    DatePicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  methods: {
+    previewFiles: function previewFiles(event) {
+      this.file = this.$refs.file.files[0]; //console.log(this.file);
+    },
+    update: function update() {
+      var _this = this;
+
+      console.log(this.dob);
+      var formData = new FormData();
+      formData.append('name', this.name);
+
+      if (this.dob !== '') {
+        formData.append('dob', this.dob);
+      }
+
+      formData.append('email_address', this.email_address);
+      formData.append('address', this.address);
+      formData.append('height', this.height);
+      formData.append('gender', this.gender);
+      formData.append('preferred_foot', this.preferred_foot);
+      formData.append('preferred_position', this.preferred_position);
+      formData.append('club', this.club);
+      formData.append('step_free', this.step_free);
+
+      if (this.contract_end_date !== '') {
+        formData.append('contract_end_date', this.contract_end_date);
+      }
+
+      formData.append('file', this.file);
+      this.success = '';
+      (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common) = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': window.csrf_token,
+        'Content-Type': 'multipart/form-data'
+      };
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/profile', formData).then(function (response) {
+        if (response.status === 200) {
+          if (response.data.error) {
+            _this.success = response.data.error;
+          } else {//window.location.href='/';
+          }
+        }
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
+    }
+  },
+  mounted: function mounted() {},
+  computed: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayersComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayersComponent.vue?vue&type=script&lang=js& ***!
@@ -2270,6 +2487,7 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 Vue.component('players-component', __webpack_require__(/*! ./components/PlayersComponent */ "./resources/js/components/PlayersComponent.vue").default);
 Vue.component('register-component', __webpack_require__(/*! ./components/RegsiterComponent */ "./resources/js/components/RegsiterComponent.vue").default);
+Vue.component('profile-component', __webpack_require__(/*! ./components/MyProfileComponent */ "./resources/js/components/MyProfileComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38283,6 +38501,45 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/MyProfileComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/MyProfileComponent.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MyProfileComponent_vue_vue_type_template_id_40f554cb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyProfileComponent.vue?vue&type=template&id=40f554cb& */ "./resources/js/components/MyProfileComponent.vue?vue&type=template&id=40f554cb&");
+/* harmony import */ var _MyProfileComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyProfileComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MyProfileComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _MyProfileComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _MyProfileComponent_vue_vue_type_template_id_40f554cb___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MyProfileComponent_vue_vue_type_template_id_40f554cb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MyProfileComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/PlayersComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/PlayersComponent.vue ***!
@@ -38377,6 +38634,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/MyProfileComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/MyProfileComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfileComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyProfileComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfileComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfileComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/PlayersComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/PlayersComponent.vue?vue&type=script&lang=js& ***!
@@ -38422,6 +38695,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MyProfileComponent.vue?vue&type=template&id=40f554cb&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/MyProfileComponent.vue?vue&type=template&id=40f554cb& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfileComponent_vue_vue_type_template_id_40f554cb___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfileComponent_vue_vue_type_template_id_40f554cb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfileComponent_vue_vue_type_template_id_40f554cb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyProfileComponent.vue?vue&type=template&id=40f554cb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfileComponent.vue?vue&type=template&id=40f554cb&");
 
 
 /***/ }),
@@ -38500,6 +38790,604 @@ var staticRenderFns = [
         ])
       ])
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfileComponent.vue?vue&type=template&id=40f554cb&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfileComponent.vue?vue&type=template&id=40f554cb& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "flex flex-wrap" }, [
+      _c("div", { staticClass: "flex-1" }, [
+        _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
+          _vm.errors && _vm.errors.length
+            ? _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("li", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(error.message) +
+                        "\n                    "
+                    )
+                  ])
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "h4",
+            {
+              staticClass:
+                "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
+              staticStyle: { color: "orange", "font-weight": "900" }
+            },
+            [_vm._v("Personal Data\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "h5",
+            {
+              staticClass: "mb-2 uppercase font-bold text-lg text-grey-darkest",
+              staticStyle: { color: "orange" }
+            },
+            [_vm._v("\n                    " + _vm._s(_vm.success))]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-col w-50 px-5 lg:pl-20 lg:px-3" }, [
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
+              [_vm._v("Name *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "text", id: "name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "address" }
+              },
+              [_vm._v("Address")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.address,
+                  expression: "address"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "text", name: "address", id: "address" },
+              domProps: { value: _vm.address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.address = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "dob" }
+              },
+              [_vm._v("Gender")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.gender,
+                    expression: "gender"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "gender" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.gender = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MALE" } }, [_vm._v("MALE")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "FEMALE" } }, [_vm._v("FEMALE")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "email_address" }
+              },
+              [_vm._v("Email Address")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email_address,
+                  expression: "email_address"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: {
+                type: "email",
+                id: "email_address",
+                readonly: "",
+                disabled: ""
+              },
+              domProps: { value: _vm.email_address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email_address = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-col mb-2" },
+            [
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                  staticStyle: { color: "orange", "font-weight": "900" },
+                  attrs: { for: "dob" }
+                },
+                [_vm._v("Date Of Birth")]
+              ),
+              _vm._v(" "),
+              _c("date-picker", {
+                attrs: {
+                  name: "dob",
+                  "input-class": "border py-2 px-3 text-grey-darkest w-full",
+                  format: "yyyy-MM-dd"
+                },
+                model: {
+                  value: _vm.dob,
+                  callback: function($$v) {
+                    _vm.dob = $$v
+                  },
+                  expression: "dob"
+                }
+              })
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-1" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" }, [
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
+              [_vm._v("Step / Free Agent")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.step_free,
+                    expression: "step_free"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.step_free = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "step" } }, [_vm._v("Step")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "free_agent" } }, [
+                  _vm._v("Free Agent")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "address" }
+              },
+              [_vm._v("Position")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.preferred_position,
+                    expression: "preferred_position"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.preferred_position = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.positions, function(position) {
+                  return _c(
+                    "option",
+                    {
+                      model: {
+                        value: position.name,
+                        callback: function($$v) {
+                          _vm.$set(position, "name", $$v)
+                        },
+                        expression: "position.name"
+                      }
+                    },
+                    [_vm._v(_vm._s(position.name))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "preferred_foot" }
+              },
+              [_vm._v("Preferred Foot")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.preferred_foot,
+                  expression: "preferred_foot"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "text", id: "preferred_foot" },
+              domProps: { value: _vm.preferred_foot },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.preferred_foot = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "height" }
+              },
+              [_vm._v("Height")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.height,
+                  expression: "height"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "text", id: "height" },
+              domProps: { value: _vm.height },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.height = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "profile_image" }
+              },
+              [_vm._v("Profile Picture")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              ref: "file",
+              attrs: { type: "file", id: "file", multiple: "" },
+              on: {
+                change: function($event) {
+                  return _vm.previewFiles()
+                }
+              }
+            })
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex flex-wrap" }, [
+      _c("div", { staticClass: "flex-1" }, [
+        _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
+          _c("div", { staticClass: "flex flex-col mb-2 mt-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "height" }
+              },
+              [_vm._v("Club Name")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.club,
+                  expression: "club"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "text", id: "club" },
+              domProps: { value: _vm.club },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.club = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-col mb-2" },
+            [
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                  staticStyle: { color: "orange", "font-weight": "900" },
+                  attrs: { for: "height" }
+                },
+                [_vm._v("Contract End Date")]
+              ),
+              _vm._v(" "),
+              _c("date-picker", {
+                attrs: {
+                  name: "contract_end_date",
+                  "input-class": "border py-2 px-3 text-grey-darkest w-full",
+                  format: "yyyy-MM-dd"
+                },
+                model: {
+                  value: _vm.contract_end_date,
+                  callback: function($$v) {
+                    _vm.contract_end_date = $$v
+                  },
+                  expression: "contract_end_date"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger border text-white p-3 uppercase",
+              staticStyle: {
+                "background-color": "orange",
+                "font-weight": "900",
+                "border-color": "orange"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.update()
+                }
+              }
+            },
+            [_vm._v("Update My Profile\n                ")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" },
+      [
+        _c(
+          "h4",
+          {
+            staticClass:
+              "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
+            staticStyle: { color: "orange", "font-weight": "900" }
+          },
+          [_vm._v("Player Data\n                ")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
