@@ -9,8 +9,13 @@ class PlayerController extends Controller
 {
     public function index()
     {
-        $players = Player::query()->with(['contracts'])->where('is_public', 1)->get();
-        return view('pages.players.players',compact('players'));
+        return view('pages.players.players');
+    }
+
+    public function players()
+    {
+        $players = Player::query()->with(['contracts'])->where('is_public', 1)->paginate(15);
+        return response()->json($players);
     }
 
     public function single(Player $player)
