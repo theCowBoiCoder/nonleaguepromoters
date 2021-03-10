@@ -5,7 +5,7 @@
 
         <div class="container m-auto">
             <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
-                <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto leading-8"
+                <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto xs:leading-1"
                     style="color: orange; font-weight: 900;">The Non <br>League <br>Promoters</h1>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <h2 class="uppercase text-white bolder italic font-Roboto leading-8 text-2xl lg:text-2xl">
@@ -13,9 +13,11 @@
                 @endif
             </div>
             <div class="flex flex-col px-7 lg:pl-20 lg:px-3">
-
+                <div class="mb-1 block sm:hidden">
+                    <a href="{{route('login')}}" class="uppercase text-white mb-1 "><strong>Login</strong></a>
+                </div>
                 <div class="mb-1">
-                    <a href="" class="uppercase text-white mb-1 "><strong>Home</strong></a>
+                    <a href="{{route('home')}}" class="uppercase text-white mb-1 "><strong>Home</strong></a>
                 </div>
                 <div class="mb-1">
                     <a href="{{route('about')}}"
