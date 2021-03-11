@@ -14,7 +14,13 @@
             </div>
             <div class="flex flex-col px-7 lg:pl-20 lg:px-3">
                 <div class="mb-1 block sm:hidden">
+                    @if(!\Illuminate\Support\Facades\Auth::check())
                     <a href="{{route('login')}}" class="uppercase text-white mb-1 "><strong>Login</strong></a>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::check())
+                        <a href="{{route('profile')}}" class="uppercase text-white mb-1 "><strong>My
+                                Profile</strong></a>
+                    @endif
                 </div>
                 <div class="mb-1">
                     <a href="{{route('home')}}" class="uppercase text-white mb-1 "><strong>Home</strong></a>
