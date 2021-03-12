@@ -18,10 +18,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(PositionsTableSeesder::class);
-        User::factory(100)->create();
-        Player::factory(100)->create();
-        PlayerContract::factory(50)->create();
-        PlayerHistory::factory(50)->create();
+        if(env('APP_ENV') == 'local'){
+            User::factory(100)->create();
+            Player::factory(100)->create();
+            PlayerContract::factory(50)->create();
+            PlayerHistory::factory(50)->create();
+        }
+
 
     }
 }
