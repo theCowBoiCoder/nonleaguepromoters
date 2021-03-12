@@ -60,11 +60,8 @@
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
-                        <select class="border py-2 px-3 text-grey-darkest" v-model="step_free">
-                            <option value="0">Please Select</option>
-                            <option value="step">Step</option>
-                            <option value="free_agent">Free Agent</option>
-                        </select>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="preferred_foot"
+                               v-model="step_free">
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"

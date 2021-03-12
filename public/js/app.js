@@ -2189,7 +2189,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      name: '',
+      name: null,
       country: '',
       county: '',
       contact_status: 0,
@@ -2197,28 +2197,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPlayers: function getPlayers(page) {
+    getPlayers: function getPlayers(page, name) {
       var _this = this;
 
       if (typeof page === 'undefined') {
         page = 1;
       }
 
-      axios.get('/player/players?page=' + page).then(function (response) {
-        console.log(response.data);
+      axios.get('/player/players?term=' + name + '&page=' + page).then(function (response) {
         return response.data;
       }).then(function (data) {
         _this.laravelData = data;
-      });
-    },
-    changeContract: function changeContract() {
-      console.log(this.contact_status);
-    },
-    filterPlayersByName: function filterPlayersByName() {
-      var _this2 = this;
-
-      return this.laravelData.data.filter(function (player) {
-        player.name.toLowerCase().includes(_this2.name.toLowerCase());
       });
     }
   },
@@ -2226,20 +2215,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getPlayers();
   },
-  computed: {
-    filteredList: function filteredList() {
-      var name = this.name,
-          county = this.county,
-          country = this.country;
-      return this.players.filter(function (player) {
-        return player.name.toLowerCase().includes(name.toLowerCase());
-      }).filter(function (player) {
-        return player.county.toLowerCase().includes(county.toLowerCase());
-      }).filter(function (player) {
-        return player.country.toLowerCase().includes(country.toLowerCase());
-      });
-    }
-  }
+  computed: {}
 });
 
 /***/ }),
@@ -2258,9 +2234,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
 //
 //
 //
@@ -39422,7 +39395,7 @@ var render = function() {
               staticClass:
                 "m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat text-orange"
             },
-            [_vm._v("Search\n                    Filters")]
+            [_vm._v("Search\n                        Filters")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "m-2 p-2" }, [
@@ -39443,6 +39416,9 @@ var render = function() {
               attrs: { type: "text", placeholder: "Search Name Contains" },
               domProps: { value: _vm.name },
               on: {
+                keyup: function($event) {
+                  return _vm.getPlayers(null, _vm.name)
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -39451,126 +39427,6 @@ var render = function() {
                 }
               }
             })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
-              _vm._v("Search By County")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.county,
-                  expression: "county"
-                }
-              ],
-              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-              attrs: { type: "text", placeholder: "Search Name Contains" },
-              domProps: { value: _vm.county },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.county = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
-              _vm._v("Search By Country")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.country,
-                  expression: "country"
-                }
-              ],
-              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-              attrs: { type: "text", placeholder: "Search Name Contains" },
-              domProps: { value: _vm.country },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.country = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-2 p-2" }, [
-            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
-              _vm._v("Contract Status")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.contact_status,
-                    expression: "contact_status"
-                  }
-                ],
-                staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.contact_status = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    },
-                    _vm.changeContract
-                  ]
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0", selected: "" } }, [
-                  _vm._v("Please Select")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "free-agent" } }, [
-                  _vm._v("Free Agent")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "professional" } }, [
-                  _vm._v("Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "semi-professional" } }, [
-                  _vm._v("Semi Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "non-contract" } }, [
-                  _vm._v("Non-Contract")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "amateur-contract" } }, [
-                  _vm._v("Amateur Contract")
-                ])
-              ]
-            )
           ])
         ]),
         _vm._v(" "),
@@ -39610,7 +39466,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(player.contracts.contracted_club) +
-                                  "\n                        "
+                                  "\n                            "
                               )
                             ]
                           )
@@ -39633,7 +39489,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(player.contracts.contact_expiry_date) +
-                                  "\n                        "
+                                  "\n                            "
                               )
                             ]
                           )
@@ -39695,7 +39551,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                            Name\n                        "
+              "\n                                Name\n                            "
             )
           ]
         ),
@@ -39738,7 +39594,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                View Details\n                            "
+            "\n                                    View Details\n                                "
           )
         ]
       )
@@ -40019,46 +39875,27 @@ var render = function() {
               [_vm._v("Step / Free Agent")]
             ),
             _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.step_free,
-                    expression: "step_free"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.step_free = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.step_free,
+                  expression: "step_free"
                 }
-              },
-              [
-                _c("option", { attrs: { value: "0" } }, [
-                  _vm._v("Please Select")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "step" } }, [_vm._v("Step")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "free_agent" } }, [
-                  _vm._v("Free Agent")
-                ])
-              ]
-            )
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "text", id: "preferred_foot" },
+              domProps: { value: _vm.step_free },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.step_free = $event.target.value
+                }
+              }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col mb-2" }, [

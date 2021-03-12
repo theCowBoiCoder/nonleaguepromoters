@@ -9,32 +9,32 @@
                     <div class="m-2 p-2">
                         <p class="mb-2 uppercase text-center text-orange">Search By Name</p>
                         <input v-model="name" type="text" placeholder="Search Name Contains"
-                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">
+                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
+                               v-on:keyup="getPlayers(null,name)">
                     </div>
-                    <div class="m-2 p-2">
-                        <p class="mb-2 uppercase text-center text-orange">Search By County</p>
-                        <input v-model="county" type="text" placeholder="Search Name Contains"
-                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">
-                    </div>
+<!--                    <div class="m-2 p-2">-->
+<!--                        <p class="mb-2 uppercase text-center text-orange">Search By County</p>-->
+<!--                        <input v-model="county" type="text" placeholder="Search Name Contains"-->
+<!--                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
+<!--                    </div>-->
 
-                    <div class="m-2 p-2">
-                        <p class="mb-2 uppercase text-center text-orange">Search By Country</p>
-                        <input v-model="country" type="text" placeholder="Search Name Contains"
-                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">
-                    </div>
+<!--                    <div class="m-2 p-2">-->
+<!--                        <p class="mb-2 uppercase text-center text-orange">Search By Country</p>-->
+<!--                        <input v-model="country" type="text" placeholder="Search Name Contains"-->
+<!--                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
+<!--                    </div>-->
 
-                    <div class="m-2 p-2">
-                        <p class="mb-2 uppercase text-center text-orange">Contract Status</p>
-                        <select v-model="contact_status" class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                                v-on:change="changeContract">
-                            <option value="0" selected>Please Select</option>
-                            <option value="free-agent">Free Agent</option>
-                            <option value="professional">Professional</option>
-                            <option value="semi-professional">Semi Professional</option>
-                            <option value="non-contract">Non-Contract</option>
-                            <option value="amateur-contract">Amateur Contract</option>
-                        </select>
-                    </div>
+<!--                    <div class="m-2 p-2">-->
+<!--                        <p class="mb-2 uppercase text-center text-orange">Contract Status</p>-->
+<!--                        <select v-model="contact_status" class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
+<!--                            <option value="0" selected>Please Select</option>-->
+<!--                            <option value="free-agent">Free Agent</option>-->
+<!--                            <option value="professional">Professional</option>-->
+<!--                            <option value="semi-professional">Semi Professional</option>-->
+<!--                            <option value="non-contract">Non-Contract</option>-->
+<!--                            <option value="amateur-contract">Amateur Contract</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                 </div>
                 <div class="flex-initial lg:flex-grow">
                     <!--                    <div v-if="laravelData.data.length >=1">-->
@@ -91,7 +91,7 @@
 export default {
     data() {
         return {
-            name: '',
+            name: null,
             country: '',
             county: '',
             contact_status: 0,
@@ -99,26 +99,17 @@ export default {
         }
     },
     methods: {
-        getPlayers(page) {
+        getPlayers(page, name) {
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            axios.get('/player/players?page=' + page)
+            axios.get('/player/players?term=' + name + '&page=' + page)
                 .then(response => {
-                    console.log(response.data);
                     return response.data;
                 }).then(data => {
                 this.laravelData = data;
             })
         },
-        changeContract: function () {
-            console.log(this.contact_status);
-        },
-        filterPlayersByName: function () {
-            return this.laravelData.data.filter(player => {
-                player.name.toLowerCase().includes(this.name.toLowerCase());
-            });
-        }
     },
     mounted() {
 
@@ -126,15 +117,6 @@ export default {
     created() {
         this.getPlayers();
     },
-    computed: {
-
-        filteredList() {
-            const {name, county, country} = this;
-            return this.players
-                .filter(player => player.name.toLowerCase().includes(name.toLowerCase()))
-                .filter(player => player.county.toLowerCase().includes(county.toLowerCase()))
-                .filter(player => player.country.toLowerCase().includes(country.toLowerCase()))
-        }
-    }
+    computed: {}
 }
 </script>
