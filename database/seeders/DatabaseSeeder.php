@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(RegionTableSeeder::class);
         $this->call(PositionsTableSeesder::class);
         if(env('APP_ENV') == 'local'){
             User::factory(100)->create();

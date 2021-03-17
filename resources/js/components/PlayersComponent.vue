@@ -10,31 +10,44 @@
                         <p class="mb-2 uppercase text-center text-orange">Search By Name</p>
                         <input v-model="name" type="text" placeholder="Search Name Contains"
                                class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                               v-on:keyup="getPlayers(null,name)">
+                               v-on:keyup="getPlayers(null,name,region,county)">
                     </div>
-<!--                    <div class="m-2 p-2">-->
-<!--                        <p class="mb-2 uppercase text-center text-orange">Search By County</p>-->
-<!--                        <input v-model="county" type="text" placeholder="Search Name Contains"-->
-<!--                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
-<!--                    </div>-->
+                    <div class="m-2 p-2">
+                        <p class="mb-2 uppercase text-center text-orange">Search By County</p>
+                        <select name="" id="" v-model="county" type="text"
+                                class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
+                                @change="getPlayers(null,name,region,county)">
+                            <option value="selected">Please Select</option>
 
-<!--                    <div class="m-2 p-2">-->
-<!--                        <p class="mb-2 uppercase text-center text-orange">Search By Country</p>-->
-<!--                        <input v-model="country" type="text" placeholder="Search Name Contains"-->
-<!--                               class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
-<!--                    </div>-->
+                            <option v-for="county of counties" v-model="county.id">{{county.county}}</option>
+                        </select>
+                    </div>
 
-<!--                    <div class="m-2 p-2">-->
-<!--                        <p class="mb-2 uppercase text-center text-orange">Contract Status</p>-->
-<!--                        <select v-model="contact_status" class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
-<!--                            <option value="0" selected>Please Select</option>-->
-<!--                            <option value="free-agent">Free Agent</option>-->
-<!--                            <option value="professional">Professional</option>-->
-<!--                            <option value="semi-professional">Semi Professional</option>-->
-<!--                            <option value="non-contract">Non-Contract</option>-->
-<!--                            <option value="amateur-contract">Amateur Contract</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="m-2 p-2">
+                        <p class="mb-2 uppercase text-center text-orange">Search By Region</p>
+                        <select name="" id="" v-model="region" type="text"
+                                class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
+                                @change="getPlayers(null,name,region,county)">
+                            <option value="selected">Please Select</option>
+                            <option v-for="region of regions" v-model="region.id">{{region.region}}</option>
+                        </select>
+                    </div>
+                    <div class="m-2 p-2 text-center">
+                        <a class=" uppercase text-md mb-5 font-bold font-light font-Montserrat text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light" v-on:click="resetFilter">Reset Filter</a>
+                    </div>
+
+
+                    <!--                    <div class="m-2 p-2">-->
+                    <!--                        <p class="mb-2 uppercase text-center text-orange">Contract Status</p>-->
+                    <!--                        <select v-model="contact_status" class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
+                    <!--                            <option value="0" selected>Please Select</option>-->
+                    <!--                            <option value="free-agent">Free Agent</option>-->
+                    <!--                            <option value="professional">Professional</option>-->
+                    <!--                            <option value="semi-professional">Semi Professional</option>-->
+                    <!--                            <option value="non-contract">Non-Contract</option>-->
+                    <!--                            <option value="amateur-contract">Amateur Contract</option>-->
+                    <!--                        </select>-->
+                    <!--                    </div>-->
                 </div>
                 <div class="flex-initial lg:flex-grow">
                     <!--                    <div v-if="laravelData.data.length >=1">-->
@@ -89,27 +102,36 @@
 
 <script>
 export default {
+    props:['regions','counties'],
     data() {
         return {
             name: null,
-            country: '',
-            county: '',
+            region: 'selected',
+            county: 'selected',
             contact_status: 0,
             laravelData: {},
         }
     },
     methods: {
-        getPlayers(page, name) {
+        getPlayers(page, name, region, county) {
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            axios.get('/player/players?term=' + name + '&page=' + page)
+            axios.get('/player/players?term=' + name + '&region=' + region + '&county=' + county + '&page=' + page)
                 .then(response => {
                     return response.data;
                 }).then(data => {
                 this.laravelData = data;
             })
         },
+        resetFilter()
+        {
+            this.name = null;
+            this.region = 'selected';
+            this.county = 'selected';
+
+            this.getPlayers(null,this.name,this.region,this.county)
+        }
     },
     mounted() {
 

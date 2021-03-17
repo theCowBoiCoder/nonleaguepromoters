@@ -37,7 +37,7 @@ class PlayerFactory extends Factory
             'dob' => $this->faker->dateTimeBetween('1990-01-01', '2010-01-01'),
             'bio' => $this->faker->sentence,
             'county' => $counties[array_rand($counties)],
-            'country' => $this->faker->country,
+            'region' => $this->faker->country,
             'is_public' => $this->faker->boolean(),
             'profile_image' => $this->faker->imageUrl(200, 200)
         ];

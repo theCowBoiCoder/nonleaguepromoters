@@ -25,6 +25,7 @@ class Player extends Model
         'country',
         'height',
         'county',
+        'region',
         'step_level',
         'twitter_url',
         'instagram_url',

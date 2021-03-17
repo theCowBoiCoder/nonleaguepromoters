@@ -59,8 +59,16 @@
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">County</label>
+                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
+                            <option value="0" selected disabled>Please Select</option>
+                            <<option v-for="region in regions" v-model="region.id">{{ region.county }}</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
-                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="preferred_foot"
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="step_free"
                                v-model="step_free">
                     </div>
                     <div class="flex flex-col mb-2">
@@ -80,7 +88,8 @@
                     <div class="flex flex-col mb-2">
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Height</label>
-                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="height" v-model="height">
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="height"
+                               v-model="height">
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -122,7 +131,7 @@ import DatePicker from 'vuejs-datepicker';
 import axios from 'axios';
 
 export default {
-    props: ['positions'],
+    props: ['positions','regions'],
     data() {
         return {
             name: '',
@@ -133,6 +142,7 @@ export default {
             gender: '',
             preferred_foot: '',
             preferred_position: '',
+            region: 0,
             step_free: '',
             club: '',
             contract_end_date: '',
@@ -150,7 +160,6 @@ export default {
     methods: {
         previewFiles(event) {
             this.file = this.$refs.file.files[0];
-            //console.log(this.file);
         },
         register() {
             let formData = new FormData();
@@ -165,6 +174,7 @@ export default {
             formData.append('preferred_foot', this.preferred_foot);
             formData.append('preferred_position', this.preferred_position);
             formData.append('club', this.club);
+            formData.append('county', this.region);
             formData.append('step_free', this.step_free);
             if (this.contract_end_date !== '') {
                 formData.append('contract_end_date', this.contract_end_date.toDateString());

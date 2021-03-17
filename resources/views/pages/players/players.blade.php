@@ -9,7 +9,7 @@
                     style="color: orange; font-weight: 900;"><a href="{{route('home')}}">
                         <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
             </div>
-            <players-component></players-component>
+            <players-component :regions="{{$regions}}" :counties="{{$counties}}"></players-component>
         </div>
     </div>
 @stop

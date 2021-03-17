@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use App\Models\PlayerContract;
 use App\Models\Position;
+use App\Models\Region;
 use App\Models\User;
 use App\Notifications\UserHasRegisteredNotification;
 use App\Notifications\UserRegisterNotification;
@@ -38,8 +39,10 @@ class HomeController extends Controller
     public function register()
     {
         $positions = Position::query()->get();
+        $regions = Region::query()->orderBy('county','ASC')->get();
         return view('pages.register', [
-            'positions' => $positions
+            'positions' => $positions,
+            'regions' => $regions
         ]);
     }
 
@@ -64,7 +67,7 @@ class HomeController extends Controller
             'email' => $request->email_address,
             'password' => Hash::make($password)
         ]);
-
+        $region = Region::query()->where('county',$request->county)->first();
 
         $player = Player::query()->create([
             'user_id' => $user->id,
@@ -74,6 +77,8 @@ class HomeController extends Controller
             'dob' => Carbon::parse($request->dob)->toDateString(),
             'step_level' => $request->step_free,
             'height' => $request->height ?? 0,
+            'county' => $region->county,
+            'region' => $region->region,
             'preferred_position' => $request->preferred_position ?? '',
             'preferred_foot' => $request->preferred_foot ?? '',
             'profile_image' => $imageName ?? NULL

@@ -26,8 +26,8 @@ class CreatePlayersTable extends Migration
             $table->date('dob')->nullable();
             $table->text('bio')->nullable();
             $table->string('profile_image')->nullable();
-            $table->string('country')->nullable();
             $table->string('county')->nullable();
+            $table->string('region')->nullable();
             $table->string('step_level')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('instagram_url')->nullable();

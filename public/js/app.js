@@ -2186,29 +2186,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['regions', 'counties'],
   data: function data() {
     return {
       name: null,
-      country: '',
-      county: '',
+      region: 'selected',
+      county: 'selected',
       contact_status: 0,
       laravelData: {}
     };
   },
   methods: {
-    getPlayers: function getPlayers(page, name) {
+    getPlayers: function getPlayers(page, name, region, county) {
       var _this = this;
 
       if (typeof page === 'undefined') {
         page = 1;
       }
 
-      axios.get('/player/players?term=' + name + '&page=' + page).then(function (response) {
+      axios.get('/player/players?term=' + name + '&region=' + region + '&county=' + county + '&page=' + page).then(function (response) {
         return response.data;
       }).then(function (data) {
         _this.laravelData = data;
       });
+    },
+    resetFilter: function resetFilter() {
+      this.name = null;
+      this.region = 'selected';
+      this.county = 'selected';
+      this.getPlayers(null, this.name, this.region, this.county);
     }
   },
   mounted: function mounted() {},
@@ -2353,10 +2373,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['positions'],
+  props: ['positions', 'regions'],
   data: function data() {
     return {
       name: '',
@@ -2367,6 +2396,7 @@ __webpack_require__.r(__webpack_exports__);
       gender: '',
       preferred_foot: '',
       preferred_position: '',
+      region: 0,
       step_free: '',
       club: '',
       contract_end_date: '',
@@ -2381,7 +2411,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     previewFiles: function previewFiles(event) {
-      this.file = this.$refs.file.files[0]; //console.log(this.file);
+      this.file = this.$refs.file.files[0];
     },
     register: function register() {
       var _this = this;
@@ -2400,6 +2430,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('preferred_foot', this.preferred_foot);
       formData.append('preferred_position', this.preferred_position);
       formData.append('club', this.club);
+      formData.append('county', this.region);
       formData.append('step_free', this.step_free);
 
       if (this.contract_end_date !== '') {
@@ -39395,7 +39426,7 @@ var render = function() {
               staticClass:
                 "m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat text-orange"
             },
-            [_vm._v("Search\n                        Filters")]
+            [_vm._v("Search\n                    Filters")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "m-2 p-2" }, [
@@ -39417,7 +39448,7 @@ var render = function() {
               domProps: { value: _vm.name },
               on: {
                 keyup: function($event) {
-                  return _vm.getPlayers(null, _vm.name)
+                  return _vm.getPlayers(null, _vm.name, _vm.region, _vm.county)
                 },
                 input: function($event) {
                   if ($event.target.composing) {
@@ -39427,6 +39458,156 @@ var render = function() {
                 }
               }
             })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "m-2 p-2" }, [
+            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+              _vm._v("Search By County")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.county,
+                    expression: "county"
+                  }
+                ],
+                staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+                attrs: { name: "", id: "", type: "text" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.county = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.getPlayers(
+                        null,
+                        _vm.name,
+                        _vm.region,
+                        _vm.county
+                      )
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "selected" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.counties, function(county) {
+                  return _c(
+                    "option",
+                    {
+                      model: {
+                        value: county.id,
+                        callback: function($$v) {
+                          _vm.$set(county, "id", $$v)
+                        },
+                        expression: "county.id"
+                      }
+                    },
+                    [_vm._v(_vm._s(county.county))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "m-2 p-2" }, [
+            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+              _vm._v("Search By Region")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.region,
+                    expression: "region"
+                  }
+                ],
+                staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+                attrs: { name: "", id: "", type: "text" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.region = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.getPlayers(
+                        null,
+                        _vm.name,
+                        _vm.region,
+                        _vm.county
+                      )
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "selected" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.regions, function(region) {
+                  return _c(
+                    "option",
+                    {
+                      model: {
+                        value: region.id,
+                        callback: function($$v) {
+                          _vm.$set(region, "id", $$v)
+                        },
+                        expression: "region.id"
+                      }
+                    },
+                    [_vm._v(_vm._s(region.region))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "m-2 p-2 text-center" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  " uppercase text-md mb-5 font-bold font-light font-Montserrat text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                on: { click: _vm.resetFilter }
+              },
+              [_vm._v("Reset Filter")]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -39466,7 +39647,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(player.contracts.contracted_club) +
-                                  "\n                            "
+                                  "\n                        "
                               )
                             ]
                           )
@@ -39489,7 +39670,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(player.contracts.contact_expiry_date) +
-                                  "\n                            "
+                                  "\n                        "
                               )
                             ]
                           )
@@ -39551,7 +39732,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                Name\n                            "
+              "\n                            Name\n                        "
             )
           ]
         ),
@@ -39594,7 +39775,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                    View Details\n                                "
+            "\n                                View Details\n                            "
           )
         ]
       )
@@ -39872,6 +40053,74 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "name" }
               },
+              [_vm._v("County")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.region,
+                    expression: "region"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "county" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.region = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v("\n                        <"),
+                _vm._l(_vm.regions, function(region) {
+                  return _c(
+                    "option",
+                    {
+                      model: {
+                        value: region.id,
+                        callback: function($$v) {
+                          _vm.$set(region, "id", $$v)
+                        },
+                        expression: "region.id"
+                      }
+                    },
+                    [_vm._v(_vm._s(region.county))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
               [_vm._v("Step / Free Agent")]
             ),
             _vm._v(" "),
@@ -39885,7 +40134,7 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "preferred_foot" },
+              attrs: { type: "text", id: "step_free" },
               domProps: { value: _vm.step_free },
               on: {
                 input: function($event) {
