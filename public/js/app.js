@@ -39951,7 +39951,7 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "dob" }
               },
-              [_vm._v("Gender")]
+              [_vm._v("Gender *")]
             ),
             _vm._v(" "),
             _c(
@@ -40006,7 +40006,7 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "email_address" }
               },
-              [_vm._v("Email Address")]
+              [_vm._v("Email Address *")]
             ),
             _vm._v(" "),
             _c("input", {
@@ -40080,7 +40080,7 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "name" }
               },
-              [_vm._v("County")]
+              [_vm._v("County *")]
             ),
             _vm._v(" "),
             _c(
@@ -40148,7 +40148,7 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "name" }
               },
-              [_vm._v("Step / Free Agent")]
+              [_vm._v("Step / Free Agent *")]
             ),
             _vm._v(" "),
             _c(
@@ -40215,7 +40215,7 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "address" }
               },
-              [_vm._v("Position")]
+              [_vm._v("Position *")]
             ),
             _vm._v(" "),
             _c(
@@ -40283,7 +40283,7 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "preferred_foot" }
               },
-              [_vm._v("Preferred Foot")]
+              [_vm._v("Preferred Foot *")]
             ),
             _vm._v(" "),
             _c(

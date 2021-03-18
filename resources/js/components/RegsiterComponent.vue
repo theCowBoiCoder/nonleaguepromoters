@@ -30,7 +30,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="dob" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Gender</label>
+                               style="color: orange; font-weight: 900;">Gender *</label>
                         <select name="gender" class="border py-2 px-3 text-grey-darkest" v-model="gender">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="MALE">MALE</option>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="email_address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Email Address</label>
+                               style="color: orange; font-weight: 900;">Email Address *</label>
                         <input type="email" class="border py-2 px-3 text-grey-darkest" id="email_address"
                                v-model="email_address">
                     </div>
@@ -59,7 +59,7 @@
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;" for="name">County</label>
+                               style="color: orange; font-weight: 900;" for="name">County *</label>
                         <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
                             <option value="0" selected disabled>Please Select</option>
                             <<option v-for="region in regions" v-model="region.id">{{ region.county }}</option>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
+                               style="color: orange; font-weight: 900;" for="name">Step / Free Agent *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="step_free">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="professional">Professional</option>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Position</label>
+                               style="color: orange; font-weight: 900;">Position *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_position">
                             <option value="0" selected disabled>Please Select</option>
                             <option v-for="position in positions" v-model="position.name">{{ position.name }}</option>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Preferred Foot</label>
+                               style="color: orange; font-weight: 900;">Preferred Foot *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_foot">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="left">Left</option>
