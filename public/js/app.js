@@ -2399,6 +2399,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -39832,6 +39835,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
       _c("div", { staticClass: "flex-1" }, [
         _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
@@ -40068,7 +40073,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "flex-1" }, [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" }, [
           _c("div", { staticClass: "flex flex-col mb-2" }, [
@@ -40531,6 +40536,16 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex px-7 mb-3 lg:pl-20 lg:px-3" }, [
+      _c("span", { staticClass: "text-orange font-bold" }, [
+        _vm._v("All fields marked with * are mandatory")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

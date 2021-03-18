@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="flex px-7 mb-3 lg:pl-20 lg:px-3">
+            <span class="text-orange font-bold">All fields marked with * are mandatory</span>
+        </div>
         <div class="flex flex-wrap">
             <div class="flex-1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
