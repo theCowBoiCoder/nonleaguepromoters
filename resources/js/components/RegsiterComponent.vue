@@ -68,22 +68,31 @@
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
-                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="step_free"
-                               v-model="step_free">
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="step_free">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="professional">Professional</option>
+                            <option value="semi-professional">Semi Professional</option>
+                            <option value="non-contract">Non Contract</option>
+                            <option value="amateur-contract">Amateur Contract</option>
+                        </select>
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Position</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_position">
-                            <option value="0">Please Select</option>
+                            <option value="0" selected disabled>Please Select</option>
                             <option v-for="position in positions" v-model="position.name">{{ position.name }}</option>
                         </select>
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Preferred Foot</label>
-                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="preferred_foot"
-                               v-model="preferred_foot">
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_foot">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="both">Both</option>
+                        </select>
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -94,7 +103,7 @@
                     <div class="flex flex-col mb-2">
                         <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Profile Picture</label>
-                        <input type="file" id="file" ref="file"
+                        <input type="file" id="file" ref="file" class="text-orange font-bold"
                                v-on:change="previewFiles()" multiple>
                     </div>
                 </div>
@@ -139,11 +148,11 @@ export default {
             email_address: '',
             address: '',
             height: '',
-            gender: '',
-            preferred_foot: '',
-            preferred_position: '',
+            gender: 0,
+            preferred_foot: 0,
+            preferred_position: 0,
             region: 0,
-            step_free: '',
+            step_free: 0,
             club: '',
             contract_end_date: '',
             file: '',

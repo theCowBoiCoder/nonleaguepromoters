@@ -19,6 +19,7 @@ class Player extends Model
         'gender',
         'dob',
         'bio',
+        'address',
         'preferred_position',
         'preferred_foot',
         'profile_image',

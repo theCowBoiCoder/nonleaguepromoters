@@ -2382,6 +2382,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2393,11 +2402,11 @@ __webpack_require__.r(__webpack_exports__);
       email_address: '',
       address: '',
       height: '',
-      gender: '',
-      preferred_foot: '',
-      preferred_position: '',
+      gender: 0,
+      preferred_foot: 0,
+      preferred_position: 0,
       region: 0,
-      step_free: '',
+      step_free: 0,
       club: '',
       contract_end_date: '',
       file: '',
@@ -40124,27 +40133,59 @@ var render = function() {
               [_vm._v("Step / Free Agent")]
             ),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.step_free,
-                  expression: "step_free"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "step_free" },
-              domProps: { value: _vm.step_free },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.step_free,
+                    expression: "step_free"
                   }
-                  _vm.step_free = $event.target.value
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.step_free = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "professional" } }, [
+                  _vm._v("Professional")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "semi-professional" } }, [
+                  _vm._v("Semi Professional")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "non-contract" } }, [
+                  _vm._v("Non Contract")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "amateur-contract" } }, [
+                  _vm._v("Amateur Contract")
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col mb-2" }, [
@@ -40189,9 +40230,11 @@ var render = function() {
                 }
               },
               [
-                _c("option", { attrs: { value: "0" } }, [
-                  _vm._v("Please Select")
-                ]),
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
                 _vm._v(" "),
                 _vm._l(_vm.positions, function(position) {
                   return _c(
@@ -40225,27 +40268,49 @@ var render = function() {
               [_vm._v("Preferred Foot")]
             ),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.preferred_foot,
-                  expression: "preferred_foot"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "preferred_foot" },
-              domProps: { value: _vm.preferred_foot },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.preferred_foot,
+                    expression: "preferred_foot"
                   }
-                  _vm.preferred_foot = $event.target.value
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.preferred_foot = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "left" } }, [_vm._v("Left")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "right" } }, [_vm._v("Right")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col mb-2" }, [
@@ -40297,6 +40362,7 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               ref: "file",
+              staticClass: "text-orange font-bold",
               attrs: { type: "file", id: "file", multiple: "" },
               on: {
                 change: function($event) {
