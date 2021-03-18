@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="flex px-7 mb-3 lg:pl-20 lg:px-3">
+            <span class="text-orange font-bold">All fields marked with * are mandatory</span>
+        </div>
         <div class="flex flex-wrap">
             <div class="flex-1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
@@ -30,7 +33,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="dob" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Gender</label>
+                               style="color: orange; font-weight: 900;">Gender *</label>
                         <select name="gender" class="border py-2 px-3 text-grey-darkest" v-model="gender">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="MALE">MALE</option>
@@ -39,7 +42,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="email_address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Email Address</label>
+                               style="color: orange; font-weight: 900;">Email Address *</label>
                         <input type="email" class="border py-2 px-3 text-grey-darkest" id="email_address"
                                v-model="email_address">
                     </div>
@@ -59,7 +62,7 @@
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;" for="name">County</label>
+                               style="color: orange; font-weight: 900;" for="name">County *</label>
                         <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
                             <option value="0" selected disabled>Please Select</option>
                             <<option v-for="region in regions" v-model="region.id">{{ region.county }}</option>
@@ -67,7 +70,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
+                               style="color: orange; font-weight: 900;" for="name">Step / Free Agent *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="step_free">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="professional">Professional</option>
@@ -78,7 +81,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Position</label>
+                               style="color: orange; font-weight: 900;">Position *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_position">
                             <option value="0" selected disabled>Please Select</option>
                             <option v-for="position in positions" v-model="position.name">{{ position.name }}</option>
@@ -86,7 +89,7 @@
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Preferred Foot</label>
+                               style="color: orange; font-weight: 900;">Preferred Foot *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_foot">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="left">Left</option>
@@ -124,9 +127,17 @@
                                      :input-class="'border py-2 px-3 text-grey-darkest w-full'"
                                      v-model="contract_end_date"></date-picker>
                     </div>
-                    <button class="btn btn-danger border text-white p-3 uppercase" @click="register()"
-                            style="background-color: orange; font-weight: 900; border-color: orange">Register
-                    </button>
+                    <div class="flex justify-center items-center bg-orange font-medium rounded">
+                            <button v-bind:class="{ 'opacity-25' : isDisabled === true}" class="inline-flex items-center px-3 py-2 font-medium rounded px-4 py-2 leading-5 bg-green-500 text-primary-100 text-white hover:text-white hover:bg-green-700" @click="register()"
+                                    style="background-color: orange; font-weight: 900; border-color: orange" :disabled='isDisabled'>
+                                <svg v-bind:class="{ 'invisible' : formGo !== true}" class=" animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Register
+                            </button>
+                    </div>
+
                 </div>
 
             </div>
@@ -159,6 +170,8 @@ export default {
             got_club: false,
             errors: [],
             success: '',
+            btnDisable: true,
+            formGo : false
         }
     },
 
@@ -171,6 +184,7 @@ export default {
             this.file = this.$refs.file.files[0];
         },
         register() {
+            this.formGo = true;
             let formData = new FormData();
             formData.append('name', this.name);
             if (this.dob !== '') {
@@ -201,6 +215,7 @@ export default {
                 if (response.status === 200) {
                     if (response.data.error) {
                         this.success = response.data.error;
+                        this.formGo = false;
                     }else{
                         window.location.href='/';
 
@@ -217,6 +232,13 @@ export default {
     mounted() {
 
     },
-    computed: {}
+    computed: {
+        isDisabled: function(){
+            if(this.name === '' || this.email_address === ''
+                || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0){
+                return true;
+            }
+        }
+    }
 }
 </script>
