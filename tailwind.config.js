@@ -7,9 +7,15 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
+            colors:{
+                orange: {
+                    DEFAULT: '#ffa500'
+                }
+            },
             backgroundImage: theme => ({
                 'home-image' : "url('/images/home_background.jpg')",
                 'about-image' : "url('/images/about.png')",
+                'player-image' : "url('/images/player.png')",
             }),
             fontFamily:{
               'Roboto':['Roboto','sans-serif'],

@@ -46,12 +46,12 @@ class UserHasRegisteredNotification extends Notification
             ->subject('New User Has Registered')
             ->greeting('Great News!')
             ->line('New users has signed up to the system')
-            ->line("NAME: {$this->user->name}")
-            ->line("EMAIL: {$this->user->email}")
-            ->line("DOB: {$this->player->dob}")
-            ->line("POSITION: {$this->player->preferred_position}")
-            ->line("HEIGHT: {$this->player->height}")
-            ->line("GENDER: {$this->player->gender}");
+            ->line("Name: ***{$this->user->name}***")
+            ->line("EMAIL: ***{$this->user->email}***")
+            ->line("DOB: ***{$this->player->dob}***")
+            ->line("POSITION: ***{$this->player->preferred_position}***")
+            ->line("HEIGHT: ***{$this->player->height}***")
+            ->line("GENDER: ***{$this->player->gender}***");
     }
 
     /**
