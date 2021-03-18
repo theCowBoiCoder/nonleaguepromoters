@@ -2391,6 +2391,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2412,7 +2420,9 @@ __webpack_require__.r(__webpack_exports__);
       file: '',
       got_club: false,
       errors: [],
-      success: ''
+      success: '',
+      btnDisable: true,
+      formGo: false
     };
   },
   components: {
@@ -2425,6 +2435,7 @@ __webpack_require__.r(__webpack_exports__);
     register: function register() {
       var _this = this;
 
+      this.formGo = true;
       var formData = new FormData();
       formData.append('name', this.name);
 
@@ -2457,6 +2468,7 @@ __webpack_require__.r(__webpack_exports__);
         if (response.status === 200) {
           if (response.data.error) {
             _this.success = response.data.error;
+            _this.formGo = false;
           } else {
             window.location.href = '/';
           }
@@ -2467,7 +2479,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {},
-  computed: {}
+  computed: {
+    isDisabled: function isDisabled() {
+      if (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0) {
+        return true;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -40446,21 +40464,66 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "button",
+            "div",
             {
-              staticClass: "btn btn-danger border text-white p-3 uppercase",
-              staticStyle: {
-                "background-color": "orange",
-                "font-weight": "900",
-                "border-color": "orange"
-              },
-              on: {
-                click: function($event) {
-                  return _vm.register()
-                }
-              }
+              staticClass:
+                "flex justify-center items-center bg-orange font-medium rounded"
             },
-            [_vm._v("Register\n                ")]
+            [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "inline-flex items-center px-3 py-2 font-medium rounded px-4 py-2 leading-5 bg-green-500 text-primary-100 text-white hover:text-white hover:bg-green-700",
+                  class: { "opacity-25": _vm.isDisabled === true },
+                  staticStyle: {
+                    "background-color": "orange",
+                    "font-weight": "900",
+                    "border-color": "orange"
+                  },
+                  attrs: { disabled: _vm.isDisabled },
+                  on: {
+                    click: function($event) {
+                      return _vm.register()
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: " animate-spin h-5 w-5 mr-3 ...",
+                      class: { invisible: _vm.formGo !== true },
+                      attrs: { viewBox: "0 0 24 24" }
+                    },
+                    [
+                      _c("circle", {
+                        staticClass: "opacity-25",
+                        attrs: {
+                          cx: "12",
+                          cy: "12",
+                          r: "10",
+                          stroke: "currentColor",
+                          "stroke-width": "4"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        staticClass: "opacity-75",
+                        attrs: {
+                          fill: "currentColor",
+                          d:
+                            "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(
+                    "\n                            Register\n                        "
+                  )
+                ]
+              )
+            ]
           )
         ])
       ])
