@@ -1,45 +1,43 @@
 @extends('layout.main')
 @section('content')
-    <div class="container m-auto">
-        <div class="flex flex-row m-6 items-center">
-            <div class="w-auto mr-3">
-                <img src="{{$player->profile_image}}" alt="Player Profile Image">
+    <div class="bg-black md:bg-player-image bg-scroll">
+        @include('layout.login')
+        <div class="container m-auto">
+            <div class="flex flex-wrap">
+                <div class="flex-1">
+                    <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
+                        <h3 class="uppercase text-white text-1xl lg:text-2xl bolder italic font-Roboto leading-8"
+                            style="color: orange; font-weight: 900;"><a href="{{route('search')}}">
+                                <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
+                        <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto xs:leading-8 mb-9"
+                            style="color: white; font-weight: 900;">{{$player->name}}</h1>
+
+                        <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
+                            style="color: white; font-weight: 900;">{{$player->preferred_position}}</h3>
+                        <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
+                            style="color: white; font-weight: 900;">Age {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
+                        @if(isset($player->contracts))
+                            <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
+                                style="color: white; font-weight: 900;">Club {{$player->contracts->contracted_club}}</h3>
+                            <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
+                                style="color: white; font-weight: 900;">Contract Ends {{$player->contracts->contracted_expiry_date}}</h3>
+                        @else
+                            <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
+                                style="color: white; font-weight: 900;">LOOKING FOR A CLUB</h3>
+                        @endif
+
+                        <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
+                            style="color: white; font-weight: 900;">{{$player->preferred_foot}}</h5>
+                        <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
+                            style="color: white; font-weight: 900;">{{$player->height}}</h5>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <player-single-component :player="{{$player}}"></player-single-component>
+                </div>
             </div>
-            <div class="w-1/2 mt-4">
-                <h3 class="font-bold font-Montserrat font-thin uppercase text-5xl pb-2">{{$player->name}}</h3>
-                <p class="font-light font-Montserrat text-lg mb-3">{{$player->bio}}</p>
-                <p class="font-light font-Montserrat text-md uppercase">Age: <strong
-                        class="font-bold text-md">{{\Carbon\Carbon::parse($player->dob)->age}}</strong></p>
-                @include('pages.players.partials.socials')
-            </div>
+
+
         </div>
-        @if(count($player->histories) >= 1)
-            <div class="flex flex-row w-auto mb-7">
-                <table class="table border-gray-500 text-md uppercase font-Montserrat border-collapse">
-                    <thead>
-                    <tr class="border-1 border-gray-500">
-                        <th class="border-gray-500 p-3">Season</th>
-                        <th class="border-gray-500 p-3">Club</th>
-                        <th class="border-gray-500 p-3">Appearances</th>
-                        <th class="border-gray-500 p-3">Goals</th>
-                        <th class="border-gray-500 p-3">Assists</th>
-                        <th class="border-gray-500 p-3">Clean Sheets</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($player->histories as $history)
-                        <tr>
-                            <td class="text-center p-3 border-gray-700 border-2">{{$history->season}}</td>
-                            <td class="text-center p-3 border-gray-600 border-2">{{$history->club}}</td>
-                            <td class="text-center p-3 border-gray-600 border-2">{{$history->appearances}}</td>
-                            <td class="text-center p-3 border-gray-600 border-2">{{$history->goals}}</td>
-                            <td class="text-center p-3 border-gray-600 border-2">{{$history->assists}}</td>
-                            <td class="text-center p-3 border-gray-600 border-2">{{$history->clean_sheets}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endif
     </div>
-@endsection
+@stop

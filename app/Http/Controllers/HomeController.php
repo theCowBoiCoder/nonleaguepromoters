@@ -80,6 +80,7 @@ class HomeController extends Controller
             'county' => $region->county,
             'region' => $region->region,
             'preferred_position' => $request->preferred_position ?? '',
+            'looking_for_a_club' => $request->looking_for_a_club ?? 0,
             'preferred_foot' => $request->preferred_foot ?? '',
             'profile_image' => $imageName ?? NULL
         ]);

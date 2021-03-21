@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Position;
 use App\Models\Region;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,12 @@ class PlayerController extends Controller
     public function index()
     {
         $regions = Region::query()->select('region')->groupBy('region')->get();
-        $counties = Region::query()->orderBy('county','ASC')->get();
+        $counties = Region::query()->orderBy('county', 'ASC')->get();
+        $positions = Position::query()->get();
         return view('pages.players.players', [
             'regions' => $regions,
-            'counties' => $counties
+            'counties' => $counties,
+            'positions' => $positions
         ]);
     }
 
@@ -38,6 +41,18 @@ class PlayerController extends Controller
             $county = $request->county;
         }
 
+        if ($request->gender == 'undefined' || $request->gender == 'null' || $request->gender == 'selected') {
+            $gender = null;
+        } else {
+            $gender = $request->gender;
+        }
+
+        if ($request->position == 'undefined' || $request->position == 'null' || $request->position == 'selected') {
+            $position = null;
+        } else {
+            $position = $request->position;
+        }
+
 
         $player = Player::query();
         if ($term != null) {
@@ -50,6 +65,15 @@ class PlayerController extends Controller
         if ($county != null) {
             $player->where('county', $county);
         }
+
+        if ($gender != null) {
+            $player->where('gender', $gender);
+        }
+
+        if ($position != null) {
+            $player->where('preferred_position', $position);
+        }
+
         $player->with(['contracts']);
         $player->where('is_public', 1);
 

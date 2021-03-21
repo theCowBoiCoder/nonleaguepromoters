@@ -36,6 +36,7 @@ class PlayerFactory extends Factory
             'preferred_position' => $positions[random_int(0, 16)]->name,
             'dob' => $this->faker->dateTimeBetween('1990-01-01', '2010-01-01'),
             'bio' => $this->faker->sentence,
+            'gender' => $this->faker->randomElement(['MALE', 'FEMALE']),
             'county' => $counties[array_rand($counties)],
             'region' => $this->faker->country,
             'is_public' => $this->faker->boolean(),

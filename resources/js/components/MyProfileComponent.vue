@@ -12,7 +12,6 @@
                     <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
                         style="color: orange; font-weight: 900;">Personal Data
                     </h4>
-
                     <h5 class="mb-2 uppercase font-bold text-lg text-grey-darkest" style="color: orange">
                         {{ success }}</h5>
                 </div>
@@ -48,6 +47,15 @@
                                style="color: orange; font-weight: 900;">Date Of Birth</label>
                         <date-picker name="dob" :input-class="'border py-2 px-3 text-grey-darkest w-full'" v-model="dob"
                                      format="yyyy-MM-dd"></date-picker>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Looking For A Club</label>
+                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -136,6 +144,7 @@ export default {
             address: (this.my_profile.player) ? this.my_profile.player.address : '',
             height: (this.my_profile.player) ? this.my_profile.player.height : '',
             gender: (this.my_profile.player) ? this.my_profile.player.gender : '',
+            looking_for_a_club: (this.my_profile.player) ? this.my_profile.player.looking_for_a_club : 0,
             preferred_foot: (this.my_profile.player) ? this.my_profile.player.preferred_foot : '',
             preferred_position: (this.my_profile.player) ? this.my_profile.player.preferred_position : '',
             step_free: (this.my_profile.player) ? this.my_profile.player.step_level : '',

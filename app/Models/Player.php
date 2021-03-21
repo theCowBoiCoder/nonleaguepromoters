@@ -20,6 +20,7 @@ class Player extends Model
         'dob',
         'bio',
         'address',
+        'looking_for_a_club',
         'preferred_position',
         'preferred_foot',
         'profile_image',
