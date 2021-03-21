@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('players-component', require('./components/PlayersComponent').default);
+Vue.component('player-single-component', require('./components/PlayerSingle.Component').default);
 Vue.component('register-component', require('./components/RegsiterComponent').default);
 Vue.component('profile-component', require('./components/MyProfileComponent').default);
 

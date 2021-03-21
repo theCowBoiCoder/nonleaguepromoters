@@ -2007,6 +2007,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2019,6 +2027,7 @@ __webpack_require__.r(__webpack_exports__);
       address: this.my_profile.player ? this.my_profile.player.address : '',
       height: this.my_profile.player ? this.my_profile.player.height : '',
       gender: this.my_profile.player ? this.my_profile.player.gender : '',
+      looking_for_a_club: this.my_profile.player ? this.my_profile.player.looking_for_a_club : 0,
       preferred_foot: this.my_profile.player ? this.my_profile.player.preferred_foot : '',
       preferred_position: this.my_profile.player ? this.my_profile.player.preferred_position : '',
       step_free: this.my_profile.player ? this.my_profile.player.step_level : '',
@@ -2199,26 +2208,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['regions', 'counties'],
+  props: ['regions', 'counties', 'positions'],
   data: function data() {
     return {
       name: null,
       region: 'selected',
       county: 'selected',
+      gender: 'selected',
+      position: 'selected',
       contact_status: 0,
       laravelData: {}
     };
   },
   methods: {
-    getPlayers: function getPlayers(page, name, region, county) {
+    getPlayers: function getPlayers(page, name, region, county, gender, position) {
       var _this = this;
 
       if (typeof page === 'undefined') {
         page = 1;
       }
 
-      axios.get('/player/players?term=' + name + '&region=' + region + '&county=' + county + '&page=' + page).then(function (response) {
+      axios.get('/player/players?term=' + name + '&gender=' + gender + '&region=' + region + '&county=' + county + '&position=' + position + '&page=' + page).then(function (response) {
         return response.data;
       }).then(function (data) {
         _this.laravelData = data;
@@ -2228,6 +2267,8 @@ __webpack_require__.r(__webpack_exports__);
       this.name = null;
       this.region = 'selected';
       this.county = 'selected';
+      this.position = 'selected';
+      this.gender = 'selected';
       this.getPlayers(null, this.name, this.region, this.county);
     }
   },
@@ -2402,6 +2443,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2414,6 +2464,7 @@ __webpack_require__.r(__webpack_exports__);
       address: '',
       height: '',
       gender: 0,
+      looking_for_a_club: 0,
       preferred_foot: 0,
       preferred_position: 0,
       region: 0,
@@ -2450,6 +2501,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('address', this.address);
       formData.append('height', this.height);
       formData.append('gender', this.gender);
+      formData.append('looking_for_a_club', this.looking_for_a_club);
       formData.append('preferred_foot', this.preferred_foot);
       formData.append('preferred_position', this.preferred_position);
       formData.append('club', this.club);
@@ -2520,6 +2572,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 Vue.component('players-component', __webpack_require__(/*! ./components/PlayersComponent */ "./resources/js/components/PlayersComponent.vue").default);
+Vue.component('player-single-component', __webpack_require__(/*! ./components/PlayerSingle.Component */ "./resources/js/components/PlayerSingle.Component.vue").default);
 Vue.component('register-component', __webpack_require__(/*! ./components/RegsiterComponent */ "./resources/js/components/RegsiterComponent.vue").default);
 Vue.component('profile-component', __webpack_require__(/*! ./components/MyProfileComponent */ "./resources/js/components/MyProfileComponent.vue").default);
 /**
@@ -38574,6 +38627,40 @@ component.options.__file = "resources/js/components/MyProfileComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/PlayerSingle.Component.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/PlayerSingle.Component.vue ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__.default)(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/PlayerSingle.Component.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/PlayersComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/PlayersComponent.vue ***!
@@ -39085,7 +39172,62 @@ var render = function() {
               })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "looking_for_a_club" }
+              },
+              [_vm._v("Looking For A Club")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.looking_for_a_club,
+                    expression: "looking_for_a_club"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "looking_for_a_club" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.looking_for_a_club = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
+              ]
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -39478,7 +39620,13 @@ var render = function() {
               domProps: { value: _vm.name },
               on: {
                 keyup: function($event) {
-                  return _vm.getPlayers(null, _vm.name, _vm.region, _vm.county)
+                  return _vm.getPlayers(
+                    null,
+                    _vm.name,
+                    _vm.region,
+                    _vm.county,
+                    _vm.gender
+                  )
                 },
                 input: function($event) {
                   if ($event.target.composing) {
@@ -39488,6 +39636,141 @@ var render = function() {
                 }
               }
             })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "m-2 p-2" }, [
+            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+              _vm._v("Search By Position")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.position,
+                    expression: "position"
+                  }
+                ],
+                staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+                attrs: { name: "", id: "position", type: "text" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.position = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.getPlayers(
+                        null,
+                        _vm.name,
+                        _vm.region,
+                        _vm.county,
+                        _vm.gender,
+                        _vm.position
+                      )
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "selected" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.positions, function(pos) {
+                  return _c(
+                    "option",
+                    {
+                      model: {
+                        value: pos.id,
+                        callback: function($$v) {
+                          _vm.$set(pos, "id", $$v)
+                        },
+                        expression: "pos.id"
+                      }
+                    },
+                    [_vm._v(_vm._s(pos.name))]
+                  )
+                }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "selected" } }, [_vm._v("ALL")])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "m-2 p-2" }, [
+            _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+              _vm._v("Search By Gender")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.gender,
+                    expression: "gender"
+                  }
+                ],
+                staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+                attrs: { name: "", id: "gender", type: "text" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.gender = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.getPlayers(
+                        null,
+                        _vm.name,
+                        _vm.region,
+                        _vm.county,
+                        _vm.gender,
+                        _vm.position
+                      )
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "selected" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "MALE" } }, [_vm._v("MALE")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "FEMALE" } }, [
+                  _vm._v("FEMALE")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "selected" } }, [_vm._v("BOTH")])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "m-2 p-2" }, [
@@ -39507,7 +39790,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
-                attrs: { name: "", id: "", type: "text" },
+                attrs: { name: "", id: "county", type: "text" },
                 on: {
                   change: [
                     function($event) {
@@ -39528,7 +39811,9 @@ var render = function() {
                         null,
                         _vm.name,
                         _vm.region,
-                        _vm.county
+                        _vm.county,
+                        _vm.gender,
+                        _vm.position
                       )
                     }
                   ]
@@ -39597,7 +39882,9 @@ var render = function() {
                         null,
                         _vm.name,
                         _vm.region,
-                        _vm.county
+                        _vm.county,
+                        _vm.gender,
+                        _vm.position
                       )
                     }
                   ]
@@ -39667,6 +39954,21 @@ var render = function() {
                         [_vm._v(_vm._s(player.name))]
                       ),
                       _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "border-orange border-2 uppercase pl-2 font-light p-2"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(player.preferred_position) +
+                              "\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
                       player.contracts != null
                         ? _c(
                             "td",
@@ -39719,7 +40021,15 @@ var render = function() {
                           staticClass:
                             "border-orange border-2 uppercase pl-2 font-light p-2"
                         },
-                        [_vm._v("NO")]
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                player.looking_for_a_club === 1 ? "YES" : "NO"
+                              ) +
+                              "\n                        "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _vm._m(1, true)
@@ -39770,6 +40080,12 @@ var staticRenderFns = [
         _c(
           "th",
           { staticClass: "border-orange border-2 uppercase p-2 text-orange" },
+          [_vm._v("Position")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "border-orange border-2 uppercase p-2 text-orange" },
           [_vm._v("Club")]
         ),
         _vm._v(" "),
@@ -39801,7 +40117,7 @@ var staticRenderFns = [
         {
           staticClass:
             "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
-          attrs: { href: "/player/search/" }
+          attrs: { href: "#" }
         },
         [
           _vm._v(
@@ -40068,7 +40384,62 @@ var render = function() {
               })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "looking_for_a_club" }
+              },
+              [_vm._v("Looking For A Club")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.looking_for_a_club,
+                    expression: "looking_for_a_club"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "looking_for_a_club" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.looking_for_a_club = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
+              ]
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -40123,7 +40494,7 @@ var render = function() {
                   { attrs: { value: "0", selected: "", disabled: "" } },
                   [_vm._v("Please Select")]
                 ),
-                _vm._v("\n                        <"),
+                _vm._v(" "),
                 _vm._l(_vm.regions, function(region) {
                   return _c(
                     "option",
@@ -40303,7 +40674,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "" },
+                attrs: { name: "", id: "preferred_foot" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter

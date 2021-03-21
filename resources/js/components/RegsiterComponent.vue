@@ -51,6 +51,15 @@
                                style="color: orange; font-weight: 900;">Date Of Birth</label>
                         <date-picker name="dob" :input-class="'border py-2 px-3 text-grey-darkest w-full'" v-model="dob" format="yyyy-MM-dd"></date-picker>
                     </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Looking For A Club</label>
+                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="flex-1">
@@ -65,7 +74,7 @@
                                style="color: orange; font-weight: 900;" for="name">County *</label>
                         <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
                             <option value="0" selected disabled>Please Select</option>
-                            <<option v-for="region in regions" v-model="region.id">{{ region.county }}</option>
+                            <option v-for="region in regions" v-model="region.id">{{ region.county }}</option>
                         </select>
                     </div>
                     <div class="flex flex-col mb-2">
@@ -90,7 +99,7 @@
                     <div class="flex flex-col mb-2">
                         <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Preferred Foot *</label>
-                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_foot">
+                        <select name="" id="preferred_foot" class="border py-2 px-3 text-grey-darkest" v-model="preferred_foot">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="left">Left</option>
                             <option value="right">Right</option>
@@ -160,6 +169,7 @@ export default {
             address: '',
             height: '',
             gender: 0,
+            looking_for_a_club: 0,
             preferred_foot: 0,
             preferred_position: 0,
             region: 0,
@@ -194,6 +204,7 @@ export default {
             formData.append('address', this.address);
             formData.append('height', this.height);
             formData.append('gender', this.gender);
+            formData.append('looking_for_a_club', this.looking_for_a_club);
             formData.append('preferred_foot', this.preferred_foot);
             formData.append('preferred_position', this.preferred_position);
             formData.append('club', this.club);
