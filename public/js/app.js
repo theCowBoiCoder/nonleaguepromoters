@@ -2015,12 +2015,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['positions', 'my_profile'],
   data: function data() {
     return {
+      id: this.my_profile.id,
       name: this.my_profile.name,
       dob: this.my_profile.player !== null ? this.my_profile.player.dob : '',
       email_address: this.my_profile.email,
@@ -2046,10 +2051,18 @@ __webpack_require__.r(__webpack_exports__);
     previewFiles: function previewFiles(event) {
       this.file = this.$refs.file.files[0]; //console.log(this.file);
     },
+    deleteAccount: function deleteAccount() {
+      if (confirm('Are you sure you want to delete your account?')) {
+        var formData = new FormData();
+        formData.append('id', this.my_profile.id);
+        axios__WEBPACK_IMPORTED_MODULE_1___default().post('/delete', formData).then(function (response) {
+          console.log(response);
+        });
+      }
+    },
     update: function update() {
       var _this = this;
 
-      console.log(this.dob);
       var formData = new FormData();
       formData.append('name', this.name);
 
@@ -39525,7 +39538,8 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-danger border text-white p-3 uppercase",
+              staticClass:
+                "btn btn-danger border text-white p-3 uppercase mb-3",
               staticStyle: {
                 "background-color": "orange",
                 "font-weight": "900",
@@ -39538,6 +39552,21 @@ var render = function() {
               }
             },
             [_vm._v("Update My Profile\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-danger border text-white p-3 uppercase bg-red-400",
+              staticStyle: { "font-weight": "900", "border-color": "orange" },
+              on: {
+                click: function($event) {
+                  return _vm.deleteAccount()
+                }
+              }
+            },
+            [_vm._v("Delete My Profile\n                ")]
           )
         ])
       ])

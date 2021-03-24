@@ -7,6 +7,7 @@ use App\Models\PlayerContract;
 use App\Models\Position;
 use App\Models\Region;
 use App\Models\User;
+use App\Notifications\UserDeletionNotification;
 use App\Notifications\UserHasRegisteredNotification;
 use App\Notifications\UserPasswordResetNotification;
 use App\Notifications\UserRegisterNotification;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use MongoDB\Driver\Session;
 
 class HomeController extends Controller
 {
@@ -45,6 +45,12 @@ class HomeController extends Controller
             'positions' => $positions,
             'regions' => $regions
         ]);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $user = User::query()->find($request->id);
+        Notification::route('mail', $user->email)->notify(new UserDeletionNotification($user));
     }
 
     public function reset()

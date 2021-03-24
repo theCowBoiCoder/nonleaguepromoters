@@ -51,7 +51,8 @@
                     <div class="flex flex-col mb-2">
                         <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Looking For A Club</label>
-                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest"
+                                v-model="looking_for_a_club">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="1">YES</option>
                             <option value="0">NO</option>
@@ -119,8 +120,11 @@
                                      format="yyyy-MM-dd"
                                      v-model="contract_end_date"></date-picker>
                     </div>
-                    <button class="btn btn-danger border text-white p-3 uppercase" @click="update()"
+                    <button class="btn btn-danger border text-white p-3 uppercase mb-3" @click="update()"
                             style="background-color: orange; font-weight: 900; border-color: orange">Update My Profile
+                    </button>
+                    <button class="btn btn-danger border text-white p-3 uppercase bg-red-400" @click="deleteAccount()"
+                            style="font-weight: 900; border-color: orange">Delete My Profile
                     </button>
                 </div>
 
@@ -138,6 +142,7 @@ export default {
     props: ['positions', 'my_profile'],
     data() {
         return {
+            id: this.my_profile.id,
             name: this.my_profile.name,
             dob: (this.my_profile.player !== null) ? this.my_profile.player.dob : '',
             email_address: this.my_profile.email,
@@ -164,8 +169,16 @@ export default {
             this.file = this.$refs.file.files[0];
             //console.log(this.file);
         },
+        deleteAccount() {
+            if (confirm('Are you sure you want to delete your account?')) {
+                let formData = new FormData();
+                formData.append('id', this.my_profile.id);
+                axios.post('/delete', formData).then(response => {
+                    console.log(response);
+                });
+            }
+        },
         update() {
-            console.log(this.dob);
             let formData = new FormData();
             formData.append('name', this.name);
             if (this.dob !== '') {
@@ -191,11 +204,11 @@ export default {
                 'Content-Type': 'multipart/form-data'
 
             };
-            axios.post('/profile',formData).then(response => {
+            axios.post('/profile', formData).then(response => {
                 if (response.status === 200) {
                     if (response.data.error) {
                         this.success = response.data.error;
-                    }else{
+                    } else {
                         //window.location.href='/';
 
                     }

@@ -19,6 +19,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('h
 Route::get('about', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('register', [\App\Http\Controllers\HomeController::class, 'register'])->name('register');
 Route::post('register', [\App\Http\Controllers\HomeController::class, 'registerUser'])->name('register.store');
+Route::post('delete',[\App\Http\Controllers\HomeController::class,'deleteUser'])->name('delete.user');
 Route::get('login', [\App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('login', [\App\Http\Controllers\HomeController::class, 'auth'])->name('auth.login');
 Route::get('logout', [\App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
