@@ -22,6 +22,10 @@ Route::post('register', [\App\Http\Controllers\HomeController::class, 'registerU
 Route::get('login', [\App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('login', [\App\Http\Controllers\HomeController::class, 'auth'])->name('auth.login');
 Route::get('logout', [\App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+Route::get('password-change/{user}',[\App\Http\Controllers\HomeController::class,'passwordChange'])->name('password.change');
+Route::post('password-change/{user}',[\App\Http\Controllers\HomeController::class,'passwordConfirm'])->name('password.change.store');
+Route::get('password-reset',[\App\Http\Controllers\HomeController::class,'reset'])->name('reset');
+Route::post('password-reset',[\App\Http\Controllers\HomeController::class,'resetStore'])->name('reset.update');
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/', [\App\Http\Controllers\HomeController::class, 'profileUpdate'])->name('profile');

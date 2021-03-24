@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Models\Region;
 use App\Models\User;
 use App\Notifications\UserHasRegisteredNotification;
+use App\Notifications\UserPasswordResetNotification;
 use App\Notifications\UserRegisterNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,11 +40,36 @@ class HomeController extends Controller
     public function register()
     {
         $positions = Position::query()->get();
-        $regions = Region::query()->orderBy('county','ASC')->get();
+        $regions = Region::query()->orderBy('county', 'ASC')->get();
         return view('pages.register', [
             'positions' => $positions,
             'regions' => $regions
         ]);
+    }
+
+    public function reset()
+    {
+        return view('pages.reset');
+    }
+
+    public function resetStore(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        //Find Email
+        $user = User::query()->where('email', $request->email)->first();
+
+        if ($user != null) {
+            //Send password Reset Email
+            $message = "Your new password has been sent to $user->email";
+            $password = Str::random(8);
+            Notification::route('mail', $user->email)->notify(new UserPasswordResetNotification($user, $password));
+            $user->password_been_changed = 0;
+            $user->save();
+        } else {
+            $message = "Sorry we couldn't find any details with the email $request->email";
+        }
+
+
+        return redirect()->back()->with('success', $message);
     }
 
     public function registerUser(Request $request): \Illuminate\Http\JsonResponse
@@ -67,7 +93,7 @@ class HomeController extends Controller
             'email' => $request->email_address,
             'password' => Hash::make($password)
         ]);
-        $region = Region::query()->where('county',$request->county)->first();
+        $region = Region::query()->where('county', $request->county)->first();
 
         $player = Player::query()->create([
             'user_id' => $user->id,
@@ -113,7 +139,33 @@ class HomeController extends Controller
     {
         Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
+        if (Auth::user()->password_been_changed == 0) {
+            //Send to change password
+            return redirect()->route('password.change', Auth::user());
+        }
+
         return redirect('/')->with('logged_in', 'Welcome back');
+    }
+
+    public function passwordChange(User $user)
+    {
+        return view('pages.auth.passwordchange', [
+            'user' => $user
+        ]);
+    }
+
+    public function passwordConfirm(User $user, Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'min:6|required_with:confirm_password|same:confirm_password',
+            'confirm_password' => 'min:6'
+        ]);
+
+        $user->password = Hash::make($request->password);
+        $user->password_been_changed = 1;
+        $user->save();
+
+        return redirect('/')->with('logged_in', 'Password Has Been Chanegd');
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse
