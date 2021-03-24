@@ -40061,7 +40061,27 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _c(
+                        "td",
+                        {
+                          staticClass: "border-orange border-2 p-2 text-center"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                              attrs: { href: "/player/" + player.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                View Details\n                            "
+                              )
+                            ]
+                          )
+                        ]
+                      )
                     ])
                   }),
                   0
@@ -40134,26 +40154,6 @@ var staticRenderFns = [
           staticClass: "border-orange border-2 w-32 uppercase  text-orange"
         })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "border-orange border-2 p-2 text-center" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
-          attrs: { href: "#" }
-        },
-        [
-          _vm._v(
-            "\n                                View Details\n                            "
-          )
-        ]
-      )
     ])
   }
 ]

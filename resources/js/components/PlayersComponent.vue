@@ -104,7 +104,7 @@
                                 {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}
                             </td>
                             <td class="border-orange border-2 p-2 text-center">
-                                <a href="#"
+                                <a v-bind:href="'/player/'+player.id"
                                    class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                     View Details
                                 </a>

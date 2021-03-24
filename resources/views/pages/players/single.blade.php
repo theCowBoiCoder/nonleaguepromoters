@@ -15,12 +15,15 @@
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;">{{$player->preferred_position}}</h3>
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
-                            style="color: white; font-weight: 900;">Age {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
+                            style="color: white; font-weight: 900;">
+                            Age {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
                         @if(isset($player->contracts))
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
-                                style="color: white; font-weight: 900;">Club {{$player->contracts->contracted_club}}</h3>
+                                style="color: white; font-weight: 900;">
+                                Club {{$player->contracts->contracted_club}}</h3>
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
-                                style="color: white; font-weight: 900;">Contract Ends {{$player->contracts->contracted_expiry_date}}</h3>
+                                style="color: white; font-weight: 900;">Contract
+                                Ends {{$player->contracts->contracted_expiry_date}}</h3>
                         @else
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                                 style="color: white; font-weight: 900;">LOOKING FOR A CLUB</h3>
@@ -32,8 +35,29 @@
                             style="color: white; font-weight: 900;">{{$player->height}}</h5>
                     </div>
                 </div>
-                <div class="flex-1">
-                    <player-single-component :player="{{$player}}"></player-single-component>
+                <div class="flex-1 bg-blue-500 p-4">
+                    @if($player->profile_image != null)
+                        <img src="/images/{{$player->profile_image}}" alt="Profile Image">
+                    @else
+
+
+
+
+
+
+
+
+                    @endif
+
+                    <div class="flex flex-wrap">
+                        <div class="flex-1">
+                            <p class="uppercase text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
+                                Social Media Stuff here!</p>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-yellow-300 text-6xl bolder">Message Now</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
 
