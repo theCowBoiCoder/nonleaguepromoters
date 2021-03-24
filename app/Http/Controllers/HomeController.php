@@ -90,7 +90,7 @@ class HomeController extends Controller
 
         if (isset($request->file)) {
             $imageName = time() . '.' . $request->file->extension();
-            $request->file->move(public_path('images'), $imageName);
+            $request->file->move(public_path('images/user'), $imageName);
         }
 
         $password = Str::random(8);
