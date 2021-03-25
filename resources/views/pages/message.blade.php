@@ -14,7 +14,7 @@
                     <div class="md:flex">
                         <div class="p-8">
                             <a href="#" class="block mt-1 text-xl leading-tight font-medium text-orange hover:underline">{{$message->subject}}</a>
-                            <p class="mt-2 text-gray-500 break-all">{{$message->message}}</p>
+                            <p class="mt-2 text-gray-500 break-all">{{decrypt($message->message)}}</p>
                             @if($message->has_read == 0)
                                 <div class="mt-4">
                                     <a class="p-2 rounded bg-white text-orange border border-orange hover:text-white hover:bg-orange" href="{{route('profile.my_messages.read',[$message,$message->id])}}">Mark As Read</a>
