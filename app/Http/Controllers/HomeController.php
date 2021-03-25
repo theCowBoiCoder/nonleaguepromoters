@@ -51,6 +51,9 @@ class HomeController extends Controller
     {
         $user = User::query()->find($request->id);
         Notification::route('mail', $user->email)->notify(new UserDeletionNotification($user));
+        User::query()->where('id', $request->id)->delete();
+        \request()->session()->flush();
+        return redirect()->route('home');
     }
 
     public function reset()
