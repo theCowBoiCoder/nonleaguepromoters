@@ -69,6 +69,16 @@
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">County *</label>
+                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
+                            <option value="0" disabled>Please Select</option>
+                            <option v-for="region in regions" v-model="region.id"
+                                    :selected="my_profile.player.county === region.county">{{ region.county }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
                         <select class="border py-2 px-3 text-grey-darkest" v-model="step_free">
                             <option value="0">Please Select</option>
@@ -107,6 +117,15 @@
         <div class="flex flex-wrap">
             <div class="flex-1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <label for="bio" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                           style="color: orange; font-weight: 900;">My Bio</label>
+                    <textarea id="bio" v-model="bio" class="p-2"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap">
+            <div class="flex-1">
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2 mt-2">
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Club Name</label>
@@ -139,7 +158,7 @@ import DatePicker from 'vuejs-datepicker';
 import axios from 'axios';
 
 export default {
-    props: ['positions', 'my_profile'],
+    props: ['positions', 'my_profile', 'regions'],
     data() {
         return {
             id: this.my_profile.id,
@@ -147,6 +166,7 @@ export default {
             dob: (this.my_profile.player !== null) ? this.my_profile.player.dob : '',
             email_address: this.my_profile.email,
             address: (this.my_profile.player) ? this.my_profile.player.address : '',
+            bio: (this.my_profile.player) ? this.my_profile.player.bio : '',
             height: (this.my_profile.player) ? this.my_profile.player.height : '',
             gender: (this.my_profile.player) ? this.my_profile.player.gender : '',
             looking_for_a_club: (this.my_profile.player) ? this.my_profile.player.looking_for_a_club : 0,
@@ -180,7 +200,9 @@ export default {
         },
         update() {
             let formData = new FormData();
+            formData.append('id', this.my_profile.id);
             formData.append('name', this.name);
+            formData.append('bio', this.bio);
             if (this.dob !== '') {
                 formData.append('dob', this.dob);
             }

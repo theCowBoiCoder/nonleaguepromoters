@@ -35,18 +35,11 @@
                             style="color: white; font-weight: 900;">{{$player->height}}</h5>
                     </div>
                 </div>
-                <div class="flex-1 bg-blue-500 p-4">
+                <div class="flex-1 bg-orange p-4">
                     @if($player->profile_image != null)
                         <img src="/images/{{$player->profile_image}}" alt="Profile Image">
                     @else
-
-
-
-
-
-
-
-
+                        <img src="/images/default_profile_image.png" alt="Default Image" class="object-contain h-48 w-full">
                     @endif
 
                     <div class="flex flex-wrap">
@@ -55,7 +48,7 @@
                                 Social Media Stuff here!</p>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-yellow-300 text-6xl bolder">Message Now</h3>
+                            <h3 class="text-white text-6xl bolder">Message Now</h3>
                         </div>
                     </div>
                 </div>

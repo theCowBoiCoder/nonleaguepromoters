@@ -40,7 +40,6 @@ class PlayerFactory extends Factory
             'county' => $counties[array_rand($counties)],
             'region' => $this->faker->country,
             'is_public' => $this->faker->boolean(),
-            'profile_image' => $this->faker->imageUrl(200, 200)
         ];
     }
 }

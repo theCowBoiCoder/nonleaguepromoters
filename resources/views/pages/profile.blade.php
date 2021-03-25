@@ -9,7 +9,8 @@
                 <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto leading-8"
                     style="color: orange; font-weight: 900;">My Profile</h1>
             </div>
-            <profile-component :positions="{{$positions}}" :my_profile="{{$me}}"></profile-component>
+            <profile-component :positions="{{$positions}}" :my_profile="{{$me}}"
+                               :regions="{{$regions}}"></profile-component>
         </div>
     </div>
 @endsection

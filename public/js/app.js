@@ -2019,10 +2019,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['positions', 'my_profile'],
+  props: ['positions', 'my_profile', 'regions'],
   data: function data() {
     return {
       id: this.my_profile.id,
@@ -2030,6 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
       dob: this.my_profile.player !== null ? this.my_profile.player.dob : '',
       email_address: this.my_profile.email,
       address: this.my_profile.player ? this.my_profile.player.address : '',
+      bio: this.my_profile.player ? this.my_profile.player.bio : '',
       height: this.my_profile.player ? this.my_profile.player.height : '',
       gender: this.my_profile.player ? this.my_profile.player.gender : '',
       looking_for_a_club: this.my_profile.player ? this.my_profile.player.looking_for_a_club : 0,
@@ -2064,7 +2084,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var formData = new FormData();
+      formData.append('id', this.my_profile.id);
       formData.append('name', this.name);
+      formData.append('bio', this.bio);
 
       if (this.dob !== '') {
         formData.append('dob', this.dob);
@@ -39257,6 +39279,79 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "name" }
               },
+              [_vm._v("County *")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.region,
+                    expression: "region"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "county" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.region = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", disabled: "" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.regions, function(region) {
+                  return _c(
+                    "option",
+                    {
+                      domProps: {
+                        selected: _vm.my_profile.player.county === region.county
+                      },
+                      model: {
+                        value: region.id,
+                        callback: function($$v) {
+                          _vm.$set(region, "id", $$v)
+                        },
+                        expression: "region.id"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(region.county) + "\n                        "
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
               [_vm._v("Step / Free Agent")]
             ),
             _vm._v(" "),
@@ -39460,6 +39555,44 @@ var render = function() {
               }
             })
           ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex flex-wrap" }, [
+      _c("div", { staticClass: "flex-1" }, [
+        _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
+          _c(
+            "label",
+            {
+              staticClass: "mb-2 uppercase font-bold text-lg text-grey-darkest",
+              staticStyle: { color: "orange", "font-weight": "900" },
+              attrs: { for: "bio" }
+            },
+            [_vm._v("My Bio")]
+          ),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.bio,
+                expression: "bio"
+              }
+            ],
+            staticClass: "p-2",
+            attrs: { id: "bio" },
+            domProps: { value: _vm.bio },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.bio = $event.target.value
+              }
+            }
+          })
         ])
       ])
     ]),

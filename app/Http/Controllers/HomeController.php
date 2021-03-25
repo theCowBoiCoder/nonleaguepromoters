@@ -184,14 +184,36 @@ class HomeController extends Controller
     {
         $me = User::query()->with('player.contracts')->find(Auth::id());
         $positions = Position::query()->get();
+        $regions = Region::query()->orderBy('county', 'ASC')->get();
         return view('pages.profile', [
             'positions' => $positions,
-            'me' => $me
+            'me' => $me,
+            'regions' => $regions
         ]);
     }
 
     public function profileUpdate(Request $request)
     {
+
+        $user = User::query()->find($request->id);
+        $user->name = $request->name;
+        $user->save();
+
+        $region = Region::query()->where('county', $request->county)->first();
+
+        $user->player->name = $request->name;
+        $user->playergender = $request->gender;
+        $user->player->address = $request->address;
+        $user->player->dob = Carbon::parse($request->dob)->toDateString();
+        $user->player->step_level = $request->step_free;
+        $user->player->height = $request->height ?? 0;
+        $user->player->county = $region->county;
+        $user->player->region = $region->region;
+        $user->player->preferred_position = $request->preferred_position ?? NULL;
+        $user->player->looking_for_a_club = $request->looking_for_a_club ?? 0;
+        $user->player->preferred_foot = $request->preferred_foot ?? '';
+        $user->player->save();
+
 
         dd($request->all(), Carbon::parse($request->dob)->toDateString());
     }
