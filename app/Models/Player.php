@@ -53,7 +53,7 @@ class Player extends Model
 
     public function histories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(PlayerHistory::class, 'user_id', 'id')->orderBy('season', 'DESC');
+        return $this->hasMany(PlayerHistory::class, 'player_id', 'id')->orderBy('season', 'DESC');
     }
 
     public function getAgeAttribute()

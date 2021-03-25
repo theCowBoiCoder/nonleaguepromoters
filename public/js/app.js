@@ -2046,18 +2046,19 @@ __webpack_require__.r(__webpack_exports__);
     return {
       id: this.my_profile.id,
       name: this.my_profile.name,
-      dob: this.my_profile.player !== null ? this.my_profile.player.dob : '',
+      dob: this.my_profile.player !== null ? this.my_profile.player.dob : null,
       email_address: this.my_profile.email,
-      address: this.my_profile.player ? this.my_profile.player.address : '',
-      bio: this.my_profile.player ? this.my_profile.player.bio : '',
-      height: this.my_profile.player ? this.my_profile.player.height : '',
-      gender: this.my_profile.player ? this.my_profile.player.gender : '',
+      address: this.my_profile.player ? this.my_profile.player.address : null,
+      bio: this.my_profile.player ? this.my_profile.player.bio : null,
+      height: this.my_profile.player ? this.my_profile.player.height : null,
+      gender: this.my_profile.player ? this.my_profile.player.gender : null,
       looking_for_a_club: this.my_profile.player ? this.my_profile.player.looking_for_a_club : 0,
-      preferred_foot: this.my_profile.player ? this.my_profile.player.preferred_foot : '',
-      preferred_position: this.my_profile.player ? this.my_profile.player.preferred_position : '',
-      step_free: this.my_profile.player ? this.my_profile.player.step_level : '',
-      club: this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : '',
-      contract_end_date: this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : '',
+      preferred_foot: this.my_profile.player ? this.my_profile.player.preferred_foot : null,
+      preferred_position: this.my_profile.player ? this.my_profile.player.preferred_position : null,
+      step_free: this.my_profile.player ? this.my_profile.player.step_level : null,
+      club: this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : null,
+      contract_end_date: this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : null,
+      county: this.my_profile.player ? this.my_profile.player.county : null,
       file: '',
       got_club: false,
       errors: [],
@@ -2100,6 +2101,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('preferred_position', this.preferred_position);
       formData.append('club', this.club);
       formData.append('step_free', this.step_free);
+      formData.append('county', this.county);
 
       if (this.contract_end_date !== '') {
         formData.append('contract_end_date', this.contract_end_date);

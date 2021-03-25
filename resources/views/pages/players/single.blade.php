@@ -3,7 +3,7 @@
     <div class="bg-black md:bg-player-image bg-scroll">
         @include('layout.login')
         <div class="container m-auto">
-            <div class="flex flex-wrap">
+            <div class="flex flex-col md:flex-row h-screen">
                 <div class="flex-1">
                     <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
                         <h3 class="uppercase text-white text-1xl lg:text-2xl bolder italic font-Roboto leading-8"
@@ -33,22 +33,87 @@
                             style="color: white; font-weight: 900;">{{$player->preferred_foot}}</h5>
                         <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;">{{$player->height}}</h5>
+                        <p class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
+                           style="color: white; font-weight: 900;">{{$player->bio}}</p>
                     </div>
                 </div>
-                <div class="flex-1 bg-orange p-4">
-                    @if($player->profile_image != null)
-                        <img src="/images/{{$player->profile_image}}" alt="Profile Image">
-                    @else
-                        <img src="/images/default_profile_image.png" alt="Default Image" class="object-contain h-48 w-full">
-                    @endif
-
-                    <div class="flex flex-wrap">
-                        <div class="flex-1">
-                            <p class="uppercase text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
-                                Social Media Stuff here!</p>
+                <div class="flex-1">
+                    <div class="bg-orange px-6 py-6 mx-6 h-auto">
+                        <div class="mt-8 mb-8 py-3 p-6">
+                            @if($player->profile_image != null)
+                                <img src="/images/user/{{$player->profile_image}}" alt="Profile Image">
+                            @else
+                                <img src="/images/default_profile_image.png" alt="Default Image"
+                                     class="object-contain h-48 w-full">
+                            @endif
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-white text-6xl bolder">Message Now</h3>
+                        @if(count($player->histories) >= 1)
+                            <div class="flex-initial lg:flex-grow mt-8 mb-8">
+                                <div class="flex justify-center items-center">
+                                    <table
+                                        class="table-auto border-collapse border-2 border-orange bg-white bg-opacity-95 align-items-center">
+                                        <thead>
+                                        <tr>
+                                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange">
+                                                Years
+                                            </th>
+                                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange">
+                                                Club
+                                            </th>
+                                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange">
+                                                Appearances
+                                            </th>
+                                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange">
+                                                Goals
+                                            </th>
+                                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange">
+                                                Assists
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($player->histories as $history)
+                                            <tr>
+                                                <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{$history->season}}</td>
+                                                <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{$history->club}}</td>
+                                                <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{$history->appearances}}</td>
+                                                <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{$history->goals}}</td>
+                                                <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{$history->assists}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="flex flex-col md:flex-row">
+                            <div class="flex-1">
+                                @if($player->twitter_url != null || $player->facebook_url != null || $player->instagram_url != null || $player->youtube_url)
+                                    <p class="uppercase text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
+                                        Social Media Sites</p>
+                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
+                                        Twitter: </p>
+                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
+                                        Instagram: </p>
+                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
+                                        YouTube: </p>
+                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
+                                        Facebook: </p>
+                                @else
+                                    <p class="text-white text-1xl lg:text-1xl bolder font-Roboto xs:leading-8 mb-4">
+                                        No Social Media Details have been added yet</p>
+                                @endif
+                            </div>
+                            <div class="flex-1">
+                                <div
+                                    class="border-2 border-white p-2 rounded hover:text-orange hover:bg-white hover:border-orange">
+                                    <h3 class="text-white text-4xl bolder text-center uppercase hover:text-orange hover:bg-white hover:text-orange hover:bg-white">
+                                        <a href="">Message
+                                            Now</a></h3>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

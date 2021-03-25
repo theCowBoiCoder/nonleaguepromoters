@@ -171,7 +171,7 @@ class HomeController extends Controller
         $user->password_been_changed = 1;
         $user->save();
 
-        return redirect('/')->with('logged_in', 'Password Has Been Chanegd');
+        return redirect('/')->with('logged_in', 'Password Has Been Changed');
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse
@@ -192,29 +192,35 @@ class HomeController extends Controller
         ]);
     }
 
-    public function profileUpdate(Request $request)
+    public function profileUpdate(Request $request): \Illuminate\Http\JsonResponse
     {
+
+        if (isset($request->file)) {
+            $imageName = time() . '.' . $request->file->extension();
+            $request->file->move(public_path('images/user'), $imageName);
+        }
 
         $user = User::query()->find($request->id);
         $user->name = $request->name;
         $user->save();
 
-        $region = Region::query()->where('county', $request->county)->first();
-
+        $county = Region::query()->where('county', $request->county)->first();
         $user->player->name = $request->name;
         $user->playergender = $request->gender;
         $user->player->address = $request->address;
+        $user->player->bio = $request->bio;
         $user->player->dob = Carbon::parse($request->dob)->toDateString();
         $user->player->step_level = $request->step_free;
         $user->player->height = $request->height ?? 0;
-        $user->player->county = $region->county;
-        $user->player->region = $region->region;
+        $user->player->county = $county->county;
+        $user->player->region = $county->region;
         $user->player->preferred_position = $request->preferred_position ?? NULL;
         $user->player->looking_for_a_club = $request->looking_for_a_club ?? 0;
         $user->player->preferred_foot = $request->preferred_foot ?? '';
+        $user->player->profile_image = $imageName ?? NULL;
         $user->player->save();
 
 
-        dd($request->all(), Carbon::parse($request->dob)->toDateString());
+        return response()->json(['message' => 'Thanks You Have Now Updated Your Profile']);
     }
 }
