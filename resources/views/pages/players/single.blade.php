@@ -37,8 +37,8 @@
                            style="color: white; font-weight: 900;">{{$player->bio}}</p>
                     </div>
                 </div>
-                <div class="flex-1">
-                    <div class="bg-orange px-6 py-6 mx-6 h-auto">
+                <div class="flex-1 relative ">
+                    <div class="bg-orange px-6 py-6 mx-6 h-auto absolute top-32 rounded">
                         <div class="mt-8 mb-8 py-3 p-6">
                             @if($player->profile_image != null)
                                 <img src="/images/user/{{$player->profile_image}}" alt="Profile Image">
@@ -109,7 +109,7 @@
                                 <div
                                     class="border-2 border-white p-2 rounded hover:text-orange hover:bg-white hover:border-orange">
                                     <h3 class="text-white text-4xl bolder text-center uppercase hover:text-orange hover:bg-white hover:text-orange hover:bg-white">
-                                        <a href="">Message
+                                        <a href="{{route('message',$player)}}">Message
                                             Now</a></h3>
                                 </div>
 

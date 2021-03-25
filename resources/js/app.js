@@ -24,6 +24,7 @@ Vue.component('players-component', require('./components/PlayersComponent').defa
 Vue.component('player-single-component', require('./components/PlayerSingle.Component').default);
 Vue.component('register-component', require('./components/RegsiterComponent').default);
 Vue.component('profile-component', require('./components/MyProfileComponent').default);
+Vue.component('message-component', require('./components/MessageComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

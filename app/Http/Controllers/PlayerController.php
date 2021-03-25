@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Player;
 use App\Models\Position;
 use App\Models\Region;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlayerController extends Controller
 {
@@ -86,5 +89,27 @@ class PlayerController extends Controller
         return view('pages.players.single', [
             'player' => $player
         ]);
+    }
+
+    public function message(Player $player)
+    {
+        return view('pages.players.message', [
+            'player' => $player
+        ]);
+    }
+
+    public function messageSend(Request $request)
+    {
+        $player = Player::query()->find($request->segment(2));
+
+        Message::query()->create([
+            'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
+            'receiver_user_id' => $player->user_id,
+            'subject' => $request->subject,
+            'message' => encrypt($request->message),
+            'from' => $request->from_name
+        ]);
+
+        return response()->json(['success' =>  'Your Message has been sent']);
     }
 }
