@@ -2137,6 +2137,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2158,6 +2186,10 @@ __webpack_require__.r(__webpack_exports__);
       club: this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : null,
       contract_end_date: this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : null,
       county: this.my_profile.player ? this.my_profile.player.county : null,
+      facebook_url: this.my_profile.player ? this.my_profile.player.facebook_url : null,
+      twitter_url: this.my_profile.player ? this.my_profile.player.twitter_url : null,
+      youtube_url: this.my_profile.player ? this.my_profile.player.youtube_url : null,
+      instagram_url: this.my_profile.player ? this.my_profile.player.instagram_url : null,
       file: '',
       got_club: false,
       errors: [],
@@ -2201,6 +2233,10 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('club', this.club);
       formData.append('step_free', this.step_free);
       formData.append('county', this.county);
+      formData.append('twitter_url', this.twitter_url);
+      formData.append('facebook_url', this.facebook_url);
+      formData.append('youtube_url', this.youtube_url);
+      formData.append('instagram_url', this.instagram_url);
 
       if (this.contract_end_date !== '') {
         formData.append('contract_end_date', this.contract_end_date);
@@ -2215,8 +2251,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios__WEBPACK_IMPORTED_MODULE_1___default().post('/profile', formData).then(function (response) {
         if (response.status === 200) {
-          if (response.data.error) {
-            _this.success = response.data.error;
+          if (response.data.message) {
+            _this.success = response.data.message;
           } else {//window.location.href='/';
           }
         }
@@ -39367,10 +39403,9 @@ var render = function() {
             "h4",
             {
               staticClass:
-                "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
-              staticStyle: { color: "orange", "font-weight": "900" }
+                "mb-2 uppercase font-bold text-2xl text-grey-darkest text-white"
             },
-            [_vm._v("Personal Data\n                ")]
+            [_vm._v("Personal Data")]
           ),
           _vm._v(" "),
           _c(
@@ -39624,11 +39659,9 @@ var render = function() {
                 }
               },
               [
-                _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
-                ),
+                _c("option", { attrs: { selected: "", disabled: "" } }, [
+                  _vm._v("Please Select")
+                ]),
                 _vm._v(" "),
                 _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
                 _vm._v(" "),
@@ -39662,8 +39695,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.region,
-                    expression: "region"
+                    value: _vm.county,
+                    expression: "county"
                   }
                 ],
                 staticClass: "border py-2 px-3 text-grey-darkest",
@@ -39678,7 +39711,7 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.region = $event.target.multiple
+                    _vm.county = $event.target.multiple
                       ? $$selectedVal
                       : $$selectedVal[0]
                   }
@@ -39740,6 +39773,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -39757,14 +39791,26 @@ var render = function() {
                 }
               },
               [
-                _c("option", { attrs: { value: "0" } }, [
-                  _vm._v("Please Select")
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "professional" } }, [
+                  _vm._v("Professional")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "step" } }, [_vm._v("Step")]),
+                _c("option", { attrs: { value: "semi-professional" } }, [
+                  _vm._v("Semi Professional")
+                ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "free_agent" } }, [
-                  _vm._v("Free Agent")
+                _c("option", { attrs: { value: "non-contract" } }, [
+                  _vm._v("Non Contract")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "amateur-contract" } }, [
+                  _vm._v("Amateur Contract")
                 ])
               ]
             )
@@ -39848,27 +39894,49 @@ var render = function() {
               [_vm._v("Preferred Foot")]
             ),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.preferred_foot,
-                  expression: "preferred_foot"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "preferred_foot" },
-              domProps: { value: _vm.preferred_foot },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.preferred_foot,
+                    expression: "preferred_foot"
                   }
-                  _vm.preferred_foot = $event.target.value
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "", id: "preferred_foot" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.preferred_foot = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "left" } }, [_vm._v("Left")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "right" } }, [_vm._v("Right")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col mb-2" }, [
@@ -39972,7 +40040,165 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
       _c("div", { staticClass: "flex-1" }, [
+        _c(
+          "div",
+          { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3 mt-3 " },
+          [
+            _c(
+              "h3",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-2xl text-grey-darkest text-white",
+                staticStyle: { "font-weight": "900" }
+              },
+              [_vm._v("Social Media\n                ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest text-orange",
+                attrs: { for: "facebook_url" }
+              },
+              [_vm._v("Facebook")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.facebook_url,
+                  expression: "facebook_url"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest mb-3",
+              attrs: { type: "text", id: "facebook_url" },
+              domProps: { value: _vm.facebook_url },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.facebook_url = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest text-orange",
+                attrs: { for: "twitter_url" }
+              },
+              [_vm._v("Twitter")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.twitter_url,
+                  expression: "twitter_url"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest mb-3",
+              attrs: { type: "text", id: "twitter_url" },
+              domProps: { value: _vm.twitter_url },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.twitter_url = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest text-orange",
+                attrs: { for: "instagram_url" }
+              },
+              [_vm._v("Instagram")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.instagram_url,
+                  expression: "instagram_url"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest mb-3",
+              attrs: { type: "text", id: "instagram_url" },
+              domProps: { value: _vm.instagram_url },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.instagram_url = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest text-orange",
+                attrs: { for: "youtube_url" }
+              },
+              [_vm._v("YouTube")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.youtube_url,
+                  expression: "youtube_url"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest mb-3",
+              attrs: { type: "text", id: "youtube_url" },
+              domProps: { value: _vm.youtube_url },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.youtube_url = $event.target.value
+                }
+              }
+            })
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex flex-wrap" }, [
+      _c("div", { staticClass: "flex-1" }, [
         _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
+          _c(
+            "h3",
+            {
+              staticClass:
+                "mb-2 uppercase font-bold text-2xl text-grey-darkest text-white",
+              staticStyle: { "font-weight": "900" }
+            },
+            [_vm._v("Club Information\n                ")]
+          ),
+          _vm._v(" "),
           _c("div", { staticClass: "flex flex-col mb-2 mt-2" }, [
             _c(
               "label",
@@ -40092,10 +40318,9 @@ var staticRenderFns = [
           "h4",
           {
             staticClass:
-              "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
-            staticStyle: { color: "orange", "font-weight": "900" }
+              "mb-2 uppercase font-bold text-2xl text-grey-darkest text-white"
           },
-          [_vm._v("Player Data\n                ")]
+          [_vm._v("Player Data")]
         )
       ]
     )

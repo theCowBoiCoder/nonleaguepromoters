@@ -8,10 +8,7 @@
                             {{ error.message }}
                         </li>
                     </ul>
-
-                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
-                        style="color: orange; font-weight: 900;">Personal Data
-                    </h4>
+                    <h4 class="mb-2 uppercase font-bold text-2xl text-grey-darkest text-white">Personal Data</h4>
                     <h5 class="mb-2 uppercase font-bold text-lg text-grey-darkest" style="color: orange">
                         {{ success }}</h5>
                 </div>
@@ -53,7 +50,7 @@
                                style="color: orange; font-weight: 900;">Looking For A Club</label>
                         <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest"
                                 v-model="looking_for_a_club">
-                            <option value="0" selected disabled>Please Select</option>
+                            <option selected disabled>Please Select</option>
                             <option value="1">YES</option>
                             <option value="0">NO</option>
                         </select>
@@ -62,15 +59,13 @@
             </div>
             <div class="flex-1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
-                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
-                        style="color: orange; font-weight: 900;">Player Data
-                    </h4>
+                    <h4 class="mb-2 uppercase font-bold text-2xl text-grey-darkest text-white">Player Data</h4>
                 </div>
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">County *</label>
-                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
+                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="county">
                             <option value="0" disabled>Please Select</option>
                             <option v-for="region in regions" v-model="region.id"
                                     :selected="my_profile.player.county === region.county">{{ region.county }}
@@ -80,11 +75,14 @@
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
-                        <select class="border py-2 px-3 text-grey-darkest" v-model="step_free">
-                            <option value="0">Please Select</option>
-                            <option value="step">Step</option>
-                            <option value="free_agent">Free Agent</option>
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="step_free">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="professional">Professional</option>
+                            <option value="semi-professional">Semi Professional</option>
+                            <option value="non-contract">Non Contract</option>
+                            <option value="amateur-contract">Amateur Contract</option>
                         </select>
+
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -97,8 +95,13 @@
                     <div class="flex flex-col mb-2">
                         <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Preferred Foot</label>
-                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="preferred_foot"
-                               v-model="preferred_foot">
+                        <select name="" id="preferred_foot" class="border py-2 px-3 text-grey-darkest"
+                                v-model="preferred_foot">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="both">Both</option>
+                        </select>
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -125,7 +128,32 @@
         </div>
         <div class="flex flex-wrap">
             <div class="flex-1">
+
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3 mt-3 ">
+                    <h3 class="mb-2 uppercase font-bold text-2xl text-grey-darkest text-white"
+                        style="font-weight: 900;">Social Media
+                    </h3>
+                    <label for="facebook_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">Facebook</label>
+                    <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="facebook_url"
+                           v-model="facebook_url">
+                    <label for="twitter_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">Twitter</label>
+                    <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="twitter_url"
+                           v-model="twitter_url">
+                    <label for="instagram_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">Instagram</label>
+                    <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="instagram_url"
+                           v-model="instagram_url">
+                    <label for="youtube_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">YouTube</label>
+                    <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="youtube_url"
+                           v-model="youtube_url">
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap">
+            <div class="flex-1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <h3 class="mb-2 uppercase font-bold text-2xl text-grey-darkest text-white"
+                        style="font-weight: 900;">Club Information
+                    </h3>
                     <div class="flex flex-col mb-2 mt-2">
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Club Name</label>
@@ -176,6 +204,10 @@ export default {
             club: (this.my_profile.player.contracts) ? this.my_profile.player.contracts.contracted_club : null,
             contract_end_date: (this.my_profile.player.contracts) ? this.my_profile.player.contracts.contact_expiry_date : null,
             county: (this.my_profile.player) ? this.my_profile.player.county : null,
+            facebook_url: (this.my_profile.player) ? this.my_profile.player.facebook_url : null,
+            twitter_url: (this.my_profile.player) ? this.my_profile.player.twitter_url : null,
+            youtube_url: (this.my_profile.player) ? this.my_profile.player.youtube_url : null,
+            instagram_url: (this.my_profile.player) ? this.my_profile.player.instagram_url : null,
             file: '',
             got_club: false,
             errors: [],
@@ -216,6 +248,10 @@ export default {
             formData.append('club', this.club);
             formData.append('step_free', this.step_free);
             formData.append('county', this.county);
+            formData.append('twitter_url', this.twitter_url);
+            formData.append('facebook_url', this.facebook_url);
+            formData.append('youtube_url', this.youtube_url);
+            formData.append('instagram_url', this.instagram_url);
             if (this.contract_end_date !== '') {
                 formData.append('contract_end_date', this.contract_end_date);
             }
@@ -230,8 +266,8 @@ export default {
             };
             axios.post('/profile', formData).then(response => {
                 if (response.status === 200) {
-                    if (response.data.error) {
-                        this.success = response.data.error;
+                    if (response.data.message) {
+                        this.success = response.data.message;
                     } else {
                         //window.location.href='/';
 

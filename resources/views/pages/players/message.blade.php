@@ -3,7 +3,7 @@
     <script type="text/javascript">
         window.csrf_token = "{{ csrf_token() }}"
     </script>
-    <div class="bg-black md:bg-player-image bg-scroll">
+    <div class="bg-mobile-image md:bg-player-image bg-scroll h-screen">
         @include('layout.login')
         <div class="container m-auto">
             <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
