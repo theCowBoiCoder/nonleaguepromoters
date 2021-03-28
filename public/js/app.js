@@ -2200,6 +2200,9 @@ __webpack_require__.r(__webpack_exports__);
     DatePicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__.default
   },
   methods: {
+    scrollToTop: function scrollToTop() {
+      window.scrollTo(0, 0);
+    },
     previewFiles: function previewFiles(event) {
       this.file = this.$refs.file.files[0]; //console.log(this.file);
     },
@@ -2253,8 +2256,9 @@ __webpack_require__.r(__webpack_exports__);
         if (response.status === 200) {
           if (response.data.message) {
             _this.success = response.data.message;
-          } else {//window.location.href='/';
           }
+
+          _this.scrollToTop();
         }
       })["catch"](function (e) {
         _this.errors.push(e);

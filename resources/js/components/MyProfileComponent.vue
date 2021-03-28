@@ -218,6 +218,9 @@ export default {
         DatePicker
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         previewFiles(event) {
             this.file = this.$refs.file.files[0];
             //console.log(this.file);
@@ -268,11 +271,8 @@ export default {
                 if (response.status === 200) {
                     if (response.data.message) {
                         this.success = response.data.message;
-                    } else {
-                        //window.location.href='/';
-
                     }
-
+                    this.scrollToTop();
                 }
 
             })
