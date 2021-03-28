@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\Player;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function messages(User $user)
+    public function messages(Player $player)
     {
-        $messages = Message::query()->where('receiver_user_id', $user->id)->paginate(5);
+        $messages = Message::query()->where('receiver_user_id', $player->id)->paginate(5);
 
         return view('pages.message', [
             'messages' => $messages
