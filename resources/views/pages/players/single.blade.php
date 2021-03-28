@@ -3,7 +3,7 @@
     <div class="bg-repeat bg-black md:bg-player-image bg-scroll">
         @include('layout.login')
         <div class="container m-auto">
-            <div class="flex flex-col md:flex-row h-screen">
+            <div class="flex flex-col md:flex-row">
                 <div class="flex-1">
                     <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
                         <h3 class="uppercase text-white text-1xl lg:text-2xl bolder italic font-Roboto leading-8"
