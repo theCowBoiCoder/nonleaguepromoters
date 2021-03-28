@@ -93,25 +93,25 @@
                                     <p class="text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4 italic">
                                         Social Media</p>
                                     <div class="flex flex-row">
-                                        @if($player->facebook_url != null || $player->facebook_url != 'null')
+                                        @if($player->facebook_url != null)
                                             <div class="flex-1">
                                                 <a class="lowercase" target="_blank" href="{{$player->facebook_url}}">
                                                     <img src="https://img.icons8.com/color/50/000000/facebook-new.png"/></a>
                                             </div>
                                         @endif
-                                            @if($player->twitter_url != null || $player->twitter_url != 'null')
+                                            @if($player->twitter_url != null)
                                                 <div class="flex-1">
                                                     <a class="lowercase" target="_blank" href="{{$player->twitter_url}}">
                                                         <img src="https://img.icons8.com/color/50/000000/twitter--v1.png"/></a>
                                                 </div>
                                             @endif
-                                            @if($player->youtube_url != null || $player->youtube_url != 'null')
+                                            @if($player->youtube_url != null)
                                                 <div class="flex-1">
                                                     <a class="lowercase" target="_blank" href="{{$player->youtube_url}}">
                                                         <img src="https://img.icons8.com/color/50/000000/youtube-play.png"/></a>
                                                 </div>
                                             @endif
-                                            @if($player->instagram_url != null || $player->instagram_url != 'null')
+                                            @if($player->instagram_url != null)
                                                 <div class="flex-1">
                                                     <a class="lowercase" target="_blank" href="{{$player->instagram_url}}">
                                                         <img src="https://img.icons8.com/color/50/000000/instagram-new--v1.png"/></a>
