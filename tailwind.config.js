@@ -16,6 +16,7 @@ module.exports = {
                 'home-image' : "url('/images/home_background.jpg')",
                 'about-image' : "url('/images/about.png')",
                 'player-image' : "url('/images/player.png')",
+                'mobile-image' : "url('/images/mobile_image.jpg')"
             }),
             fontFamily:{
               'Roboto':['Roboto','sans-serif'],

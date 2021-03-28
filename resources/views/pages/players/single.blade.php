@@ -90,16 +90,35 @@
                         <div class="flex flex-col md:flex-row">
                             <div class="flex-1">
                                 @if($player->twitter_url != null || $player->facebook_url != null || $player->instagram_url != null || $player->youtube_url)
-                                    <p class="uppercase text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
-                                        Social Media Sites</p>
-                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
-                                        Twitter: </p>
-                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
-                                        Instagram: </p>
-                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
-                                        YouTube: </p>
-                                    <p class="uppercase text-white text-1xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4">
-                                        Facebook: </p>
+                                    <p class="text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4 italic">
+                                        Social Media</p>
+                                    <div class="flex flex-row">
+                                        @if($player->facebook_url != null)
+                                            <div class="flex-1">
+                                                <a class="lowercase" target="_blank" href="{{$player->facebook_url}}">
+                                                    <img src="https://img.icons8.com/color/50/000000/facebook-new.png"/></a>
+                                            </div>
+                                        @endif
+                                            @if($player->twitter_url != null)
+                                                <div class="flex-1">
+                                                    <a class="lowercase" target="_blank" href="{{$player->twitter_url}}">
+                                                        <img src="https://img.icons8.com/color/50/000000/twitter--v1.png"/></a>
+                                                </div>
+                                            @endif
+                                            @if($player->youtube_url != null)
+                                                <div class="flex-1">
+                                                    <a class="lowercase" target="_blank" href="{{$player->twitter_url}}">
+                                                        <img src="https://img.icons8.com/color/50/000000/youtube-play.png"/></a>
+                                                </div>
+                                            @endif
+                                            @if($player->instagram_url != null)
+                                                <div class="flex-1">
+                                                    <a class="lowercase" target="_blank" href="{{$player->twitter_url}}">
+                                                        <img src="https://img.icons8.com/color/50/000000/instagram-new--v1.png"/></a>
+                                                </div>
+                                            @endif
+
+                                    </div>
                                 @else
                                     <p class="text-white text-1xl lg:text-1xl bolder font-Roboto xs:leading-8 mb-4">
                                         No Social Media Details have been added yet</p>

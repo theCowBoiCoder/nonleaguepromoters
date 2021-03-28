@@ -221,6 +221,10 @@ class HomeController extends Controller
         $user->player->looking_for_a_club = $request->looking_for_a_club ?? 0;
         $user->player->preferred_foot = $request->preferred_foot ?? '';
         $user->player->profile_image = $imageName ?? NULL;
+        $user->player->facebook_url = $request->facebook_url ?? NULL;
+        $user->player->twitter_url = $request->twitter_url ?? NULL;
+        $user->player->instagram_url = $request->instagram_url ?? NULL;
+        $user->player->youtube_url = $request->youtube_url ?? NULL;
         $user->player->save();
 
 
