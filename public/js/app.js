@@ -2402,12 +2402,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['regions', 'counties', 'positions'],
   data: function data() {
@@ -40690,13 +40684,13 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "flex-initial lg:flex-grow" },
+          { staticClass: "flex-initial" },
           [
             _c(
               "table",
               {
                 staticClass:
-                  "table-auto border-collapse border-2 border-orange bg-white bg-opacity-95"
+                  "table-auto border-collapse border-2 border-orange bg-white bg-opacity-95 hidden lg:block"
               },
               [
                 _vm._m(0),
@@ -40820,13 +40814,83 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "lg:hidden block p-4" },
+              _vm._l(_vm.laravelData.data, function(player) {
+                return _c("div", { staticClass: "flex-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "bg-white px-2 py-2 border border-orange border-2"
+                    },
+                    [
+                      _c("h3", { staticClass: "uppercase" }, [
+                        _vm._v(_vm._s(player.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "uppercase" }, [
+                        _vm._v(
+                          "Preferred Position : " +
+                            _vm._s(player.preferred_position)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      player.contracts != null
+                        ? _c("p", { staticClass: "uppercase" }, [
+                            _vm._v(
+                              "Club : " +
+                                _vm._s(player.contracts.contracted_club)
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      player.contracts != null
+                        ? _c("p", { staticClass: "uppercase" }, [
+                            _vm._v(
+                              "Club Expiry: " +
+                                _vm._s(player.contracts.contact_expiry_date)
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "uppercase" }, [
+                        _vm._v(
+                          "Looking For A Club :   " +
+                            _vm._s(
+                              player.looking_for_a_club === 1 ? "YES" : "NO"
+                            )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                          attrs: { href: "/player/" + player.id }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                View Details\n                            "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              }),
+              0
+            ),
+            _vm._v(" "),
             _c("pagination", {
               attrs: {
                 data: _vm.laravelData,
                 "prev-text": "Prev",
                 "next-text": "Next",
-                "container-class": "pagination",
-                "page-class": "page-item"
+                "container-class": "pagination block",
+                "page-class": "page-item block"
               },
               on: { "pagination-change-page": _vm.getPlayers }
             })
@@ -40848,36 +40912,40 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange"
+              "pl-2 border-orange border-2 text-left text-gray-800 uppercase lg:p-2 text-orange"
           },
-          [
-            _vm._v(
-              "\n                            Name\n                        "
-            )
-          ]
+          [_vm._v("Name")]
         ),
         _vm._v(" "),
         _c(
           "th",
-          { staticClass: "border-orange border-2 uppercase p-2 text-orange" },
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
           [_vm._v("Position")]
         ),
         _vm._v(" "),
         _c(
           "th",
-          { staticClass: "border-orange border-2 uppercase p-2 text-orange" },
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
           [_vm._v("Club")]
         ),
         _vm._v(" "),
         _c(
           "th",
-          { staticClass: "border-orange border-2 uppercase p-2 text-orange" },
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
           [_vm._v("Contract Finish Date")]
         ),
         _vm._v(" "),
         _c(
           "th",
-          { staticClass: "border-orange border-2 uppercase p-2 text-orange" },
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
           [_vm._v("Looking To Move")]
         ),
         _vm._v(" "),
