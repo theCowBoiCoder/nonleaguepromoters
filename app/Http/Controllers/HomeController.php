@@ -147,10 +147,10 @@ class HomeController extends Controller
     public function auth(Request $request)
     {
         Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-        $user = User::query()->where('email',$request->email)->first();
+        $user = User::query()->where('email', $request->email)->first();
         if ($user->password_been_changed == 0) {
             //Send to change password
-            return redirect()->route('password.change', Auth::user());
+            return redirect()->route('password.change', $user);
         }
 
         return redirect('/')->with('logged_in', 'Welcome back');
