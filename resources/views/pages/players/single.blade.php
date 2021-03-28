@@ -5,7 +5,7 @@
         <div class="container m-auto">
             <div class="flex flex-col md:flex-row">
                 <div class="flex-1">
-                    <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
+                    <div class="text-center pt-10 lg:text-left">
                         <h3 class="uppercase text-white text-1xl lg:text-2xl bolder italic font-Roboto leading-8"
                             style="color: orange; font-weight: 900;"><a href="{{route('search')}}">
                                 <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
@@ -41,7 +41,7 @@
                     <div class="bg-orange px-6 py-6 mx-6 rounded">
                         <div class="mt-8 mb-8 py-3 p-6">
                             @if($player->profile_image != null)
-                                <img src="/images/user/{{$player->profile_image}}" alt="Profile Image">
+                                <img src="/images/user/{{$player->profile_image}}" alt="Profile Image" width="70%">
                             @else
                                 <img src="/images/default_profile_image.png" alt="Default Image"
                                      class="object-contain h-48 w-full">
