@@ -37,8 +37,8 @@
                            style="color: white; font-weight: 900;">{{$player->bio}}</p>
                     </div>
                 </div>
-                <div class="flex-1 relative ">
-                    <div class="bg-orange px-6 py-6 mx-6 h-auto absolute top-32 rounded">
+                <div class="flex-1">
+                    <div class="bg-orange px-6 py-6 mx-6 rounded">
                         <div class="mt-8 mb-8 py-3 p-6">
                             @if($player->profile_image != null)
                                 <img src="/images/user/{{$player->profile_image}}" alt="Profile Image">
