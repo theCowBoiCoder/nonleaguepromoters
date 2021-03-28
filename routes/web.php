@@ -35,8 +35,8 @@ Route::post('password-reset', [\App\Http\Controllers\HomeController::class, 'res
 Route::group(['prefix' => 'profile','as' => 'profile.'], function () {
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/', [\App\Http\Controllers\HomeController::class, 'profileUpdate'])->name('profile');
-    Route::get('{player}/my-messages',[\App\Http\Controllers\ProfileController::class,'messages'])->name('my_messages');
-    Route::get('{player}/my-messages/{message_id}',[\App\Http\Controllers\ProfileController::class,'readMessages'])->name('my_messages.read');
+    Route::get('{user}/my-messages',[\App\Http\Controllers\ProfileController::class,'messages'])->name('my_messages');
+    Route::get('{user}/my-messages/{message_id}',[\App\Http\Controllers\ProfileController::class,'readMessages'])->name('my_messages.read');
 });
 Route::group(['prefix' => 'player'], function () {
     Route::get('players', [\App\Http\Controllers\PlayerController::class, 'players'])->name('players');
