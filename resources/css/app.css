@@ -6,7 +6,7 @@
     @apply text-white;
 }
 .pagination{
-    @apply flex h-8 font-medium;
+    @apply flex h-8 font-medium p-6 text-2xl lg:text-sm mb-4;
 }
 .page-item,.page-link{
     @apply w-8 md:flex justify-center items-center  cursor-pointer leading-5 transition duration-150 ease-in  border-t-2 border-transparent text-orange;
