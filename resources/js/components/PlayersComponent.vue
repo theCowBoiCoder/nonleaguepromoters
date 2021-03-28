@@ -57,32 +57,16 @@
                         <a class=" uppercase text-md mb-5 font-bold font-light font-Montserrat text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light"
                            v-on:click="resetFilter">Reset Filter</a>
                     </div>
-
-
-                    <!--                    <div class="m-2 p-2">-->
-                    <!--                        <p class="mb-2 uppercase text-center text-orange">Contract Status</p>-->
-                    <!--                        <select v-model="contact_status" class="border-2 border-gray-600 rounded h-9 pl-2 w-full">-->
-                    <!--                            <option value="0" selected>Please Select</option>-->
-                    <!--                            <option value="free-agent">Free Agent</option>-->
-                    <!--                            <option value="professional">Professional</option>-->
-                    <!--                            <option value="semi-professional">Semi Professional</option>-->
-                    <!--                            <option value="non-contract">Non-Contract</option>-->
-                    <!--                            <option value="amateur-contract">Amateur Contract</option>-->
-                    <!--                        </select>-->
-                    <!--                    </div>-->
                 </div>
-                <div class="flex-initial lg:flex-grow">
-                    <!--                    <div v-if="laravelData.data.length >=1">-->
-                    <table class="table-auto border-collapse border-2 border-orange bg-white bg-opacity-95">
+                <div class="flex-initial">
+                    <table class="table-auto border-collapse border-2 border-orange bg-white bg-opacity-95 hidden lg:block">
                         <thead>
                         <tr>
-                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase p-2 text-orange">
-                                Name
-                            </th>
-                            <th class="border-orange border-2 uppercase p-2 text-orange">Position</th>
-                            <th class="border-orange border-2 uppercase p-2 text-orange">Club</th>
-                            <th class="border-orange border-2 uppercase p-2 text-orange">Contract Finish Date</th>
-                            <th class="border-orange border-2 uppercase p-2 text-orange">Looking To Move</th>
+                            <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase lg:p-2 text-orange">Name</th>
+                            <th class="border-orange border-2 uppercase lg:p-2 text-orange">Position</th>
+                            <th class="border-orange border-2 uppercase lg:p-2 text-orange">Club</th>
+                            <th class="border-orange border-2 uppercase lg:p-2 text-orange">Contract Finish Date</th>
+                            <th class="border-orange border-2 uppercase lg:p-2 text-orange">Looking To Move</th>
                             <th class="border-orange border-2 w-32 uppercase  text-orange"></th>
                         </tr>
                         </thead>
@@ -113,14 +97,24 @@
                         </tbody>
                     </table>
 
+                    <div class="lg:hidden block p-4">
+                        <div class="flex-1" v-for="player in laravelData.data">
+                            <div class="bg-white px-2 py-2 border border-orange border-2">
+                                <h3 class="uppercase">{{player.name}}</h3>
+                                <p class="uppercase">Preferred Position : {{ player.preferred_position }}</p>
+                                <p  class="uppercase" v-if="player.contracts != null">Club : {{ player.contracts.contracted_club }}</p>
+                                <p  class="uppercase" v-if="player.contracts != null">Club Expiry: {{ player.contracts.contact_expiry_date }}</p>
+                                <p class="uppercase">Looking For A Club :   {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}</p>
+                                <a v-bind:href="'/player/'+player.id"
+                                   class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <pagination :data="laravelData" @pagination-change-page="getPlayers" :prev-text="'Prev'"
-                                :next-text="'Next'" :container-class="'pagination'"
-                                :page-class="'page-item'"></pagination>
-                    <!--                    </div>-->
-                    <!--                    <div v-if="laravelData.data.length === 0">-->
-                    <!--                        <h2>NO PLAYERS YET BE THE FIRST</h2>-->
-                    <!--                    </div>-->
-
+                                :next-text="'Next'" :container-class="'pagination block'"
+                                :page-class="'page-item block'"></pagination>
                 </div>
             </div>
         </div>
