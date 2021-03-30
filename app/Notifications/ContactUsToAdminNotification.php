@@ -53,6 +53,7 @@ class ContactUsToAdminNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->bcc('haydensweet29@gmail.com')
             ->subject('Contact Us has been filled in')
             ->greeting('We have had a member contact us.')
             ->line("Name: {$this->name}")
