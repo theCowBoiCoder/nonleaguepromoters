@@ -12,15 +12,25 @@ class ContactUsToAdminNotification extends Notification
     use Queueable;
 
     private $data;
+    private $name;
+    private $email;
+    private $subject;
+    private $message;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $name
+     * @param $email
+     * @param $subject
+     * @param $message
      */
-    public function __construct($data)
+    public function __construct($name,$email,$subject,$message)
     {
-        $this->data = $data;
+        $this->name = $name;
+        $this->email = $email;
+        $this->subject = $subject;
+        $this->message = $message;
     }
 
     /**
@@ -45,9 +55,10 @@ class ContactUsToAdminNotification extends Notification
         return (new MailMessage)
             ->subject('Contact Us has been filled in')
             ->greeting('We have had a member contact us.')
-            ->line("Name: {$this->data->name}")
-            ->line("Subject: {$this->data->subject}")
-            ->line("Message: {$this->data->message}");
+            ->line("Name: {$this->name}")
+            ->line("Email: {$this->email}")
+            ->line("Subject: {$this->subject}")
+            ->line("Message: {$this->message}");
     }
 
     /**

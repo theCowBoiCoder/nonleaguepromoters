@@ -28,7 +28,7 @@ class ContactController extends Controller
 
         if (env('APP_ENV') == 'production') {
             Notification::route('mail', $request->email)->notify(new ContactUsNotification());
-            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new ContactUsToAdminNotification($request->all()));
+            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new ContactUsToAdminNotification($request->name,$request->email,$request->subject,$request->message));
         }
 
 
