@@ -125,6 +125,17 @@
             <div class="flex-1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2 mt-2">
+                        <label for="bio" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Bio</label>
+                        <textarea name="bio" class="border py-2 px-3 text-grey-darkest" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap">
+            <div class="flex-1">
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <div class="flex flex-col mb-2 mt-2">
                         <label for="height" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Club Name</label>
                         <input type="text" class="border py-2 px-3 text-grey-darkest" id="club" v-model="club">

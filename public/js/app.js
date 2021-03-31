@@ -2622,6 +2622,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -41601,6 +41612,8 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
       _c("div", { staticClass: "flex-1" }, [
         _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
@@ -41768,6 +41781,34 @@ var staticRenderFns = [
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex flex-wrap" }, [
+      _c("div", { staticClass: "flex-1" }, [
+        _c("div", { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" }, [
+          _c("div", { staticClass: "flex flex-col mb-2 mt-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "bio" }
+              },
+              [_vm._v("Bio")]
+            ),
+            _vm._v(" "),
+            _c("textarea", {
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { name: "bio", cols: "30", rows: "10" }
+            })
+          ])
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
