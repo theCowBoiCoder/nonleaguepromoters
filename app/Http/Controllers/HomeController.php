@@ -111,6 +111,7 @@ class HomeController extends Controller
             'address', $request->address,
             'dob' => Carbon::parse($request->dob)->toDateString(),
             'step_level' => $request->step_free,
+            'bio' => $request->bio,
             'height' => $request->height ?? 0,
             'county' => $region->county,
             'region' => $region->region,

@@ -127,7 +127,7 @@
                     <div class="flex flex-col mb-2 mt-2">
                         <label for="bio" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Bio</label>
-                        <textarea name="bio" class="border py-2 px-3 text-grey-darkest" cols="30" rows="10"></textarea>
+                        <textarea name="bio" class="border py-2 px-3 text-grey-darkest" cols="30" rows="10" v-model="bio"></textarea>
                     </div>
                 </div>
             </div>
@@ -188,6 +188,7 @@ export default {
             club: '',
             contract_end_date: '',
             file: '',
+            bio: '',
             got_club: false,
             errors: [],
             success: '',
@@ -215,6 +216,7 @@ export default {
             formData.append('address', this.address);
             formData.append('height', this.height);
             formData.append('gender', this.gender);
+            formData.append('bio', this.bio);
             formData.append('looking_for_a_club', this.looking_for_a_club);
             formData.append('preferred_foot', this.preferred_foot);
             formData.append('preferred_position', this.preferred_position);
