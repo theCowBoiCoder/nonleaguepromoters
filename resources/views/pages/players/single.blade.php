@@ -30,9 +30,9 @@
                         @endif
 
                         <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
-                            style="color: white; font-weight: 900;">{{$player->preferred_foot}}</h5>
+                            style="color: white; font-weight: 900;">{{$player->preferred_foot}} footed</h5>
                         <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
-                            style="color: white; font-weight: 900;">{{$player->height}}</h5>
+                            style="color: white; font-weight: 900;">Height: {{$player->height}}</h5>
                         <p class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
                            style="color: white; font-weight: 900;">{{$player->bio}}</p>
                     </div>
