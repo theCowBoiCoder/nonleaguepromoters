@@ -3,8 +3,11 @@
     <div class="md:bg-home-image bg-black bg-repeat bg-mobile-image h-screen">
         <div class="container m-auto">
             <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
+                <div class="flex justify-center visible md:invisible mb-3">
+                    <div><img src="{{asset('images/mobile_logo.jpg')}}" alt="" width="150"></div>
+                </div>
                 <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto leading-8"
-                    style="color: orange; font-weight: 900;">Login</h1>
+                    style="color: orange; font-weight: 900;">Reset My Password</h1>
             </div>
 
             <form action="{{route('reset.update')}}" method="post">
