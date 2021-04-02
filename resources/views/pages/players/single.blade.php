@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="bg-repeat bg-mobile-image md:bg-player-image bg-scroll md:h-screen">
+    <div class="bg-repeat h-screen bg-mobile-image md:bg-player-image bg-scroll md:h-screen pb-7">
         @include('layout.login')
         <div class="container m-auto">
             <div class="flex flex-col md:flex-row">
@@ -16,17 +16,17 @@
                             style="color: white; font-weight: 900;">{{$player->name}}</h1>
 
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
-                            style="color: white; font-weight: 900;">{{$player->preferred_position}}</h3>
+                            style="color: white; font-weight: 900;"><span class="text-orange">Position: </span>{{$player->preferred_position}}</h3>
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;">
-                            Age {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
+                            <span class="text-orange">Age</span> {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
                         @if(isset($player->contracts))
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
-                                style="color: white; font-weight: 900;">
-                                Club {{$player->contracts->contracted_club}}</h3>
+                                style="color: white; font-weight: 900;"><span class="text-orange">
+                                    Club:</span> {{$player->contracts->contracted_club}}</h3>
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
-                                style="color: white; font-weight: 900;">Contract
-                                Ends {{$player->contracts->contracted_expiry_date}}</h3>
+                                style="color: white; font-weight: 900;"><span class="text-orange">Contract
+                                    Ends:</span> {{$player->contracts->contact_expiry_date}}</h3>
                         @else
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                                 style="color: white; font-weight: 900;">LOOKING FOR A CLUB</h3>
@@ -35,7 +35,7 @@
                         <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;">{{$player->preferred_foot}} footed</h5>
                         <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
-                            style="color: white; font-weight: 900;">Height: {{$player->height}}</h5>
+                            style="color: white; font-weight: 900;"><span class="text-orange">Height:</span> {{$player->height}}</h5>
                         <p class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
                            style="color: white; font-weight: 900;">{{$player->bio}}</p>
                     </div>
