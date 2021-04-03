@@ -79,7 +79,7 @@ class PlayerController extends Controller
 
         $player->with(['contracts']);
         $player->where('is_public', 1);
-
+        $player->orderBy('youtube_url','DESC');
         $players = $player->paginate(15);
         return response()->json($players);
     }
