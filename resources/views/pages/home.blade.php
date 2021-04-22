@@ -34,15 +34,16 @@
                     <a href="{{route('search')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Player
                             Search Platform</strong></a>
                 </div>
+                <div class="mb-1">
+                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Staff Search Platform</strong></a>
+                </div>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <a href="{{route('profile.my_messages',\Illuminate\Support\Facades\Auth::user())}}" class="uppercase text-white mb-1 "><strong>My
                             Messages</strong></a>
                     <a href="{{route('logout')}}"
                        class="uppercase text-white font-weight-bold mb-2"><strong>Logout</strong></a>
                 @endif
-                {{--                <div class="mb-1">--}}
-                {{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Staff Search Platform</strong></a>--}}
-                {{--                </div>--}}
+
                 {{--                <div class="mb-1">--}}
                 {{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Club Promotion</strong></a>--}}
                 {{--                </div>--}}

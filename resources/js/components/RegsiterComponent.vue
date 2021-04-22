@@ -22,6 +22,15 @@
                 <div class="flex flex-col w-50 px-5 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">Are you a *</label>
+                        <select name="profile_type" id="" class="border py-2 px-3 text-grey-darkest" v-model="profile_type" v-bind:key="profile_type">
+                            <option value="0">Please Select</option>
+                            <option value="1">Player</option>
+                            <option value="2">Staff</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Name *</label>
                         <input type="text" class="border py-2 px-3 text-grey-darkest" id="name" v-model="name">
                     </div>
@@ -52,17 +61,16 @@
                         <date-picker name="dob" :input-class="'border py-2 px-3 text-grey-darkest w-full'" v-model="dob" format="yyyy-MM-dd"></date-picker>
                     </div>
                     <div class="flex flex-col mb-2">
-                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Looking For A Club</label>
-                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
-                            <option value="0" selected disabled>Please Select</option>
-                            <option value="1">YES</option>
-                            <option value="0">NO</option>
-                        </select>
+                        <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Profile Picture</label>
+                        <input type="file" id="file" ref="file" class="text-orange font-bold"
+                               v-on:change="previewFiles()" multiple>
                     </div>
+
                 </div>
             </div>
-            <div class="flex-1">
+
+            <div class="flex-1" v-show="profile_type == 1">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
                     <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
                         style="color: orange; font-weight: 900;">Player Data
@@ -113,12 +121,67 @@
                                v-model="height">
                     </div>
                     <div class="flex flex-col mb-2">
-                        <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Profile Picture</label>
-                        <input type="file" id="file" ref="file" class="text-orange font-bold"
-                               v-on:change="previewFiles()" multiple>
+                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Looking For A Club</label>
+                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
+
                 </div>
+            </div>
+            <div class="flex-1" v-show="profile_type == 2">
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
+                        style="color: orange; font-weight: 900;">Staff Data
+                    </h4>
+                </div>
+                <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">County *</label>
+                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="region">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option v-for="region in regions" v-model="region.id">{{ region.county }}</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">Step / Free Agent *</label>
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="step_free">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="professional">Professional</option>
+                            <option value="semi-professional">Semi Professional</option>
+                            <option value="non-contract">Non Contract</option>
+                            <option value="amateur-contract">Amateur Contract</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Role *</label>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="role"
+                               v-model="role">
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Qualifications *</label>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="qualifications"
+                               v-model="qualifications">
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Looking For A Club</label>
+                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </div>
+
+                </div>
+
             </div>
         </div>
         <div class="flex flex-wrap">
@@ -184,16 +247,20 @@ export default {
             preferred_foot: 0,
             preferred_position: 0,
             region: 0,
+            staff_region: 0,
             step_free: 0,
             club: '',
             contract_end_date: '',
             file: '',
+            role: '',
+            qualifications: '',
             bio: '',
             got_club: false,
             errors: [],
             success: '',
             btnDisable: true,
-            formGo : false
+            formGo : false,
+            profile_type: 0
         }
     },
 
@@ -223,6 +290,9 @@ export default {
             formData.append('club', this.club);
             formData.append('county', this.region);
             formData.append('step_free', this.step_free);
+            formData.append('role',this.role);
+            formData.append('qualification',this.qualifications);
+            formData.append('profile_type',this.profile_type);
             if (this.contract_end_date !== '') {
                 formData.append('contract_end_date', this.contract_end_date.toDateString());
             }
@@ -258,8 +328,13 @@ export default {
     },
     computed: {
         isDisabled: function(){
-            if(this.name === '' || this.email_address === ''
-                || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0){
+            if(this.profile_type === 1 && (this.name === '' || this.email_address === ''
+                || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)){
+                return true;
+            }
+
+            if(this.profile_type === 2 && (this.name === '' || this.email_address === ''
+                || this.gender === 0 || this.dob === '' || this.region === 0 || this.role === '' || this.qualifications === '')){
                 return true;
             }
         }

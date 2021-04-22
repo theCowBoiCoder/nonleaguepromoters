@@ -6,6 +6,7 @@ use App\Models\Player;
 use App\Models\PlayerContract;
 use App\Models\Position;
 use App\Models\Region;
+use App\Models\Staff;
 use App\Models\User;
 use App\Notifications\UserDeletionNotification;
 use App\Notifications\UserHasRegisteredNotification;
@@ -103,31 +104,49 @@ class HomeController extends Controller
             'password' => Hash::make($password)
         ]);
         $region = Region::query()->where('county', $request->county)->first();
+        dd($region);
+        if($request->profile_type == 1){
+            $player = Player::query()->create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'gender' => $request->gender,
+                'address', $request->address,
+                'dob' => Carbon::parse($request->dob)->toDateString(),
+                'step_level' => $request->step_free,
+                'bio' => $request->bio,
+                'height' => $request->height ?? 0,
+                'county' => $region->county,
+                'region' => $region->region,
+                'preferred_position' => $request->preferred_position ?? '',
+                'looking_for_a_club' => $request->looking_for_a_club ?? 0,
+                'preferred_foot' => $request->preferred_foot ?? '',
+                'profile_image' => $imageName ?? NULL
+            ]);
 
-        $player = Player::query()->create([
-            'user_id' => $user->id,
-            'name' => $request->name,
-            'gender' => $request->gender,
-            'address', $request->address,
-            'dob' => Carbon::parse($request->dob)->toDateString(),
-            'step_level' => $request->step_free,
-            'bio' => $request->bio,
-            'height' => $request->height ?? 0,
-            'county' => $region->county,
-            'region' => $region->region,
-            'preferred_position' => $request->preferred_position ?? '',
-            'looking_for_a_club' => $request->looking_for_a_club ?? 0,
-            'preferred_foot' => $request->preferred_foot ?? '',
-            'profile_image' => $imageName ?? NULL
-        ]);
+            if (isset($request->club)) {
+                PlayerContract::query()->create([
+                    'player_id' => $player->id,
+                    'contracted_club' => $request->club,
+                    'contact_expiry_date' => Carbon::parse($request->contract_end_date)->toDateString()
+                ]);
+            }
+        }
 
-        if (isset($request->club)) {
-            PlayerContract::query()->create([
-                'player_id' => $player->id,
-                'contracted_club' => $request->club,
-                'contact_expiry_date' => Carbon::parse($request->contract_end_date)->toDateString()
+        if($request->profile_type == 2){
+            Staff::query()->create([
+                'user_id' => $user->id,
+                'gender' => $request->gender,
+                'dob' => $request->dob,
+                'looking_for_a_club' => $request->looking_for_a_club ?? 0,
+                'role' => $request->role,
+                'qualification' => $request->qualification,
+                'county' => $region->county,
+                'region' => $region->region,
+                'profile_image' => $imageName ?? NULL,
+                'bio' => $request->bio,
             ]);
         }
+
 
         Auth::attempt(['email' => $request->email, 'password' => $password]);
         if (env('APP_ENV') != 'local') {
