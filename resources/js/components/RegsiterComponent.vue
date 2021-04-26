@@ -312,7 +312,6 @@ export default {
                         this.formGo = false;
                     }else{
                         window.location.href='/';
-
                     }
 
                 }

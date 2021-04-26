@@ -26,6 +26,7 @@ Vue.component('register-component', require('./components/RegsiterComponent').de
 Vue.component('profile-component', require('./components/MyProfileComponent').default);
 Vue.component('message-component', require('./components/MessageComponent').default);
 Vue.component('staff-register-component', require('./components/StaffRegisterComponent.vue').default);
+Vue.component('staff-component', require('./components/StaffComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

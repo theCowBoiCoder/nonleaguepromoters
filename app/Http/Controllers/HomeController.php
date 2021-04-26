@@ -104,7 +104,6 @@ class HomeController extends Controller
             'password' => Hash::make($password)
         ]);
         $region = Region::query()->where('county', $request->county)->first();
-        dd($region);
         if($request->profile_type == 1){
             $player = Player::query()->create([
                 'user_id' => $user->id,
@@ -136,7 +135,7 @@ class HomeController extends Controller
             Staff::query()->create([
                 'user_id' => $user->id,
                 'gender' => $request->gender,
-                'dob' => $request->dob,
+                'dob' => Carbon::parse($request->dob)->toDateString(),
                 'looking_for_a_club' => $request->looking_for_a_club ?? 0,
                 'role' => $request->role,
                 'qualification' => $request->qualification,
@@ -145,6 +144,14 @@ class HomeController extends Controller
                 'profile_image' => $imageName ?? NULL,
                 'bio' => $request->bio,
             ]);
+
+            if (isset($request->club)) {
+                PlayerContract::query()->create([
+                    'player_id' => $player->id,
+                    'contracted_club' => $request->club,
+                    'contact_expiry_date' => Carbon::parse($request->contract_end_date)->toDateString()
+                ]);
+            }
         }
 
 

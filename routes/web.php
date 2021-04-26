@@ -50,3 +50,8 @@ Route::group(['prefix' => 'player'], function () {
     Route::post('{player}/message/send', [\App\Http\Controllers\PlayerController::class, 'messageSend'])->name('message.sent');
 });
 
+Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
+    Route::get('search', [\App\Http\Controllers\StaffController::class, 'index'])->name('search');
+    Route::get('filter', [\App\Http\Controllers\StaffController::class, 'filter'])->name('filter');
+});
+

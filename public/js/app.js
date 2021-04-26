@@ -2805,6 +2805,184 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['regions', 'counties', 'positions'],
+  data: function data() {
+    return {
+      name: null,
+      region: 'selected',
+      county: 'selected',
+      gender: 'selected',
+      role: null,
+      contact_status: 0,
+      laravelData: {}
+    };
+  },
+  methods: {
+    getStaff: function getStaff(page, name, region, county, gender, role) {
+      var _this = this;
+
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+
+      axios.get('/staff/filter?term=' + name + '&gender=' + gender + '&region=' + region + '&county=' + county + '&page=' + page + '&role=' + role).then(function (response) {
+        return response.data;
+      }).then(function (data) {
+        _this.laravelData = data;
+      });
+    },
+    resetFilter: function resetFilter() {
+      this.name = null;
+      this.region = 'selected';
+      this.county = 'selected';
+      this.role = null;
+      this.gender = 'selected';
+      this.getStaff(null, this.name, this.region, this.county, this.role);
+    }
+  },
+  mounted: function mounted() {},
+  created: function created() {
+    this.getStaff();
+  },
+  computed: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js& ***!
@@ -2855,6 +3033,7 @@ Vue.component('register-component', __webpack_require__(/*! ./components/Regsite
 Vue.component('profile-component', __webpack_require__(/*! ./components/MyProfileComponent */ "./resources/js/components/MyProfileComponent.vue").default);
 Vue.component('message-component', __webpack_require__(/*! ./components/MessageComponent */ "./resources/js/components/MessageComponent.vue").default);
 Vue.component('staff-register-component', __webpack_require__(/*! ./components/StaffRegisterComponent.vue */ "./resources/js/components/StaffRegisterComponent.vue").default);
+Vue.component('staff-component', __webpack_require__(/*! ./components/StaffComponent */ "./resources/js/components/StaffComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -39058,6 +39237,45 @@ component.options.__file = "resources/js/components/RegsiterComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/StaffComponent.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/StaffComponent.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StaffComponent.vue?vue&type=template&id=4af24ab0& */ "./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&");
+/* harmony import */ var _StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StaffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StaffComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/StaffRegisterComponent.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/StaffRegisterComponent.vue ***!
@@ -39177,6 +39395,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/StaffComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StaffComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js& ***!
@@ -39274,6 +39508,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegsiterComponent_vue_vue_type_template_id_4dff222a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegsiterComponent_vue_vue_type_template_id_4dff222a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RegsiterComponent.vue?vue&type=template&id=4dff222a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RegsiterComponent.vue?vue&type=template&id=4dff222a&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StaffComponent.vue?vue&type=template&id=4af24ab0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&");
 
 
 /***/ }),
@@ -42362,6 +42613,597 @@ var staticRenderFns = [
         )
       ]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "flex flex-col md:flex-row" }, [
+      _c("div", { staticClass: "flex-initial m-5" }, [
+        _c(
+          "h3",
+          {
+            staticClass:
+              "m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat text-orange"
+          },
+          [_vm._v("Search\n                Filters")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Name")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.name },
+            on: {
+              keyup: function($event) {
+                return _vm.getStaff(
+                  null,
+                  _vm.name,
+                  _vm.region,
+                  _vm.county,
+                  _vm.gender,
+                  _vm.role
+                )
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Role")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.name },
+            on: {
+              keyup: function($event) {
+                return _vm.getStaff(
+                  null,
+                  _vm.name,
+                  _vm.region,
+                  _vm.county,
+                  _vm.gender,
+                  _vm.role
+                )
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Gender")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.gender,
+                  expression: "gender"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              attrs: { name: "", id: "gender", type: "text" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.gender = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.getStaff(
+                      null,
+                      _vm.name,
+                      _vm.region,
+                      _vm.county,
+                      _vm.gender,
+                      _vm.role
+                    )
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "selected" } }, [
+                _vm._v("Please Select")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "MALE" } }, [_vm._v("MALE")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "FEMALE" } }, [_vm._v("FEMALE")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "selected" } }, [_vm._v("BOTH")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By County")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.county,
+                  expression: "county"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              attrs: { name: "", id: "county", type: "text" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.county = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.getStaff(
+                      null,
+                      _vm.name,
+                      _vm.region,
+                      _vm.county,
+                      _vm.gender,
+                      _vm.role
+                    )
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "selected" } }, [
+                _vm._v("Please Select")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.counties, function(county) {
+                return _c(
+                  "option",
+                  {
+                    model: {
+                      value: county.id,
+                      callback: function($$v) {
+                        _vm.$set(county, "id", $$v)
+                      },
+                      expression: "county.id"
+                    }
+                  },
+                  [_vm._v(_vm._s(county.county))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Region")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.region,
+                  expression: "region"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              attrs: { name: "", id: "", type: "text" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.region = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.getStaff(
+                      null,
+                      _vm.name,
+                      _vm.region,
+                      _vm.county,
+                      _vm.gender,
+                      _vm.role
+                    )
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "selected" } }, [
+                _vm._v("Please Select")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.regions, function(region) {
+                return _c(
+                  "option",
+                  {
+                    model: {
+                      value: region.id,
+                      callback: function($$v) {
+                        _vm.$set(region, "id", $$v)
+                      },
+                      expression: "region.id"
+                    }
+                  },
+                  [_vm._v(_vm._s(region.region))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2 text-center" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                " uppercase text-md mb-5 font-bold font-light font-Montserrat text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+              on: { click: _vm.resetFilter }
+            },
+            [_vm._v("Reset Filter")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex-initial" },
+        [
+          _c(
+            "table",
+            {
+              staticClass:
+                "table-auto border-collapse border-2 border-orange bg-white bg-opacity-95 hidden lg:block"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.laravelData.data, function(staff) {
+                  return _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-orange border-2 uppercase pl-2 font-light p-2"
+                      },
+                      [_vm._v(_vm._s(staff.user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-orange border-2 uppercase pl-2 font-light p-2"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(staff.role) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(staff.contracts.contracted_club) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      : _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [_vm._v("No Club")]
+                        ),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(staff.contracts.contact_expiry_date) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      : _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [_vm._v("No Contract")]
+                        ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-orange border-2 uppercase pl-2 font-light p-2"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              staff.looking_for_a_club === 1 ? "YES" : "NO"
+                            ) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "border-orange border-2 p-2 text-center" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                            attrs: { href: "/staff/" + staff.id }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            View Details\n                        "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                }),
+                0
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "lg:hidden block p-4" },
+            _vm._l(_vm.laravelData.data, function(staff) {
+              return _c("div", { staticClass: "flex-1" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-white px-2 py-2 border border-orange border-2"
+                  },
+                  [
+                    _c("h3", { staticClass: "uppercase" }, [
+                      _vm._v(_vm._s(staff.user.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "uppercase" }, [
+                      _vm._v("Role : " + _vm._s(staff.role))
+                    ]),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c("p", { staticClass: "uppercase" }, [
+                          _vm._v(
+                            "Club :\n                            " +
+                              _vm._s(staff.contracts.contracted_club)
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c("p", { staticClass: "uppercase" }, [
+                          _vm._v(
+                            "Club Expiry:\n                            " +
+                              _vm._s(staff.contracts.contact_expiry_date)
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "uppercase" }, [
+                      _vm._v(
+                        "Looking For A Club :\n                            " +
+                          _vm._s(staff.looking_for_a_club === 1 ? "YES" : "NO")
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                        attrs: { href: "/staff/" + staff.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            View Details\n                        "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("pagination", {
+            attrs: {
+              data: _vm.laravelData,
+              "prev-text": "Prev",
+              "next-text": "Next",
+              "container-class": "pagination block",
+              "page-class": "page-item block"
+            },
+            on: { "pagination-change-page": _vm.getStaff }
+          })
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass:
+              "pl-2 border-orange border-2 text-left text-gray-800 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("\n                        Name\n                    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Role")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Club")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Contract Finish Date")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Looking To Move")]
+        ),
+        _vm._v(" "),
+        _c("th", {
+          staticClass: "border-orange border-2 w-32 uppercase  text-orange"
+        })
+      ])
+    ])
   }
 ]
 render._withStripped = true
