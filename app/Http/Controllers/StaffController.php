@@ -42,7 +42,7 @@ class StaffController extends Controller
         if ($request->role == 'undefined' || $request->role == 'null') {
             $role = null;
         } else {
-            $role = $request->position;
+            $role = $request->role;
         }
 
 
