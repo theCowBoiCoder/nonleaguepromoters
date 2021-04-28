@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('about', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
-Route::group(['prefix' => 'contact-us','as' => 'contact.'],function (){
+Route::group(['prefix' => 'contact-us', 'as' => 'contact.'], function () {
     Route::get('/', [\App\Http\Controllers\ContactController::class, 'index'])->name('index');
-    Route::post('/',[\App\Http\Controllers\ContactController::class,'store'])->name('store');
+    Route::post('/', [\App\Http\Controllers\ContactController::class, 'store'])->name('store');
+});
+
+Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
+    Route::get('register', [\App\Http\Controllers\StaffController::class, 'register'])->name('register');
 });
 
 Route::get('register', [\App\Http\Controllers\HomeController::class, 'register'])->name('register');
@@ -32,11 +36,11 @@ Route::get('password-change/{user}', [\App\Http\Controllers\HomeController::clas
 Route::post('password-change/{user}', [\App\Http\Controllers\HomeController::class, 'passwordConfirm'])->name('password.change.store');
 Route::get('password-reset', [\App\Http\Controllers\HomeController::class, 'reset'])->name('reset');
 Route::post('password-reset', [\App\Http\Controllers\HomeController::class, 'resetStore'])->name('reset.update');
-Route::group(['prefix' => 'profile','as' => 'profile.'], function () {
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::post('/', [\App\Http\Controllers\HomeController::class, 'profileUpdate'])->name('profile');
-    Route::get('{user}/my-messages',[\App\Http\Controllers\ProfileController::class,'messages'])->name('my_messages');
-    Route::get('{user}/my-messages/{message_id}',[\App\Http\Controllers\ProfileController::class,'readMessages'])->name('my_messages.read');
+    Route::get('{user}/my-messages', [\App\Http\Controllers\ProfileController::class, 'messages'])->name('my_messages');
+    Route::get('{user}/my-messages/{message_id}', [\App\Http\Controllers\ProfileController::class, 'readMessages'])->name('my_messages.read');
 });
 Route::group(['prefix' => 'player'], function () {
     Route::get('players', [\App\Http\Controllers\PlayerController::class, 'players'])->name('players');
@@ -44,5 +48,10 @@ Route::group(['prefix' => 'player'], function () {
     Route::get('{player}', [\App\Http\Controllers\PlayerController::class, 'single'])->name('single');
     Route::get('{player}/message', [\App\Http\Controllers\PlayerController::class, 'message'])->name('message');
     Route::post('{player}/message/send', [\App\Http\Controllers\PlayerController::class, 'messageSend'])->name('message.sent');
+});
+
+Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
+    Route::get('search', [\App\Http\Controllers\StaffController::class, 'index'])->name('search');
+    Route::get('filter', [\App\Http\Controllers\StaffController::class, 'filter'])->name('filter');
 });
 
