@@ -42697,13 +42697,13 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
+                value: _vm.role,
+                expression: "role"
               }
             ],
             staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
             attrs: { type: "text", placeholder: "Search Name Contains" },
-            domProps: { value: _vm.name },
+            domProps: { value: _vm.role },
             on: {
               keyup: function($event) {
                 return _vm.getStaff(
@@ -42719,7 +42719,7 @@ var render = function() {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.name = $event.target.value
+                _vm.role = $event.target.value
               }
             }
           })

@@ -51,17 +51,19 @@ class StaffController extends Controller
         if ($term != null) {
             $staff->where('name', 'LIKE', '%' . $term . '%');
         }
-        if ($region != null) {
-            $staff->where('region', $request->region);
-        }
+        $staff->whereHas('user', function ($builder) use ($region, $county, $request, $gender) {
+            if ($region != null) {
+                $builder->where('region', $request->region);
+            }
 
-        if ($county != null) {
-            $staff->where('county', $county);
-        }
+            if ($county != null) {
+                $builder->where('county', $county);
+            }
 
-        if ($gender != null) {
-            $staff->where('gender', $gender);
-        }
+            if ($gender != null) {
+                $builder->where('user.gender', $gender);
+            }
+        });
 
         if ($role != null) {
             $staff->where('role', $role);

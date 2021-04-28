@@ -13,7 +13,7 @@
                 </div>
                 <div class="m-2 p-2">
                     <p class="mb-2 uppercase text-center text-orange">Search By Role</p>
-                    <input v-model="name" type="text" placeholder="Search Name Contains"
+                    <input v-model="role" type="text" placeholder="Search Name Contains"
                            class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
                            v-on:keyup="getStaff(null,name,region,county,gender,role)">
                 </div>

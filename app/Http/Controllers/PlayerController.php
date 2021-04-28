@@ -7,6 +7,7 @@ use App\Models\Player;
 use App\Models\Position;
 use App\Models\Region;
 use App\Models\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,19 +59,21 @@ class PlayerController extends Controller
 
 
         $player = Player::query();
+        $player->whereHas('user', function ($builder) use ($region, $county, $request, $gender) {
+            if ($region != null) {
+                $builder->where('region', $request->region);
+            }
+
+            if ($county != null) {
+                $builder->where('county', $county);
+            }
+
+            if ($gender != null) {
+                $builder->where('user.gender', $gender);
+            }
+        });
         if ($term != null) {
             $player->where('name', 'LIKE', '%' . $term . '%');
-        }
-        if ($region != null) {
-            $player->where('region', $request->region);
-        }
-
-        if ($county != null) {
-            $player->where('county', $county);
-        }
-
-        if ($gender != null) {
-            $player->where('gender', $gender);
         }
 
         if ($position != null) {
@@ -79,7 +82,7 @@ class PlayerController extends Controller
 
         $player->with(['contracts']);
         $player->where('is_public', 1);
-        $player->orderBy('youtube_url','DESC');
+        $player->orderBy('youtube_url', 'DESC');
         $players = $player->paginate(15);
         return response()->json($players);
     }
@@ -110,6 +113,6 @@ class PlayerController extends Controller
             'from' => $request->from_name
         ]);
 
-        return response()->json(['success' =>  'Your Message has been sent']);
+        return response()->json(['success' => 'Your Message has been sent']);
     }
 }
