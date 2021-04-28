@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,12 @@ class StaffController extends Controller
 
     public function index()
     {
-        return view('pages.staff.staff');
+        $regions = Region::query()->select('region')->groupBy('region')->get();
+        $counties = Region::query()->orderBy('county', 'ASC')->get();
+        return view('pages.staff.staff', [
+            'regions' => $regions,
+            'counties' => $counties
+        ]);
     }
 
     public function filter(Request $request)
