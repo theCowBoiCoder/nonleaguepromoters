@@ -106,7 +106,8 @@ class HomeController extends Controller
             'dob' => Carbon::parse($request->dob)->toDateString(),
             'county' => $region->county,
             'region' => $region->region,
-            'profile_image' => $imageName ?? NULL
+            'profile_image' => $imageName ?? NULL,
+            'bio' => $request->bio
         ]);
 
         if ($request->profile_type == 1) {
@@ -114,7 +115,6 @@ class HomeController extends Controller
                 'user_id' => $user->id,
                 'address', $request->address,
                 'step_level' => $request->step_free,
-                'bio' => $request->bio,
                 'height' => $request->height ?? 0,
                 'preferred_position' => $request->preferred_position ?? '',
                 'looking_for_a_club' => $request->looking_for_a_club ?? 0,

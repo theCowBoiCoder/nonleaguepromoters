@@ -61,18 +61,24 @@ class StaffController extends Controller
             }
 
             if ($gender != null) {
-                $builder->where('user.gender', $gender);
+                $builder->where('gender', $gender);
             }
         });
 
         if ($role != null) {
             $staff->where('role', $role);
         }
-
         $staff->with(['user']);
         $staff->where('is_public', 1);
         $staffs = $staff->paginate(15);
 
         return response()->json($staffs);
+    }
+
+    public function single(Staff $staff)
+    {
+        return view('pages.staff.single', [
+            'staff' => $staff
+        ]);
     }
 }

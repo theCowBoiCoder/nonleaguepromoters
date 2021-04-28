@@ -20,7 +20,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'password_been_changed'
+        'password_been_changed',
+        'gender',
+        'dob',
+        'bio',
+        'county',
+        'region',
+        'profile_image',
+        'twitter_url',
+        'instagram_url',
+        'facebook_url',
+        'youtube_url',
+        'is_public'
     ];
 
     /**
@@ -44,7 +55,7 @@ class User extends Authenticatable
 
     public function player(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Player::class,'user_id','id');
+        return $this->hasOne(Player::class, 'user_id', 'id');
     }
 
 }

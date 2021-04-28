@@ -53,5 +53,6 @@ Route::group(['prefix' => 'player'], function () {
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::get('search', [\App\Http\Controllers\StaffController::class, 'index'])->name('search');
     Route::get('filter', [\App\Http\Controllers\StaffController::class, 'filter'])->name('filter');
+    Route::get('{staff}', [\App\Http\Controllers\StaffController::class, 'single'])->name('single');
 });
 
