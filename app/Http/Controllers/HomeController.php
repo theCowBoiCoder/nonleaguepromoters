@@ -109,7 +109,7 @@ class HomeController extends Controller
             'profile_image' => $imageName ?? NULL
         ]);
 
-        if($request->profile_type == 1){
+        if ($request->profile_type == 1) {
             $player = Player::query()->create([
                 'user_id' => $user->id,
                 'address', $request->address,
@@ -131,7 +131,7 @@ class HomeController extends Controller
             }
         }
 
-        if($request->profile_type == 2){
+        if ($request->profile_type == 2) {
             $staff = Staff::query()->create([
                 'user_id' => $user->id,
                 'looking_for_a_club' => $request->looking_for_a_club ?? 0,
@@ -152,7 +152,7 @@ class HomeController extends Controller
         Auth::attempt(['email' => $request->email, 'password' => $password]);
         if (env('APP_ENV') != 'local') {
             //Send the Notifications
-            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user, $player));
+            Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user));
             Notification::route('mail', $user->email)->notify(new UserRegisterNotification($user, $password));
         }
 
