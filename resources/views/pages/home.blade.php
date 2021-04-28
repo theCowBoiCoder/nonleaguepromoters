@@ -16,7 +16,7 @@
             <div class="flex flex-col px-7 lg:pl-20 lg:px-3">
                 <div class="mb-1 block sm:hidden">
                     @if(!\Illuminate\Support\Facades\Auth::check())
-                    <a href="{{route('login')}}" class="uppercase text-white mb-1 "><strong>Login</strong></a>
+                        <a href="{{route('login')}}" class="uppercase text-white mb-1 "><strong>Login</strong></a>
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <a href="{{route('profile.profile')}}" class="uppercase text-white mb-1 "><strong>My
@@ -35,10 +35,12 @@
                             Search Platform</strong></a>
                 </div>
                 <div class="mb-1">
-                    <a href="{{route('staff.search')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Staff Search Platform</strong></a>
+                    <a href="{{route('staff.search')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Staff
+                            Search Platform</strong></a>
                 </div>
                 @if(\Illuminate\Support\Facades\Auth::check())
-                    <a href="{{route('profile.my_messages',\Illuminate\Support\Facades\Auth::user())}}" class="uppercase text-white mb-1 "><strong>My
+                    <a href="{{route('profile.my_messages',\Illuminate\Support\Facades\Auth::user())}}"
+                       class="uppercase text-white mb-1 "><strong>My
                             Messages</strong></a>
                     <a href="{{route('logout')}}"
                        class="uppercase text-white font-weight-bold mb-2"><strong>Logout</strong></a>
@@ -60,7 +62,12 @@
                 {{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Contact us</strong></a>--}}
                 {{--                </div>--}}
                 <div class="mb-1">
-                    <a href="{{route('contact.index')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Contact Us</strong></a>
+                    <a href="{{route('contact.index')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Contact
+                            Us</strong></a>
+                </div>
+                <div class="mb-1">
+                    <a target="_blank" href="{{asset('TermsAndConditions.pdf')}}"
+                       class="uppercase text-white font-weight-bold mb-2"><strong>Terms And Conditions</strong></a>
                 </div>
                 @if(!\Illuminate\Support\Facades\Auth::check())
                     <div class="mt-6">
