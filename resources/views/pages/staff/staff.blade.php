@@ -11,7 +11,7 @@
                     style="color: orange; font-weight: 900;"><a href="{{route('home')}}">
                         <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
             </div>
-            <staff-component></staff-component>
+            <staff-component :regions="{{$regions}}" :counties="{{$counties}}"></staff-component>
         </div>
     </div>
 @stop
