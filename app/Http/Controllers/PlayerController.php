@@ -82,8 +82,6 @@ class PlayerController extends Controller
         }
 
         $player->with(['contracts']);
-
-        $player->orderBy('youtube_url', 'DESC');
         $players = $player->paginate(15);
         return response()->json($players);
     }
