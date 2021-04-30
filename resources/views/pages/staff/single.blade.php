@@ -27,8 +27,8 @@
                 <div class="flex-1">
                     <div class="bg-orange px-6 py-6 mx-6 rounded">
                         <div class="mt-8 mb-8 py-3 p-6">
-                            @if($staff->profile_image != null)
-                                <img src="/images/user/{{$staff->profile_image}}" alt="Profile Image" width="70%">
+                            @if($staff->user->profile_image != null)
+                                <img src="/images/user/{{$staff->user->profile_image}}" alt="Profile Image" width="70%">
                             @else
                                 <img src="/images/default_profile_image.png" alt="Default Image"
                                      class="object-contain h-48 w-full">
@@ -37,31 +37,31 @@
 
                         <div class="flex flex-col md:flex-row">
                             <div class="flex-1">
-                                @if($staff->twitter_url != null || $staff->facebook_url != null || $staff->instagram_url != null || $staff->youtube_url)
+                                @if($staff->user->twitter_url != null || $staff->user->facebook_url != null || $staff->user->instagram_url != null || $staff->user->youtube_url)
                                     <p class="text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4 italic">
                                         Social Media</p>
                                     <div class="flex flex-row">
-                                        @if($staff->facebook_url != null)
+                                        @if($staff->user->facebook_url != null)
                                             <div class="flex-1">
-                                                <a class="lowercase" target="_blank" href="{{$staff->facebook_url}}">
+                                                <a class="lowercase" target="_blank" href="{{$staff->user->facebook_url}}">
                                                     <img src="https://img.icons8.com/color/50/000000/facebook-new.png"/></a>
                                             </div>
                                         @endif
-                                        @if($staff->twitter_url != null)
+                                        @if($staff->user->twitter_url != null)
                                             <div class="flex-1">
-                                                <a class="lowercase" target="_blank" href="{{$staff->twitter_url}}">
+                                                <a class="lowercase" target="_blank" href="{{$staff->user->twitter_url}}">
                                                     <img src="https://img.icons8.com/color/50/000000/twitter--v1.png"/></a>
                                             </div>
                                         @endif
-                                        @if($staff->youtube_url != null)
+                                        @if($staff->user->youtube_url != null)
                                             <div class="flex-1">
-                                                <a class="lowercase" target="_blank" href="{{$staff->youtube_url}}">
+                                                <a class="lowercase" target="_blank" href="{{$staff->user->youtube_url}}">
                                                     <img src="https://img.icons8.com/color/50/000000/youtube-play.png"/></a>
                                             </div>
                                         @endif
-                                        @if($staff->instagram_url != null)
+                                        @if($staff->user->instagram_url != null)
                                             <div class="flex-1">
-                                                <a class="lowercase" target="_blank" href="{{$staff->instagram_url}}">
+                                                <a class="lowercase" target="_blank" href="{{$staff->user->instagram_url}}">
                                                     <img src="https://img.icons8.com/color/50/000000/instagram-new--v1.png"/></a>
                                             </div>
                                         @endif
