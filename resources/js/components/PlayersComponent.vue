@@ -101,7 +101,7 @@
                 <div class="lg:hidden block p-4">
                     <div class="flex-1" v-for="player in laravelData.data">
                         <div class="bg-white px-2 py-2 border border-orange border-2">
-                            <h3 class="uppercase">{{ player.name }}</h3>
+                            <h3 class="uppercase">{{ player.user.name }}</h3>
                             <p class="uppercase">Preferred Position : {{ player.preferred_position }}</p>
                             <p class="uppercase" v-if="player.contracts != null">Club :
                                 {{ player.contracts.contracted_club }}</p>

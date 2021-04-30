@@ -41253,7 +41253,7 @@ var render = function() {
                   },
                   [
                     _c("h3", { staticClass: "uppercase" }, [
-                      _vm._v(_vm._s(player.name))
+                      _vm._v(_vm._s(player.user.name))
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "uppercase" }, [
