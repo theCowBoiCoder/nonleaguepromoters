@@ -81,7 +81,7 @@ class PlayerController extends Controller
             $player->where('preferred_position', $position);
         }
 
-        $player->with(['contracts']);
+        $player->with(['contracts','user']);
         $players = $player->paginate(15);
         return response()->json($players);
     }
