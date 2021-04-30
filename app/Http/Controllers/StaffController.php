@@ -69,13 +69,15 @@ class StaffController extends Controller
             if ($gender != null) {
                 $builder->where('gender', $gender);
             }
+
+            $builder->where('is_public', 1);
         });
 
         if ($role != null) {
             $staff->where('role', $role);
         }
         $staff->with(['user']);
-        $staff->where('is_public', 1);
+
         $staffs = $staff->paginate(15);
 
         return response()->json($staffs);

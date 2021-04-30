@@ -71,6 +71,7 @@ class PlayerController extends Controller
             if ($gender != null) {
                 $builder->where('user.gender', $gender);
             }
+            $builder->where('is_public', 1);
         });
         if ($term != null) {
             $player->where('name', 'LIKE', '%' . $term . '%');
@@ -81,7 +82,7 @@ class PlayerController extends Controller
         }
 
         $player->with(['contracts']);
-        $player->where('is_public', 1);
+
         $player->orderBy('youtube_url', 'DESC');
         $players = $player->paginate(15);
         return response()->json($players);
