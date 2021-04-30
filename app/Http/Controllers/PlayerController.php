@@ -86,8 +86,9 @@ class PlayerController extends Controller
         return response()->json($players);
     }
 
-    public function single(Player $player)
+    public function single(Request $request)
     {
+        $player = Player::with(['user'])->where('user_id',$request->segment(2))->first();
         return view('pages.players.single', [
             'player' => $player
         ]);

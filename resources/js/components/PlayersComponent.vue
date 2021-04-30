@@ -89,7 +89,7 @@
                             {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}
                         </td>
                         <td class="border-orange border-2 p-2 text-center">
-                            <a v-bind:href="'/player/'+player.id"
+                            <a v-bind:href="'/player/'+player.user.id"
                                class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                 View Details
                             </a>
@@ -109,7 +109,7 @@
                                 {{ player.contracts.contact_expiry_date }}</p>
                             <p class="uppercase">Looking For A Club :
                                 {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}</p>
-                            <a v-bind:href="'/player/'+player.id"
+                            <a v-bind:href="'/player/'+player.user.id"
                                class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                 View Details
                             </a>

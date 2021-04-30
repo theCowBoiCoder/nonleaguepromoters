@@ -41223,7 +41223,7 @@ var render = function() {
                           {
                             staticClass:
                               "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
-                            attrs: { href: "/player/" + player.id }
+                            attrs: { href: "/player/" + player.user.id }
                           },
                           [
                             _vm._v(
@@ -41293,7 +41293,7 @@ var render = function() {
                       {
                         staticClass:
                           "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
-                        attrs: { href: "/player/" + player.id }
+                        attrs: { href: "/player/" + player.user.id }
                       },
                       [
                         _vm._v(
