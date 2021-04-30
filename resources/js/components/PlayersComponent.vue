@@ -73,7 +73,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="player in laravelData.data">
-                        <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{ player.name }}</td>
+                        <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{ player.user.name }}</td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2">
                             {{ player.preferred_position }}
                         </td>

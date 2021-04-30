@@ -69,7 +69,7 @@ class PlayerController extends Controller
             }
 
             if ($gender != null) {
-                $builder->where('user.gender', $gender);
+                $builder->where('gender', $gender);
             }
             $builder->where('is_public', 1);
         });

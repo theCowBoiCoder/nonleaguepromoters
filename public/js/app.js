@@ -41133,7 +41133,7 @@ var render = function() {
                         staticClass:
                           "border-orange border-2 uppercase pl-2 font-light p-2"
                       },
-                      [_vm._v(_vm._s(player.name))]
+                      [_vm._v(_vm._s(player.user.name))]
                     ),
                     _vm._v(" "),
                     _c(
