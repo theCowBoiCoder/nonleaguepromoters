@@ -2688,17 +2688,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2728,7 +2717,7 @@ __webpack_require__.r(__webpack_exports__);
       success: '',
       btnDisable: true,
       formGo: false,
-      profile_type: 0
+      profile_type: []
     };
   },
   components: {
@@ -2791,6 +2780,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   computed: {
+    isStaff: function isStaff() {
+      return this.profile_type.includes("2");
+    },
+    isPlayer: function isPlayer() {
+      return this.profile_type.includes("1");
+    },
     isDisabled: function isDisabled() {
       if (this.profile_type === 1 && (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)) {
         return true;
@@ -41461,46 +41456,97 @@ var render = function() {
               [_vm._v("Are you a *")]
             ),
             _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.profile_type,
-                    expression: "profile_type"
+            _c("div", { staticClass: "flex" }, [
+              _c("label", { staticClass: "flex items-center" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.profile_type,
+                      expression: "profile_type"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "checkbox", id: "player", value: "1" },
+                  domProps: {
+                    checked: Array.isArray(_vm.profile_type)
+                      ? _vm._i(_vm.profile_type, "1") > -1
+                      : _vm.profile_type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.profile_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "1",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.profile_type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.profile_type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.profile_type = $$c
+                      }
+                    }
                   }
-                ],
-                key: _vm.profile_type,
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "profile_type", id: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.profile_type = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-orange ml-2 text-md" }, [
+                  _vm._v("Player")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "flex items-center ml-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.profile_type,
+                      expression: "profile_type"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "checkbox", id: "player", value: "2" },
+                  domProps: {
+                    checked: Array.isArray(_vm.profile_type)
+                      ? _vm._i(_vm.profile_type, "2") > -1
+                      : _vm.profile_type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.profile_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "2",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.profile_type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.profile_type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.profile_type = $$c
+                      }
+                    }
                   }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0" } }, [
-                  _vm._v("Please Select")
-                ]),
+                }),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Player")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v("Staff")])
-              ]
-            )
+                _c("span", { staticClass: "text-orange ml-2 text-md" }, [
+                  _vm._v("Staff")
+                ])
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col mb-2" }, [
@@ -41533,6 +41579,41 @@ var render = function() {
                     return
                   }
                   _vm.name = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "email_address" }
+              },
+              [_vm._v("Email Address *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email_address,
+                  expression: "email_address"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "email", id: "email_address" },
+              domProps: { value: _vm.email_address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email_address = $event.target.value
                 }
               }
             })
@@ -41628,41 +41709,6 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "email_address" }
-              },
-              [_vm._v("Email Address *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.email_address,
-                  expression: "email_address"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "email", id: "email_address" },
-              domProps: { value: _vm.email_address },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.email_address = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
           _c(
             "div",
             { staticClass: "flex flex-col mb-2" },
@@ -41703,6 +41749,141 @@ var render = function() {
                 staticClass:
                   "mb-2 uppercase font-bold text-lg text-grey-darkest",
                 staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
+              [_vm._v("County *")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.region,
+                    expression: "region"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "county" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.region = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.regions, function(region) {
+                  return _c(
+                    "option",
+                    {
+                      model: {
+                        value: region.id,
+                        callback: function($$v) {
+                          _vm.$set(region, "id", $$v)
+                        },
+                        expression: "region.id"
+                      }
+                    },
+                    [_vm._v(_vm._s(region.county))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
+              [_vm._v("Step / Free Agent *")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.step_free,
+                    expression: "step_free"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.step_free = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "professional" } }, [
+                  _vm._v("Professional")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "semi-professional" } }, [
+                  _vm._v("Semi Professional")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "non-contract" } }, [
+                  _vm._v("Non Contract")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "amateur-contract" } }, [
+                  _vm._v("Amateur Contract")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "profile_image" }
               },
               [_vm._v("Profile Picture")]
@@ -41718,671 +41899,324 @@ var render = function() {
                 }
               }
             })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "looking_for_a_club" }
+              },
+              [_vm._v("Looking For A Club")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.looking_for_a_club,
+                    expression: "looking_for_a_club"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "looking_for_a_club" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.looking_for_a_club = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
+              ]
+            )
           ])
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.profile_type == 1,
-              expression: "profile_type == 1"
-            }
-          ],
-          staticClass: "flex-1"
-        },
-        [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
-            [
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "name" }
-                  },
-                  [_vm._v("County *")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.region,
-                        expression: "region"
-                      }
-                    ],
-                    staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "county" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.region = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.regions, function(region) {
-                      return _c(
-                        "option",
-                        {
-                          model: {
-                            value: region.id,
-                            callback: function($$v) {
-                              _vm.$set(region, "id", $$v)
-                            },
-                            expression: "region.id"
-                          }
-                        },
-                        [_vm._v(_vm._s(region.county))]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "name" }
-                  },
-                  [_vm._v("Step / Free Agent *")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.step_free,
-                        expression: "step_free"
-                      }
-                    ],
-                    staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.step_free = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "professional" } }, [
-                      _vm._v("Professional")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "semi-professional" } }, [
-                      _vm._v("Semi Professional")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "non-contract" } }, [
-                      _vm._v("Non Contract")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "amateur-contract" } }, [
-                      _vm._v("Amateur Contract")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "address" }
-                  },
-                  [_vm._v("Position *")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.preferred_position,
-                        expression: "preferred_position"
-                      }
-                    ],
-                    staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.preferred_position = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.positions, function(position) {
-                      return _c(
-                        "option",
-                        {
-                          model: {
-                            value: position.name,
-                            callback: function($$v) {
-                              _vm.$set(position, "name", $$v)
-                            },
-                            expression: "position.name"
-                          }
-                        },
-                        [_vm._v(_vm._s(position.name))]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "preferred_foot" }
-                  },
-                  [_vm._v("Preferred Foot *")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.preferred_foot,
-                        expression: "preferred_foot"
-                      }
-                    ],
-                    staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "", id: "preferred_foot" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.preferred_foot = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "left" } }, [
-                      _vm._v("Left")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "right" } }, [
-                      _vm._v("Right")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "height" }
-                  },
-                  [_vm._v("Height")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+      _vm.isPlayer
+        ? _c("div", { staticClass: "flex-1" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+              [
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.height,
-                      expression: "height"
-                    }
-                  ],
-                  staticClass: "border py-2 px-3 text-grey-darkest",
-                  attrs: { type: "text", id: "height" },
-                  domProps: { value: _vm.height },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "address" }
+                    },
+                    [_vm._v("Position *")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.preferred_position,
+                          expression: "preferred_position"
+                        }
+                      ],
+                      staticClass: "border py-2 px-3 text-grey-darkest",
+                      attrs: { name: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.preferred_position = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
                       }
-                      _vm.height = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "looking_for_a_club" }
-                  },
-                  [_vm._v("Looking For A Club")]
-                ),
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "0", selected: "", disabled: "" } },
+                        [_vm._v("Please Select")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.positions, function(position) {
+                        return _c(
+                          "option",
+                          {
+                            model: {
+                              value: position.name,
+                              callback: function($$v) {
+                                _vm.$set(position, "name", $$v)
+                              },
+                              expression: "position.name"
+                            }
+                          },
+                          [_vm._v(_vm._s(position.name))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "preferred_foot" }
+                    },
+                    [_vm._v("Preferred Foot *")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.preferred_foot,
+                          expression: "preferred_foot"
+                        }
+                      ],
+                      staticClass: "border py-2 px-3 text-grey-darkest",
+                      attrs: { name: "", id: "preferred_foot" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.preferred_foot = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "0", selected: "", disabled: "" } },
+                        [_vm._v("Please Select")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "left" } }, [
+                        _vm._v("Left")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "right" } }, [
+                        _vm._v("Right")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "both" } }, [
+                        _vm._v("Both")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "height" }
+                    },
+                    [_vm._v("Height")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.looking_for_a_club,
-                        expression: "looking_for_a_club"
+                        value: _vm.height,
+                        expression: "height"
                       }
                     ],
                     staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "looking_for_a_club" },
+                    attrs: { type: "text", id: "height" },
+                    domProps: { value: _vm.height },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.looking_for_a_club = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.height = $event.target.value
                       }
                     }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
-                  ]
-                )
-              ])
-            ]
-          )
-        ]
-      ),
+                  })
+                ])
+              ]
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.profile_type == 2,
-              expression: "profile_type == 2"
-            }
-          ],
-          staticClass: "flex-1"
-        },
-        [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
-            [
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "name" }
-                  },
-                  [_vm._v("County *")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.region,
-                        expression: "region"
-                      }
-                    ],
-                    staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "county" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.region = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.regions, function(region) {
-                      return _c(
-                        "option",
-                        {
-                          model: {
-                            value: region.id,
-                            callback: function($$v) {
-                              _vm.$set(region, "id", $$v)
-                            },
-                            expression: "region.id"
-                          }
-                        },
-                        [_vm._v(_vm._s(region.county))]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "name" }
-                  },
-                  [_vm._v("Step / Free Agent *")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.step_free,
-                        expression: "step_free"
-                      }
-                    ],
-                    staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.step_free = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "professional" } }, [
-                      _vm._v("Professional")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "semi-professional" } }, [
-                      _vm._v("Semi Professional")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "non-contract" } }, [
-                      _vm._v("Non Contract")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "amateur-contract" } }, [
-                      _vm._v("Amateur Contract")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "address" }
-                  },
-                  [_vm._v("Role *")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+      _vm.isStaff
+        ? _c("div", { staticClass: "flex-1" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+              [
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.role,
-                      expression: "role"
-                    }
-                  ],
-                  staticClass: "border py-2 px-3 text-grey-darkest",
-                  attrs: { type: "text", id: "role" },
-                  domProps: { value: _vm.role },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.role = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "preferred_foot" }
-                  },
-                  [_vm._v("Qualifications *")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.qualifications,
-                      expression: "qualifications"
-                    }
-                  ],
-                  staticClass: "border py-2 px-3 text-grey-darkest",
-                  attrs: { type: "text", id: "qualifications" },
-                  domProps: { value: _vm.qualifications },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.qualifications = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mb-2" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                    staticStyle: { color: "orange", "font-weight": "900" },
-                    attrs: { for: "looking_for_a_club" }
-                  },
-                  [_vm._v("Looking For A Club")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "address" }
+                    },
+                    [_vm._v("Role *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.looking_for_a_club,
-                        expression: "looking_for_a_club"
+                        value: _vm.role,
+                        expression: "role"
                       }
                     ],
                     staticClass: "border py-2 px-3 text-grey-darkest",
-                    attrs: { name: "looking_for_a_club" },
+                    attrs: { type: "text", id: "role" },
+                    domProps: { value: _vm.role },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.looking_for_a_club = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.role = $event.target.value
                       }
                     }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "0", selected: "", disabled: "" } },
-                      [_vm._v("Please Select")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
-                  ]
-                )
-              ])
-            ]
-          )
-        ]
-      )
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "preferred_foot" }
+                    },
+                    [_vm._v("Qualifications *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.qualifications,
+                        expression: "qualifications"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { type: "text", id: "qualifications" },
+                    domProps: { value: _vm.qualifications },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.qualifications = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]
+            )
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
@@ -42552,7 +42386,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(
-                    "\n                            Register\n                        "
+                    "\n                        Register\n                    "
                   )
                 ]
               )
