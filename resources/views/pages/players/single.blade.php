@@ -17,7 +17,7 @@
                             style="color: white; font-weight: 900;"><span class="text-orange">Position: </span>{{$player->preferred_position}}</h3>
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;">
-                            <span class="text-orange">Age</span> {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
+                            <span class="text-orange">Age</span> {{\Carbon\Carbon::parse($player->user->dob)->age}}</h3>
                         @if(isset($player->contracts))
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                                 style="color: white; font-weight: 900;"><span class="text-orange">
