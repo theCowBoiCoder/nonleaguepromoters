@@ -96,7 +96,8 @@ class HomeController extends Controller
             $imageName = time() . '.' . $request->file->extension();
             $request->file->move(public_path('images/user'), $imageName);
         }
-        $profile_types = explode(',', $request->profile_type);
+
+        $profile_types = is_array($request->profile_type) ? explode(',', $request->profile_type) : $request->profile_type;
         $region = Region::query()->where('county', $request->county)->first();
         $password = Str::random(8);
         $user = User::query()->create([
@@ -111,7 +112,7 @@ class HomeController extends Controller
             'bio' => $request->bio
         ]);
 
-        if ($profile_types[0] == 1) {
+        if ((is_array($profile_types) && $profile_types[0] == 1) || (!is_array($profile_types) && $profile_types == 1)) {
             $player = Player::query()->create([
                 'user_id' => $user->id,
                 'address', $request->address,
@@ -132,7 +133,7 @@ class HomeController extends Controller
             }
         }
 
-        if ($profile_types[1] == 2) {
+        if ((is_array($profile_types) && $profile_types[1] == 2) || (!is_array($profile_types) && $profile_types == 2)) {
             $staff = Staff::query()->create([
                 'user_id' => $user->id,
                 'looking_for_a_club' => $request->looking_for_a_club ?? 0,
