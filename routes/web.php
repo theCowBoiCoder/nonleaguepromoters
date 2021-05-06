@@ -46,7 +46,7 @@ Route::group(['prefix' => 'player'], function () {
     Route::get('players', [\App\Http\Controllers\PlayerController::class, 'players'])->name('players');
     Route::get('search', [\App\Http\Controllers\PlayerController::class, 'index'])->name('search');
     Route::get('{player}', [\App\Http\Controllers\PlayerController::class, 'single'])->name('single');
-    Route::get('{player}/message', [\App\Http\Controllers\PlayerController::class, 'message'])->name('message');
+    Route::get('{player}/message', [\App\Http\Controllers\PlayerController::class, 'messageForm'])->name('message');
     Route::post('{player}/message/send', [\App\Http\Controllers\PlayerController::class, 'messageSend'])->name('message.sent');
 });
 

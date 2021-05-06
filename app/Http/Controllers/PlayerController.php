@@ -95,8 +95,9 @@ class PlayerController extends Controller
         ]);
     }
 
-    public function message(Player $player)
+    public function messageForm(Player $player)
     {
+        dd($player);
         return view('pages.players.message', [
             'player' => $player
         ]);
