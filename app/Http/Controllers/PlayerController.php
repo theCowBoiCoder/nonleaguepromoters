@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Message\Messages;
 use App\Models\Message;
 use App\Models\Player;
 use App\Models\Position;
@@ -81,14 +82,14 @@ class PlayerController extends Controller
             $player->where('preferred_position', $position);
         }
 
-        $player->with(['contracts','user']);
+        $player->with(['contracts', 'user']);
         $players = $player->paginate(15);
         return response()->json($players);
     }
 
     public function single(Request $request)
     {
-        $player = Player::with(['user'])->where('user_id',$request->segment(2))->first();
+        $player = Player::with(['user'])->where('user_id', $request->segment(2))->first();
         return view('pages.players.single', [
             'player' => $player
         ]);
@@ -101,18 +102,9 @@ class PlayerController extends Controller
         ]);
     }
 
-    public function messageSend(Request $request)
+    public function messageSend(Request $request, $user_id)
     {
-        $player = Player::query()->find($request->segment(2));
-
-        Message::query()->create([
-            'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
-            'receiver_user_id' => $player->user_id,
-            'subject' => $request->subject,
-            'message' => encrypt($request->message),
-            'from' => $request->from_name
-        ]);
-
-        return response()->json(['success' => 'Your Message has been sent']);
+        $response = Messages::send($user_id, $request);
+        return response()->json(['success' => $response]);
     }
 }
