@@ -208,7 +208,7 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $me = User::query()->with('player.contracts')->find(Auth::id());
+        $me = User::query()->with(['staff','player.contracts'])->find(Auth::id());
         $positions = Position::query()->get();
         $regions = Region::query()->orderBy('county', 'ASC')->get();
         return view('pages.profile', [
@@ -227,10 +227,10 @@ class HomeController extends Controller
         }
 
         $county = Region::query()->where('county', $request->county)->first();
-
         $user = User::query()->find($request->id);
         $user->name = $request->name;
         $user->bio = $request->bio;
+        $user->gender = $request->gender;
         $user->dob = Carbon::parse($request->dob)->toDateString();
         $user->county = $county->county;
         $user->region = $county->region;
@@ -241,16 +241,21 @@ class HomeController extends Controller
         $user->youtube_url = $request->youtube_url ?? NULL;
         $user->save();
 
+        if($request->is_player == 1){
+            $user->player->step_level = $request->step_free;
+            $user->player->height = $request->height ?? 0;
+            $user->player->preferred_position = $request->preferred_position ?? NULL;
+            $user->player->looking_for_a_club = $request->looking_for_a_club ?? 0;
+            $user->player->preferred_foot = $request->preferred_foot ?? '';
+            $user->player->save();
+        }
 
-        $user->player->name = $request->name;
-        $user->playergender = $request->gender;
-        $user->player->address = $request->address;
-        $user->player->step_level = $request->step_free;
-        $user->player->height = $request->height ?? 0;
-        $user->player->preferred_position = $request->preferred_position ?? NULL;
-        $user->player->looking_for_a_club = $request->looking_for_a_club ?? 0;
-        $user->player->preferred_foot = $request->preferred_foot ?? '';
-        $user->player->save();
+        if($request->is_staff == 1){
+            $user->staff->role = $request->role;
+            $user->staff->qualification = $request->qualifications;
+            $user->staff->save();
+        }
+
 
 
         return response()->json(['message' => 'Thanks You Have Now Updated Your Profile']);

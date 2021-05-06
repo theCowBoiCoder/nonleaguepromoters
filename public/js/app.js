@@ -2165,6 +2165,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2173,23 +2197,25 @@ __webpack_require__.r(__webpack_exports__);
     return {
       id: this.my_profile.id,
       name: this.my_profile.name,
-      dob: this.my_profile.player !== null ? this.my_profile.player.dob : null,
+      dob: this.my_profile.dob,
       email_address: this.my_profile.email,
       address: this.my_profile.player ? this.my_profile.player.address : null,
-      bio: this.my_profile.player ? this.my_profile.player.bio : null,
-      height: this.my_profile.player ? this.my_profile.player.height : null,
-      gender: this.my_profile.player ? this.my_profile.player.gender : null,
-      looking_for_a_club: this.my_profile.player ? this.my_profile.player.looking_for_a_club : 0,
-      preferred_foot: this.my_profile.player ? this.my_profile.player.preferred_foot : null,
-      preferred_position: this.my_profile.player ? this.my_profile.player.preferred_position : null,
+      bio: this.my_profile.bio,
+      height: this.my_profile.player != null ? this.my_profile.player.height : null,
+      gender: this.my_profile.gender,
+      looking_for_a_club: this.my_profile.player != null ? this.my_profile.player.looking_for_a_club : 0,
+      preferred_foot: this.my_profile.player != null ? this.my_profile.player.preferred_foot : null,
+      preferred_position: this.my_profile.player != null ? this.my_profile.player.preferred_position : null,
       step_free: this.my_profile.player ? this.my_profile.player.step_level : null,
-      club: this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : null,
-      contract_end_date: this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : null,
-      county: this.my_profile.player ? this.my_profile.player.county : null,
-      facebook_url: this.my_profile.player ? this.my_profile.player.facebook_url : null,
-      twitter_url: this.my_profile.player ? this.my_profile.player.twitter_url : null,
-      youtube_url: this.my_profile.player ? this.my_profile.player.youtube_url : null,
-      instagram_url: this.my_profile.player ? this.my_profile.player.instagram_url : null,
+      club: this.my_profile.player != null && this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : null,
+      contract_end_date: this.my_profile.player != null && this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : null,
+      county: this.my_profile.county,
+      facebook_url: this.my_profile.facebook_url != null ? this.my_profile.facebook_url : null,
+      twitter_url: this.my_profile.twitter_url != null ? this.my_profile.twitter_url : null,
+      youtube_url: this.my_profile.youtube_url != null ? this.my_profile.youtube_url : null,
+      instagram_url: this.my_profile.instagram_url != null ? this.my_profile.instagram_url : null,
+      role: this.my_profile.staff != null ? this.my_profile.staff.role : null,
+      qualifications: this.my_profile.staff != null ? this.my_profile.staff.qualifications : null,
       file: '',
       got_club: false,
       errors: [],
@@ -2204,7 +2230,7 @@ __webpack_require__.r(__webpack_exports__);
       window.scrollTo(0, 0);
     },
     previewFiles: function previewFiles(event) {
-      this.file = this.$refs.file.files[0]; //console.log(this.file);
+      this.file = this.$refs.file.files[0];
     },
     deleteAccount: function deleteAccount() {
       if (confirm('Are you sure you want to delete your account?')) {
@@ -2229,20 +2255,35 @@ __webpack_require__.r(__webpack_exports__);
 
       formData.append('email_address', this.email_address);
       formData.append('address', this.address);
-      formData.append('height', this.height);
       formData.append('gender', this.gender);
-      formData.append('preferred_foot', this.preferred_foot);
-      formData.append('preferred_position', this.preferred_position);
-      formData.append('club', this.club);
-      formData.append('step_free', this.step_free);
+
+      if (this.my_profile.player != null) {
+        formData.append('height', this.height);
+        formData.append('preferred_foot', this.preferred_foot);
+        formData.append('preferred_position', this.preferred_position);
+        formData.append('club', this.club);
+        formData.append('step_free', this.step_free);
+        formData.append('is_player', 1);
+
+        if (this.contract_end_date !== '') {
+          formData.append('contract_end_date', this.contract_end_date);
+        }
+      } else {
+        formData.append('is_player', 0);
+      }
+
       formData.append('county', this.county);
       formData.append('twitter_url', this.twitter_url);
       formData.append('facebook_url', this.facebook_url);
       formData.append('youtube_url', this.youtube_url);
       formData.append('instagram_url', this.instagram_url);
 
-      if (this.contract_end_date !== '') {
-        formData.append('contract_end_date', this.contract_end_date);
+      if (this.my_profile.staff != null) {
+        formData.append('role', this.role);
+        formData.append('qualifications', this.qualifications);
+        formData.append('is_staff', 1);
+      } else {
+        formData.append('is_staff', 0);
       }
 
       formData.append('file', this.file);
@@ -40049,6 +40090,79 @@ var render = function() {
                 staticClass:
                   "mb-2 uppercase font-bold text-lg text-grey-darkest",
                 staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
+              [_vm._v("County *")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.county,
+                    expression: "county"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "county" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.county = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", disabled: "" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.regions, function(region) {
+                  return _c(
+                    "option",
+                    {
+                      domProps: {
+                        selected: _vm.my_profile.county === region.county
+                      },
+                      model: {
+                        value: region.id,
+                        callback: function($$v) {
+                          _vm.$set(region, "id", $$v)
+                        },
+                        expression: "region.id"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(region.county) + "\n                        "
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "looking_for_a_club" }
               },
               [_vm._v("Looking For A Club")]
@@ -40097,332 +40211,375 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" }, [
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "name" }
-              },
-              [_vm._v("County *")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.my_profile.staff != null,
+              expression: "this.my_profile.staff != null"
+            }
+          ],
+          staticClass: "flex-1"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+            [
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.county,
-                    expression: "county"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "county" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.county = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0", disabled: "" } }, [
-                  _vm._v("Please Select")
-                ]),
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "address" }
+                  },
+                  [_vm._v("Role *")]
+                ),
                 _vm._v(" "),
-                _vm._l(_vm.regions, function(region) {
-                  return _c(
-                    "option",
+                _c("input", {
+                  directives: [
                     {
-                      domProps: {
-                        selected: _vm.my_profile.player.county === region.county
-                      },
-                      model: {
-                        value: region.id,
-                        callback: function($$v) {
-                          _vm.$set(region, "id", $$v)
-                        },
-                        expression: "region.id"
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.role,
+                      expression: "role"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "text", id: "role" },
+                  domProps: { value: _vm.role },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(region.county) + "\n                        "
+                      _vm.role = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "preferred_foot" }
+                  },
+                  [_vm._v("Qualifications *")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.qualifications,
+                      expression: "qualifications"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "text", id: "qualifications" },
+                  domProps: { value: _vm.qualifications },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.qualifications = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.my_profile.player != null,
+              expression: "this.my_profile.player != null"
+            }
+          ],
+          staticClass: "flex-1"
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+            [
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "name" }
+                  },
+                  [_vm._v("Step / Free Agent")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.step_free,
+                        expression: "step_free"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.step_free = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "0", selected: "", disabled: "" } },
+                      [_vm._v("Please Select")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "professional" } }, [
+                      _vm._v("Professional")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "semi-professional" } }, [
+                      _vm._v("Semi Professional")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "non-contract" } }, [
+                      _vm._v("Non Contract")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "amateur-contract" } }, [
+                      _vm._v("Amateur Contract")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "address" }
+                  },
+                  [_vm._v("Position")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.preferred_position,
+                        expression: "preferred_position"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.preferred_position = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [
+                      _vm._v("Please Select")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.positions, function(position) {
+                      return _c(
+                        "option",
+                        {
+                          model: {
+                            value: position.name,
+                            callback: function($$v) {
+                              _vm.$set(position, "name", $$v)
+                            },
+                            expression: "position.name"
+                          }
+                        },
+                        [_vm._v(_vm._s(position.name))]
                       )
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "name" }
-              },
-              [_vm._v("Step / Free Agent")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.step_free,
-                    expression: "step_free"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.step_free = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
                 _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "preferred_foot" }
+                  },
+                  [_vm._v("Preferred Foot")]
                 ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "professional" } }, [
-                  _vm._v("Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "semi-professional" } }, [
-                  _vm._v("Semi Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "non-contract" } }, [
-                  _vm._v("Non Contract")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "amateur-contract" } }, [
-                  _vm._v("Amateur Contract")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "address" }
-              },
-              [_vm._v("Position")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
+                _c(
+                  "select",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.preferred_position,
-                    expression: "preferred_position"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.preferred_position = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0" } }, [
-                  _vm._v("Please Select")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.positions, function(position) {
-                  return _c(
-                    "option",
-                    {
-                      model: {
-                        value: position.name,
-                        callback: function($$v) {
-                          _vm.$set(position, "name", $$v)
-                        },
-                        expression: "position.name"
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.preferred_foot,
+                        expression: "preferred_foot"
                       }
-                    },
-                    [_vm._v(_vm._s(position.name))]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "preferred_foot" }
-              },
-              [_vm._v("Preferred Foot")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.preferred_foot,
-                    expression: "preferred_foot"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "", id: "preferred_foot" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.preferred_foot = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "", id: "preferred_foot" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.preferred_foot = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "0", selected: "", disabled: "" } },
+                      [_vm._v("Please Select")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "left" } }, [
+                      _vm._v("Left")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "right" } }, [
+                      _vm._v("Right")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
                 _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "height" }
+                  },
+                  [_vm._v("Height")]
                 ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "left" } }, [_vm._v("Left")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "right" } }, [_vm._v("Right")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "height" }
-              },
-              [_vm._v("Height")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.height,
-                  expression: "height"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "height" },
-              domProps: { value: _vm.height },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.height,
+                      expression: "height"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "text", id: "height" },
+                  domProps: { value: _vm.height },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.height = $event.target.value
+                    }
                   }
-                  _vm.height = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "profile_image" }
-              },
-              [_vm._v("Profile Picture")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              ref: "file",
-              attrs: { type: "file", id: "file", multiple: "" },
-              on: {
-                change: function($event) {
-                  return _vm.previewFiles()
-                }
-              }
-            })
-          ])
-        ])
-      ])
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "profile_image" }
+                  },
+                  [_vm._v("Profile Picture")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  ref: "file",
+                  attrs: { type: "file", id: "file", multiple: "" },
+                  on: {
+                    change: function($event) {
+                      return _vm.previewFiles()
+                    }
+                  }
+                })
+              ])
+            ]
+          )
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
@@ -40731,6 +40888,26 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" },
+      [
+        _c(
+          "h4",
+          {
+            staticClass:
+              "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
+            staticStyle: { color: "orange", "font-weight": "900" }
+          },
+          [_vm._v("Staff Data\n                ")]
+        )
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -58,4 +58,8 @@ class User extends Authenticatable
         return $this->hasOne(Player::class, 'user_id', 'id');
     }
 
+    public function staff(){
+        return $this->hasOne(Staff::class,'user_id','id');
+    }
+
 }
