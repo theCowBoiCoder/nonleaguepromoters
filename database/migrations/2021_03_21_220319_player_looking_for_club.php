@@ -14,7 +14,7 @@ class PlayerLookingForClub extends Migration
     public function up()
     {
         Schema::table('players',function (Blueprint $table){
-           $table->boolean('looking_for_a_club')->default(0)->after('gender');
+           $table->boolean('looking_for_a_club')->default(0);
         });
     }
 
