@@ -2755,6 +2755,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       name: '',
+      country: '',
+      county: '',
+      contact_status: 0,
+      laravelData: {}
       dob: '',
       email_address: '',
       address: '',
@@ -41412,6 +41416,7 @@ var render = function() {
             "table",
             {
               staticClass:
+                "table-auto border-collapse border-2 border-blue-600 bg-white w-full"
                 "table-auto border-collapse border-2 border-orange bg-white bg-opacity-95 hidden lg:block"
             },
             [
