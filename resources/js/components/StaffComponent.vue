@@ -9,24 +9,19 @@
                     <p class="mb-2 uppercase text-center text-orange">Search By Name</p>
                     <input v-model="name" type="text" placeholder="Search Name Contains"
                            class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                           v-on:keyup="getPlayers(null,name,region,county,gender)">
+                           v-on:keyup="getStaff(null,name,region,county,gender,role)">
                 </div>
                 <div class="m-2 p-2">
-                    <p class="mb-2 uppercase text-center text-orange">Search By Position</p>
-                    <select name="" id="position" v-model="position" type="text"
-                            class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                            @change="getPlayers(null,name,region,county,gender,position)">
-                        <option value="selected">Please Select</option>
-
-                        <option v-for="pos of positions" v-model="pos.id">{{ pos.name }}</option>
-                        <option value="selected">ALL</option>
-                    </select>
+                    <p class="mb-2 uppercase text-center text-orange">Search By Role</p>
+                    <input v-model="role" type="text" placeholder="Search Name Contains"
+                           class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
+                           v-on:keyup="getStaff(null,name,region,county,gender,role)">
                 </div>
                 <div class="m-2 p-2">
                     <p class="mb-2 uppercase text-center text-orange">Search By Gender</p>
                     <select name="" id="gender" v-model="gender" type="text"
                             class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                            @change="getPlayers(null,name,region,county,gender,position)">
+                            @change="getStaff(null,name,region,county,gender,role)">
                         <option value="selected">Please Select</option>
                         <option value="MALE">MALE</option>
                         <option value="FEMALE">FEMALE</option>
@@ -37,7 +32,7 @@
                     <p class="mb-2 uppercase text-center text-orange">Search By County</p>
                     <select name="" id="county" v-model="county" type="text"
                             class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                            @change="getPlayers(null,name,region,county,gender,position)">
+                            @change="getStaff(null,name,region,county,gender,role)">
                         <option value="selected">Please Select</option>
                         <option v-for="county of counties" v-model="county.id">{{ county.county }}</option>
                     </select>
@@ -47,7 +42,7 @@
                     <p class="mb-2 uppercase text-center text-orange">Search By Region</p>
                     <select name="" id="" v-model="region" type="text"
                             class="border-2 border-gray-600 rounded h-9 pl-2 w-full"
-                            @change="getPlayers(null,name,region,county,gender,position)">
+                            @change="getStaff(null,name,region,county,gender,role)">
                         <option value="selected">Please Select</option>
                         <option v-for="region of regions" v-model="region.id">{{ region.region }}</option>
                     </select>
@@ -64,7 +59,7 @@
                         <th class="pl-2 border-orange border-2 text-left text-gray-800 uppercase lg:p-2 text-orange">
                             Name
                         </th>
-                        <th class="border-orange border-2 uppercase lg:p-2 text-orange">Position</th>
+                        <th class="border-orange border-2 uppercase lg:p-2 text-orange">Role</th>
                         <th class="border-orange border-2 uppercase lg:p-2 text-orange">Club</th>
                         <th class="border-orange border-2 uppercase lg:p-2 text-orange">Contract Finish Date</th>
                         <th class="border-orange border-2 uppercase lg:p-2 text-orange">Looking To Move</th>
@@ -72,24 +67,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="player in laravelData.data">
-                        <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{ player.user.name }}</td>
+                    <tr v-for="staff in laravelData.data">
+                        <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{ staff.user.name }}</td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2">
-                            {{ player.preferred_position }}
+                            {{ staff.role }}
                         </td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2"
-                            v-if="player.contracts != null">{{ player.contracts.contracted_club }}
+                            v-if="staff.contracts != null">{{ staff.contracts.contracted_club }}
                         </td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2" v-else>No Club</td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2"
-                            v-if="player.contracts != null">{{ player.contracts.contact_expiry_date }}
+                            v-if="staff.contracts != null">{{ staff.contracts.contact_expiry_date }}
                         </td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2" v-else>No Contract</td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2">
-                            {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}
+                            {{ (staff.looking_for_a_club === 1) ? 'YES' : 'NO' }}
                         </td>
                         <td class="border-orange border-2 p-2 text-center">
-                            <a v-bind:href="'/player/'+player.user.id"
+                            <a v-bind:href="'/staff/'+staff.id"
                                class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                 View Details
                             </a>
@@ -99,24 +94,24 @@
                 </table>
 
                 <div class="lg:hidden block p-4">
-                    <div class="flex-1" v-for="player in laravelData.data">
+                    <div class="flex-1" v-for="staff in laravelData.data">
                         <div class="bg-white px-2 py-2 border border-orange border-2">
-                            <h3 class="uppercase">{{ player.user.name }}</h3>
-                            <p class="uppercase">Preferred Position : {{ player.preferred_position }}</p>
-                            <p class="uppercase" v-if="player.contracts != null">Club :
-                                {{ player.contracts.contracted_club }}</p>
-                            <p class="uppercase" v-if="player.contracts != null">Club Expiry:
-                                {{ player.contracts.contact_expiry_date }}</p>
+                            <h3 class="uppercase">{{ staff.user.name }}</h3>
+                            <p class="uppercase">Role : {{ staff.role }}</p>
+                            <p class="uppercase" v-if="staff.contracts != null">Club :
+                                {{ staff.contracts.contracted_club }}</p>
+                            <p class="uppercase" v-if="staff.contracts != null">Club Expiry:
+                                {{ staff.contracts.contact_expiry_date }}</p>
                             <p class="uppercase">Looking For A Club :
-                                {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}</p>
-                            <a v-bind:href="'/player/'+player.user.id"
+                                {{ (staff.looking_for_a_club === 1) ? 'YES' : 'NO' }}</p>
+                            <a v-bind:href="'/staff/'+staff.id"
                                class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                 View Details
                             </a>
                         </div>
                     </div>
                 </div>
-                <pagination :data="laravelData" @pagination-change-page="getPlayers" :prev-text="'Prev'"
+                <pagination :data="laravelData" @pagination-change-page="getStaff" :prev-text="'Prev'"
                             :next-text="'Next'" :container-class="'pagination block'"
                             :page-class="'page-item block'"></pagination>
             </div>
@@ -134,17 +129,17 @@ export default {
             region: 'selected',
             county: 'selected',
             gender: 'selected',
-            position: 'selected',
+            role: null,
             contact_status: 0,
             laravelData: {},
         }
     },
     methods: {
-        getPlayers(page, name, region, county, gender, position) {
+        getStaff(page, name, region, county, gender, role) {
             if (typeof page === 'undefined') {
                 page = 1;
             }
-            axios.get('/player/players?term=' + name + '&gender=' + gender + '&region=' + region + '&county=' + county + '&position=' + position + '&page=' + page)
+            axios.get('/staff/filter?term=' + name + '&gender=' + gender + '&region=' + region + '&county=' + county + '&page=' + page + '&role=' + role)
                 .then(response => {
                     return response.data;
                 }).then(data => {
@@ -155,17 +150,17 @@ export default {
             this.name = null;
             this.region = 'selected';
             this.county = 'selected';
-            this.position = 'selected';
+            this.role = null;
             this.gender = 'selected';
 
-            this.getPlayers(null, this.name, this.region, this.county)
+            this.getStaff(null, this.name, this.region, this.county, this.role)
         }
     },
     mounted() {
 
     },
     created() {
-        this.getPlayers();
+        this.getStaff();
     },
     computed: {}
 }

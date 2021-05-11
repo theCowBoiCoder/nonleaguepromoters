@@ -46,6 +46,16 @@
                                      format="yyyy-MM-dd"></date-picker>
                     </div>
                     <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">County *</label>
+                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="county">
+                            <option value="0" disabled>Please Select</option>
+                            <option v-for="region in regions" v-model="region.id"
+                                    :selected="my_profile.county === region.county">{{ region.county }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
                         <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Looking For A Club</label>
                         <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest"
@@ -57,21 +67,43 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-1">
+            <div class="flex-1" v-show="this.my_profile.staff != null">
                 <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
-                    <h4 class="mb-2 uppercase font-bold text-2xl text-grey-darkest text-white">Player Data</h4>
+                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
+                        style="color: orange; font-weight: 900;">Staff Data
+                    </h4>
                 </div>
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;" for="name">County *</label>
-                        <select name="county" class="border py-2 px-3 text-grey-darkest" v-model="county">
-                            <option value="0" disabled>Please Select</option>
-                            <option v-for="region in regions" v-model="region.id"
-                                    :selected="my_profile.player.county === region.county">{{ region.county }}
-                            </option>
+                               style="color: orange; font-weight: 900;" for="looking_for_a_club_staff">Looking For A Club</label>
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club_staff">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
                         </select>
                     </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Role *</label>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="role"
+                               v-model="role">
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Qualifications *</label>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="qualifications"
+                               v-model="qualifications">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="flex-1" v-show="this.my_profile.player != null">
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <h4 class="mb-2 uppercase font-bold text-2xl text-grey-darkest text-white">Player Data</h4>
+                </div>
+                <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
+
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Step / Free Agent</label>
@@ -83,6 +115,14 @@
                             <option value="amateur-contract">Amateur Contract</option>
                         </select>
 
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="looking_for_a_club">Looking For A Club</label>
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -191,23 +231,26 @@ export default {
         return {
             id: this.my_profile.id,
             name: this.my_profile.name,
-            dob: (this.my_profile.player !== null) ? this.my_profile.player.dob : null,
+            dob: this.my_profile.dob,
             email_address: this.my_profile.email,
             address: (this.my_profile.player) ? this.my_profile.player.address : null,
-            bio: (this.my_profile.player) ? this.my_profile.player.bio : null,
-            height: (this.my_profile.player) ? this.my_profile.player.height : null,
-            gender: (this.my_profile.player) ? this.my_profile.player.gender : null,
-            looking_for_a_club: (this.my_profile.player) ? this.my_profile.player.looking_for_a_club : 0,
-            preferred_foot: (this.my_profile.player) ? this.my_profile.player.preferred_foot : null,
-            preferred_position: (this.my_profile.player) ? this.my_profile.player.preferred_position : null,
+            bio: this.my_profile.bio,
+            height: (this.my_profile.player != null) ? this.my_profile.player.height : null,
+            gender: this.my_profile.gender,
+            looking_for_a_club: (this.my_profile.player != null) ? this.my_profile.player.looking_for_a_club : 0,
+            preferred_foot: (this.my_profile.player != null) ? this.my_profile.player.preferred_foot : null,
+            preferred_position: (this.my_profile.player != null) ? this.my_profile.player.preferred_position : null,
             step_free: (this.my_profile.player) ? this.my_profile.player.step_level : null,
-            club: (this.my_profile.player.contracts) ? this.my_profile.player.contracts.contracted_club : null,
-            contract_end_date: (this.my_profile.player.contracts) ? this.my_profile.player.contracts.contact_expiry_date : null,
-            county: (this.my_profile.player) ? this.my_profile.player.county : null,
-            facebook_url: (this.my_profile.player) ? this.my_profile.player.facebook_url : null,
-            twitter_url: (this.my_profile.player) ? this.my_profile.player.twitter_url : null,
-            youtube_url: (this.my_profile.player) ? this.my_profile.player.youtube_url : null,
-            instagram_url: (this.my_profile.player) ? this.my_profile.player.instagram_url : null,
+            club: (this.my_profile.player != null && this.my_profile.player.contracts) ? this.my_profile.player.contracts.contracted_club : null,
+            contract_end_date: (this.my_profile.player != null && this.my_profile.player.contracts) ? this.my_profile.player.contracts.contact_expiry_date : null,
+            county: this.my_profile.county,
+            facebook_url: (this.my_profile.facebook_url != null) ? this.my_profile.facebook_url : null,
+            twitter_url: (this.my_profile.twitter_url != null) ? this.my_profile.twitter_url : null,
+            youtube_url: (this.my_profile.youtube_url != null) ? this.my_profile.youtube_url : null,
+            instagram_url: (this.my_profile.instagram_url != null) ? this.my_profile.instagram_url : null,
+            role: (this.my_profile.staff != null) ? this.my_profile.staff.role : null,
+            qualifications: (this.my_profile.staff != null) ? this.my_profile.staff.qualifications : null,
+            looking_for_a_club_staff: (this.my_profile.staff != null) ? this.my_profile.staff.looking_for_a_club : 0,
             file: '',
             got_club: false,
             errors: [],
@@ -219,11 +262,10 @@ export default {
     },
     methods: {
         scrollToTop() {
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         },
         previewFiles(event) {
             this.file = this.$refs.file.files[0];
-            //console.log(this.file);
         },
         deleteAccount() {
             if (confirm('Are you sure you want to delete your account?')) {
@@ -244,20 +286,39 @@ export default {
             }
             formData.append('email_address', this.email_address);
             formData.append('address', this.address);
-            formData.append('height', this.height);
             formData.append('gender', this.gender);
-            formData.append('preferred_foot', this.preferred_foot);
-            formData.append('preferred_position', this.preferred_position);
-            formData.append('club', this.club);
-            formData.append('step_free', this.step_free);
+
+            if (this.my_profile.player != null) {
+                formData.append('height', this.height);
+                formData.append('preferred_foot', this.preferred_foot);
+                formData.append('preferred_position', this.preferred_position);
+                formData.append('club', this.club);
+                formData.append('step_free', this.step_free);
+                formData.append('looking_for_a_club', this.looking_for_a_club);
+                formData.append('is_player', 1);
+
+                if (this.contract_end_date !== '') {
+                    formData.append('contract_end_date', this.contract_end_date);
+                }
+            } else {
+                formData.append('is_player', 0);
+            }
+
+
             formData.append('county', this.county);
             formData.append('twitter_url', this.twitter_url);
             formData.append('facebook_url', this.facebook_url);
             formData.append('youtube_url', this.youtube_url);
             formData.append('instagram_url', this.instagram_url);
-            if (this.contract_end_date !== '') {
-                formData.append('contract_end_date', this.contract_end_date);
+            if (this.my_profile.staff != null) {
+                formData.append('role', this.role);
+                formData.append('qualifications', this.qualifications);
+                formData.append('looking_for_a_club', this.looking_for_a_club_staff);
+                formData.append('is_staff', 1);
+            } else {
+                formData.append('is_staff', 0);
             }
+
 
             formData.append('file', this.file);
             this.success = '';

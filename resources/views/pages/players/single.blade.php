@@ -11,13 +11,13 @@
                             style="color: orange; font-weight: 900;"><a href="{{route('search')}}">
                                 <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
                         <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto xs:leading-8 mb-9"
-                            style="color: white; font-weight: 900;">{{$player->name}}</h1>
+                            style="color: white; font-weight: 900;">{{$player->user->name}}</h1>
 
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;"><span class="text-orange">Position: </span>{{$player->preferred_position}}</h3>
                         <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;">
-                            <span class="text-orange">Age</span> {{\Carbon\Carbon::parse($player->dob)->age}}</h3>
+                            <span class="text-orange">Age</span> {{\Carbon\Carbon::parse($player->user->dob)->age}}</h3>
                         @if(isset($player->contracts))
                             <h3 class="uppercase text-white text-3xl lg:text-5xl bolder italic font-Roboto xs:leading-8 mb-4"
                                 style="color: white; font-weight: 900;"><span class="text-orange">
@@ -35,14 +35,14 @@
                         <h5 class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
                             style="color: white; font-weight: 900;"><span class="text-orange">Height:</span> {{$player->height}}</h5>
                         <p class="uppercase text-white text-2xl lg:text-2xl bolder italic font-Roboto xs:leading-8 mb-4"
-                           style="color: white; font-weight: 900;">{{$player->bio}}</p>
+                           style="color: white; font-weight: 900;">{{$player->user->bio}}</p>
                     </div>
                 </div>
                 <div class="flex-1">
                     <div class="bg-orange px-6 py-6 mx-6 rounded">
                         <div class="mt-8 mb-8 py-3 p-6">
-                            @if($player->profile_image != null)
-                                <img src="/images/user/{{$player->profile_image}}" alt="Profile Image" width="70%">
+                            @if($player->user->profile_image != null)
+                                <img src="/images/user/{{$player->user->profile_image}}" alt="Profile Image" width="70%">
                             @else
                                 <img src="/images/default_profile_image.png" alt="Default Image"
                                      class="object-contain h-48 w-full">
@@ -90,31 +90,31 @@
 
                         <div class="flex flex-col md:flex-row">
                             <div class="flex-1">
-                                @if($player->twitter_url != null || $player->facebook_url != null || $player->instagram_url != null || $player->youtube_url)
+                                @if($player->user->twitter_url != null || $player->user->facebook_url != null || $player->user->instagram_url != null || $player->user->youtube_url)
                                     <p class="text-white text-2xl lg:text-2xl bolder font-Roboto xs:leading-8 mb-4 italic">
                                         Social Media</p>
                                     <div class="flex flex-row">
-                                        @if($player->facebook_url != null)
+                                        @if($player->user->facebook_url != null)
                                             <div class="flex-1">
-                                                <a class="lowercase" target="_blank" href="{{$player->facebook_url}}">
+                                                <a class="lowercase" target="_blank" href="{{$player->user->facebook_url}}">
                                                     <img src="https://img.icons8.com/color/50/000000/facebook-new.png"/></a>
                                             </div>
                                         @endif
-                                            @if($player->twitter_url != null)
+                                            @if($player->user->twitter_url != null)
                                                 <div class="flex-1">
-                                                    <a class="lowercase" target="_blank" href="{{$player->twitter_url}}">
+                                                    <a class="lowercase" target="_blank" href="{{$player->user->twitter_url}}">
                                                         <img src="https://img.icons8.com/color/50/000000/twitter--v1.png"/></a>
                                                 </div>
                                             @endif
-                                            @if($player->youtube_url != null)
+                                            @if($player->user->youtube_url != null)
                                                 <div class="flex-1">
-                                                    <a class="lowercase" target="_blank" href="{{$player->youtube_url}}">
+                                                    <a class="lowercase" target="_blank" href="{{$player->user->youtube_url}}">
                                                         <img src="https://img.icons8.com/color/50/000000/youtube-play.png"/></a>
                                                 </div>
                                             @endif
-                                            @if($player->instagram_url != null)
+                                            @if($player->user->instagram_url != null)
                                                 <div class="flex-1">
-                                                    <a class="lowercase" target="_blank" href="{{$player->instagram_url}}">
+                                                    <a class="lowercase" target="_blank" href="{{$player->user->instagram_url}}">
                                                         <img src="https://img.icons8.com/color/50/000000/instagram-new--v1.png"/></a>
                                                 </div>
                                             @endif
@@ -129,7 +129,7 @@
                                 <div
                                     class="border-2 border-white p-2 rounded hover:text-orange hover:bg-white hover:border-orange">
                                     <h3 class="text-white text-4xl bolder text-center uppercase hover:text-orange hover:bg-white hover:text-orange hover:bg-white">
-                                        <a href="{{route('message',$player)}}">Message
+                                        <a href="{{route('message',$player->user_id)}}">Message
                                             Now</a></h3>
                                 </div>
 
