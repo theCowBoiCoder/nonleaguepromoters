@@ -75,6 +75,14 @@
                 </div>
                 <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="looking_for_a_club_staff">Looking For A Club</label>
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club_staff">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Role *</label>
                         <input type="text" class="border py-2 px-3 text-grey-darkest" id="role"
@@ -107,6 +115,14 @@
                             <option value="amateur-contract">Amateur Contract</option>
                         </select>
 
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="looking_for_a_club">Looking For A Club</label>
+                        <select name="" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -234,6 +250,7 @@ export default {
             instagram_url: (this.my_profile.instagram_url != null) ? this.my_profile.instagram_url : null,
             role: (this.my_profile.staff != null) ? this.my_profile.staff.role : null,
             qualifications: (this.my_profile.staff != null) ? this.my_profile.staff.qualifications : null,
+            looking_for_a_club_staff: (this.my_profile.staff != null) ? this.my_profile.staff.looking_for_a_club : 0,
             file: '',
             got_club: false,
             errors: [],
@@ -277,6 +294,7 @@ export default {
                 formData.append('preferred_position', this.preferred_position);
                 formData.append('club', this.club);
                 formData.append('step_free', this.step_free);
+                formData.append('looking_for_a_club', this.looking_for_a_club);
                 formData.append('is_player', 1);
 
                 if (this.contract_end_date !== '') {
@@ -295,6 +313,7 @@ export default {
             if (this.my_profile.staff != null) {
                 formData.append('role', this.role);
                 formData.append('qualifications', this.qualifications);
+                formData.append('looking_for_a_club', this.looking_for_a_club_staff);
                 formData.append('is_staff', 1);
             } else {
                 formData.append('is_staff', 0);

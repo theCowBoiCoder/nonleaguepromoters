@@ -2189,6 +2189,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2216,6 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
       instagram_url: this.my_profile.instagram_url != null ? this.my_profile.instagram_url : null,
       role: this.my_profile.staff != null ? this.my_profile.staff.role : null,
       qualifications: this.my_profile.staff != null ? this.my_profile.staff.qualifications : null,
+      looking_for_a_club_staff: this.my_profile.staff != null ? this.my_profile.staff.looking_for_a_club : 0,
       file: '',
       got_club: false,
       errors: [],
@@ -2263,6 +2280,7 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('preferred_position', this.preferred_position);
         formData.append('club', this.club);
         formData.append('step_free', this.step_free);
+        formData.append('looking_for_a_club', this.looking_for_a_club);
         formData.append('is_player', 1);
 
         if (this.contract_end_date !== '') {
@@ -2281,6 +2299,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.my_profile.staff != null) {
         formData.append('role', this.role);
         formData.append('qualifications', this.qualifications);
+        formData.append('looking_for_a_club', this.looking_for_a_club_staff);
         formData.append('is_staff', 1);
       } else {
         formData.append('is_staff', 0);
@@ -40238,6 +40257,55 @@ var render = function() {
                     staticClass:
                       "mb-2 uppercase font-bold text-lg text-grey-darkest",
                     staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "looking_for_a_club_staff" }
+                  },
+                  [_vm._v("Looking For A Club")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.looking_for_a_club_staff,
+                        expression: "looking_for_a_club_staff"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.looking_for_a_club_staff = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
                     attrs: { for: "address" }
                   },
                   [_vm._v("Role *")]
@@ -40388,6 +40456,55 @@ var render = function() {
                     _c("option", { attrs: { value: "amateur-contract" } }, [
                       _vm._v("Amateur Contract")
                     ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "looking_for_a_club" }
+                  },
+                  [_vm._v("Looking For A Club")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.looking_for_a_club,
+                        expression: "looking_for_a_club"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.looking_for_a_club = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")])
                   ]
                 )
               ]),
