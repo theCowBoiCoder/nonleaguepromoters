@@ -169,14 +169,16 @@ class HomeController extends Controller
 
     public function auth(Request $request)
     {
-        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-        $user = User::query()->where('email', $request->email)->first();
-        if ($user->password_been_changed == 0) {
-            //Send to change password
-            return redirect()->route('password.change', $user);
-        }
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = User::query()->where('email', $request->email)->first();
+            if ($user->password_been_changed == 0) {
+                //Send to change password
+                return redirect()->route('password.change', $user);
+            }
 
-        return redirect('/')->with('logged_in', 'Welcome back');
+            return redirect('/')->with('logged_in', 'Welcome back');
+        }
+        return redirect()->back()->with('logged_in','Sorry Either Username or Password does not match');
     }
 
     public function passwordChange(User $user)
@@ -208,7 +210,7 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $me = User::query()->with(['staff','player.contracts'])->find(Auth::id());
+        $me = User::query()->with(['staff', 'player.contracts'])->find(Auth::id());
         $positions = Position::query()->get();
         $regions = Region::query()->orderBy('county', 'ASC')->get();
         return view('pages.profile', [
@@ -241,7 +243,7 @@ class HomeController extends Controller
         $user->youtube_url = $request->youtube_url ?? NULL;
         $user->save();
 
-        if($request->is_player == 1){
+        if ($request->is_player == 1) {
             $user->player->step_level = $request->step_free;
             $user->player->height = $request->height ?? 0;
             $user->player->preferred_position = $request->preferred_position ?? NULL;
@@ -250,12 +252,11 @@ class HomeController extends Controller
             $user->player->save();
         }
 
-        if($request->is_staff == 1){
+        if ($request->is_staff == 1) {
             $user->staff->role = $request->role;
             $user->staff->qualification = $request->qualifications;
             $user->staff->save();
         }
-
 
 
         return response()->json(['message' => 'Thanks You Have Now Updated Your Profile']);
