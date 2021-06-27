@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="bg-repeat bg-mobile-image md:bg-player-image bg-scroll">
+    <div class="bg-cover bg-repeat bg-mobile-image md:bg-player-image bg-scroll">
         @include('layout.login')
         <div class="container m-auto">
             <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
