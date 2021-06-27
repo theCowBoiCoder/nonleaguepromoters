@@ -45,14 +45,23 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
 Route::group(['prefix' => 'player'], function () {
     Route::get('players', [\App\Http\Controllers\PlayerController::class, 'players'])->name('players');
     Route::get('search', [\App\Http\Controllers\PlayerController::class, 'index'])->name('search');
-    Route::get('{player}', [\App\Http\Controllers\PlayerController::class, 'single'])->name('single');
-    Route::get('{player}/message', [\App\Http\Controllers\PlayerController::class, 'messageForm'])->name('message');
-    Route::post('{player}/message/send', [\App\Http\Controllers\PlayerController::class, 'messageSend'])->name('message.sent');
+    Route::get('{player_id}', [\App\Http\Controllers\PlayerController::class, 'single'])->name('single');
+    Route::get('{player_id}/message', [\App\Http\Controllers\PlayerController::class, 'messageForm'])->name('message');
+    Route::post('{player_id}/message/send', [\App\Http\Controllers\PlayerController::class, 'messageSend'])->name('message.sent');
 });
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::get('search', [\App\Http\Controllers\StaffController::class, 'index'])->name('search');
     Route::get('filter', [\App\Http\Controllers\StaffController::class, 'filter'])->name('filter');
     Route::get('{staff}', [\App\Http\Controllers\StaffController::class, 'single'])->name('single');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('login', [\App\Http\Controllers\Admin\AdminController::class, 'login'])->name('login');
+    Route::post('login', [\App\Http\Controllers\Admin\AdminController::class, 'authenticate'])->name('authenticate');
+    Route::get('logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('logout');
+
+    //Dashboard Routes
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 });
 
