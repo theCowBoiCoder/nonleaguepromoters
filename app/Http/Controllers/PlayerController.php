@@ -60,7 +60,7 @@ class PlayerController extends Controller
 
 
         $player = Player::query();
-        $player->whereHas('user', function ($builder) use ($region, $county, $request, $gender) {
+        $player->whereHas('user', function ($builder) use ($term, $region, $county, $request, $gender) {
             if ($region != null) {
                 $builder->where('region', $request->region);
             }
@@ -72,11 +72,14 @@ class PlayerController extends Controller
             if ($gender != null) {
                 $builder->where('gender', $gender);
             }
+
+            if ($term != null) {
+                $builder->where('name', 'LIKE', '%' . $term . '%');
+            }
+
             $builder->where('is_public', 1);
         });
-        if ($term != null) {
-            $player->where('name', 'LIKE', '%' . $term . '%');
-        }
+
 
         if ($position != null) {
             $player->where('preferred_position', $position);
@@ -95,14 +98,15 @@ class PlayerController extends Controller
         ]);
     }
 
-    public function messageForm(Player $player)
+    public function messageForm(Request $request)
     {
+        $player = Player::with(['user'])->where('user_id', $request->segment(2))->first();
         return view('pages.players.message', [
             'player' => $player
         ]);
     }
 
-    public function messageSend(Request $request, $user_id)
+    public function messageSend(Request $request, $user_id): \Illuminate\Http\JsonResponse
     {
         $response = Messages::send($user_id, $request);
         return response()->json(['success' => $response]);
