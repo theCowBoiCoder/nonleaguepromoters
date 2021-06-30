@@ -43,7 +43,7 @@ class MessageUpdates extends Command
     {
         $messages = Message::query()->where('has_read', 0)->groupBy('receiver_user_id')->get();
         foreach ($messages as $message){
-            Notification::route('mail', $message->user)->notify(new MessageUpdateNotification($message->user));
+            Notification::route('mail', $message->user->email)->notify(new MessageUpdateNotification($message->user));
         }
 
     }
