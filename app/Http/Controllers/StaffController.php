@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
 use App\Models\Region;
 use App\Models\Staff;
 use Illuminate\Http\Request;
@@ -87,6 +88,14 @@ class StaffController extends Controller
     {
         return view('pages.staff.single', [
             'staff' => $staff
+        ]);
+    }
+
+    public function messageForm(Request $request)
+    {
+        $player = Staff::with(['user'])->where('user_id', $request->segment(2))->first();
+        return view('pages.players.message', [
+            'player' => $player
         ]);
     }
 }

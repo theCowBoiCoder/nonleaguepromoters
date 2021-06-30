@@ -76,7 +76,7 @@
                                 <div
                                     class="border-2 border-white p-2 rounded hover:text-orange hover:bg-white hover:border-orange">
                                     <h3 class="text-white text-4xl bolder text-center uppercase hover:text-orange hover:bg-white hover:text-orange hover:bg-white">
-                                        <a href="{{route('message',$staff->user_id)}}">Message
+                                        <a href="{{route('staff.message',$staff->user_id)}}">Message
                                             Now</a></h3>
                                 </div>
 

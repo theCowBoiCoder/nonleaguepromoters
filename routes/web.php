@@ -54,6 +54,8 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::get('search', [\App\Http\Controllers\StaffController::class, 'index'])->name('search');
     Route::get('filter', [\App\Http\Controllers\StaffController::class, 'filter'])->name('filter');
     Route::get('{staff}', [\App\Http\Controllers\StaffController::class, 'single'])->name('single');
+    Route::get('{staff_id}/message',[\App\Http\Controllers\StaffController::class,'messageForm'])->name('message');
+    Route::get('{staff_id}/message/send',[\App\Http\Controllers\StaffController::class,'messageSend'])->name('message.sent');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
