@@ -27,6 +27,7 @@
                     </div>
                 </div>
             @endforeach
+            {{$messages->render()}}
         </div>
     </div>
 @endsection

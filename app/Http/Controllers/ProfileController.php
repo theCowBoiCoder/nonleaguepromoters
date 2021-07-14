@@ -11,7 +11,7 @@ class ProfileController extends Controller
 {
     public function messages(User $user)
     {
-        $messages = Message::query()->where('receiver_user_id', $user->id)->get();
+        $messages = Message::query()->where('receiver_user_id', $user->id)->paginate(15);
 
         return view('pages.message', [
             'messages' => $messages
