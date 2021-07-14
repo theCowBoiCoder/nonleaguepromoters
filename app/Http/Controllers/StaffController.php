@@ -93,9 +93,9 @@ class StaffController extends Controller
 
     public function messageForm(Request $request)
     {
-        $player = Staff::with(['user'])->where('user_id', $request->segment(2))->first();
+        $staff = Staff::with(['user'])->where('id', $request->segment(2))->first();
         return view('pages.players.message', [
-            'player' => $player
+            'player' => $staff
         ]);
     }
 }
