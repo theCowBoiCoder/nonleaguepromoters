@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="bg-repeat bg-mobile-image md:bg-player-image bg-scroll">
+    <div class="bg-repeat bg-mobile-image md:bg-player-image bg-scroll h-full">
         @include('layout.login')
         <div class="container m-auto">
             <div class="flex flex-col md:flex-row">
@@ -76,7 +76,7 @@
                                 <div
                                     class="border-2 border-white p-2 rounded hover:text-orange hover:bg-white hover:border-orange">
                                     <h3 class="text-white text-4xl bolder text-center uppercase hover:text-orange hover:bg-white hover:text-orange hover:bg-white">
-                                        <a href="{{route('staff.message',$staff->user_id)}}">Message
+                                        <a href="{{route('staff.message',$staff->id)}}">Message
                                             Now</a></h3>
                                 </div>
 

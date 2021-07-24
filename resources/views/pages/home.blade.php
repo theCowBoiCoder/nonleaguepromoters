@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="bg-cover bg-repeat md:bg-home-image bg-mobile-image">
+    <div class="h-screen w-full bg-cover bg-repeat md:bg-home-image bg-mobile-image">
         @include('layout.login')
 
         <div class="container m-auto">
