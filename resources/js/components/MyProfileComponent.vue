@@ -175,16 +175,16 @@
                     </h3>
                     <label for="facebook_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">Facebook</label>
                     <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="facebook_url"
-                           v-model="facebook_url">
+                           v-model="facebook_url" placeholder="https://www.facebook.com/nonleaguepromoters">
                     <label for="twitter_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">Twitter</label>
                     <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="twitter_url"
-                           v-model="twitter_url">
+                           v-model="twitter_url" placeholder="https://www.twitter.com/nonleaguepromoters">
                     <label for="instagram_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">Instagram</label>
                     <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="instagram_url"
-                           v-model="instagram_url">
+                           v-model="instagram_url" placeholder="https://www.instagram.com/nonleaguepromoters">
                     <label for="youtube_url" class="mb-2 uppercase font-bold text-lg text-grey-darkest text-orange">YouTube</label>
                     <input type="text" class="border py-2 px-3 text-grey-darkest mb-3" id="youtube_url"
-                           v-model="youtube_url">
+                           v-model="youtube_url" placeholder="https://www.youtube.com/nonleaguepromoters">
                 </div>
             </div>
         </div>
