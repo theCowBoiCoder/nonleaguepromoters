@@ -14,12 +14,16 @@
                 <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-2">
                     <div class="md:flex">
                         <div class="p-8">
-                            <a href="#" class="block mt-1 text-xl leading-tight font-medium text-orange hover:underline">{{$message->subject}}</a>
+                            <a href="#"
+                               class="block mt-1 text-xl leading-tight font-medium text-orange hover:underline">{{$message->subject}}</a>
                             <p class="mt-2 text-gray-500 break-all">{{decrypt($message->message)}}</p>
-                            <p class="mt-2 text-gray-500 break-all">From: <span class="text-orange">{{$message->sender->name ?? NULL}}</span></p>
+                            <p class="mt-2 text-gray-500 break-all">From: <span
+                                    class="text-orange">{{$message->from ?? NULL}}</span></p>
                             @if($message->has_read == 0)
                                 <div class="mt-4">
-                                    <a class="p-2 rounded bg-white text-orange border border-orange hover:text-white hover:bg-orange" href="{{route('profile.my_messages.read',[$message,$message->id])}}">Mark As Read</a>
+                                    <a class="p-2 rounded bg-white text-orange border border-orange hover:text-white hover:bg-orange"
+                                       href="{{route('profile.my_messages.read',[$message,$message->id])}}">Mark As
+                                        Read</a>
                                 </div>
                             @endif
 
