@@ -40773,7 +40773,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "facebook_url" },
+              attrs: {
+                type: "text",
+                id: "facebook_url",
+                placeholder: "https://www.facebook.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.facebook_url },
               on: {
                 input: function($event) {
@@ -40805,7 +40809,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "twitter_url" },
+              attrs: {
+                type: "text",
+                id: "twitter_url",
+                placeholder: "https://www.twitter.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.twitter_url },
               on: {
                 input: function($event) {
@@ -40837,7 +40845,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "instagram_url" },
+              attrs: {
+                type: "text",
+                id: "instagram_url",
+                placeholder: "https://www.instagram.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.instagram_url },
               on: {
                 input: function($event) {
@@ -40869,7 +40881,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "youtube_url" },
+              attrs: {
+                type: "text",
+                id: "youtube_url",
+                placeholder: "https://www.youtube.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.youtube_url },
               on: {
                 input: function($event) {
