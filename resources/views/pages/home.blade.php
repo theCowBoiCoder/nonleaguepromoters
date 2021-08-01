@@ -17,34 +17,37 @@
             <div class="flex flex-col px-7 lg:pl-20 lg:px-3">
                 <div class="mb-1 block sm:hidden">
                     @if(!\Illuminate\Support\Facades\Auth::check())
-                        <a href="{{route('login')}}" class="uppercase text-white mb-1 "><strong>Login</strong></a>
+                        <a href="{{route('login')}}" class="uppercase text-white mb-1 hover:text-orange"><strong>Login</strong></a>
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::check())
-                        <a href="{{route('profile.profile')}}" class="uppercase text-white mb-1 "><strong>My
+                        <a href="{{route('profile.profile')}}" class="uppercase text-white mb-1 hover:text-orange"><strong>My
                                 Profile</strong></a>
                     @endif
                 </div>
                 <div class="mb-1">
-                    <a href="{{route('home')}}" class="uppercase text-white mb-1 "><strong>Home</strong></a>
+                    <a href="{{route('home')}}" class="uppercase text-white mb-1 hover:text-orange"><strong>Home</strong></a>
                 </div>
                 <div class="mb-1">
                     <a href="{{route('about')}}"
-                       class="uppercase text-white font-weight-bold"><strong>About</strong></a>
+                       class="uppercase text-white font-weight-bold hover:text-orange"><strong>About</strong></a>
                 </div>
                 <div class="mb-1">
-                    <a href="{{route('search')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Player
+                    <a href="{{route('search')}}" class="uppercase text-white font-weight-bold mb-2 hover:text-orange"><strong>Player
                             Search Platform</strong></a>
                 </div>
                 <div class="mb-1">
-                    <a href="{{route('staff.search')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Staff
+                    <a href="{{route('staff.search')}}" class="uppercase text-white font-weight-bold mb-2 hover:text-orange"><strong>Staff
                             Search Platform</strong></a>
                 </div>
                 @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(\Illuminate\Support\Facades\Auth::user()->is_admin == 1)
+                        <a href="{{route('admin.dashboard')}}" class="uppercase text-white mb-1 hover:text-orange"><strong>Admin Portal</strong></a>
+                    @endif
                     <a href="{{route('profile.my_messages',\Illuminate\Support\Facades\Auth::user())}}"
-                       class="uppercase text-white mb-1 "><strong>My
+                       class="uppercase text-white mb-1 hover:text-orange"><strong>My
                             Messages</strong></a>
                     <a href="{{route('logout')}}"
-                       class="uppercase text-white font-weight-bold mb-2"><strong>Logout</strong></a>
+                       class="uppercase text-white font-weight-bold mb-2 hover:text-orange"><strong>Logout</strong></a>
                 @endif
 
                 {{--                <div class="mb-1">--}}
@@ -63,12 +66,12 @@
                 {{--                    <a href="" class="uppercase text-white font-weight-bold mb-2"><strong>Contact us</strong></a>--}}
                 {{--                </div>--}}
                 <div class="mb-1">
-                    <a href="{{route('contact.index')}}" class="uppercase text-white font-weight-bold mb-2"><strong>Contact
+                    <a href="{{route('contact.index')}}" class="uppercase text-white font-weight-bold mb-2 hover:text-orange"><strong>Contact
                             Us</strong></a>
                 </div>
                 <div class="mb-1">
                     <a target="_blank" href="{{asset('TermsAndConditions.pdf')}}"
-                       class="uppercase text-white font-weight-bold mb-2"><strong>Terms And Conditions</strong></a>
+                       class="uppercase text-white font-weight-bold mb-2 hover:text-orange"><strong>Terms And Conditions</strong></a>
                 </div>
                 @if(!\Illuminate\Support\Facades\Auth::check())
                     <div class="mt-6">

@@ -54,16 +54,18 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::get('search', [\App\Http\Controllers\StaffController::class, 'index'])->name('search');
     Route::get('filter', [\App\Http\Controllers\StaffController::class, 'filter'])->name('filter');
     Route::get('{staff}', [\App\Http\Controllers\StaffController::class, 'single'])->name('single');
-    Route::get('{staff_id}/message',[\App\Http\Controllers\StaffController::class,'messageForm'])->name('message');
-    Route::get('{staff_id}/message/send',[\App\Http\Controllers\StaffController::class,'messageSend'])->name('message.sent');
+    Route::get('{staff_id}/message', [\App\Http\Controllers\StaffController::class, 'messageForm'])->name('message');
+    Route::get('{staff_id}/message/send', [\App\Http\Controllers\StaffController::class, 'messageSend'])->name('message.sent');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('login', [\App\Http\Controllers\Admin\AdminController::class, 'login'])->name('login');
-    Route::post('login', [\App\Http\Controllers\Admin\AdminController::class, 'authenticate'])->name('authenticate');
-    Route::get('logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('logout');
-
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'is_admin']], function () {
     //Dashboard Routes
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
+    Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {
+        Route::get('view-all', [\App\Http\Controllers\Admin\MessageController::class, 'all'])->name('all');
+        Route::get('send', [\App\Http\Controllers\Admin\MessageController::class, 'send'])->name('send');
+        Route::post('send-message', [\App\Http\Controllers\Admin\MessageController::class, 'post_message'])->name('send.message');
+    });
 });
 
