@@ -30,7 +30,7 @@ Route::get('register', [\App\Http\Controllers\HomeController::class, 'register']
 Route::post('register', [\App\Http\Controllers\HomeController::class, 'registerUser'])->name('register.store');
 Route::post('delete', [\App\Http\Controllers\HomeController::class, 'deleteUser'])->name('delete.user');
 Route::get('login', [\App\Http\Controllers\HomeController::class, 'login'])->name('login');
-Route::post('login', [\App\Http\Controllers\HomeController::class, 'auth'])->name('auth.login');
+Route::post('login/me', [\App\Http\Controllers\HomeController::class, 'auth'])->name('auth.login');
 Route::get('logout', [\App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 Route::get('password-change/{user}', [\App\Http\Controllers\HomeController::class, 'passwordChange'])->name('password.change');
 Route::post('password-change/{user}', [\App\Http\Controllers\HomeController::class, 'passwordConfirm'])->name('password.change.store');
@@ -66,6 +66,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
         Route::get('view-all', [\App\Http\Controllers\Admin\MessageController::class, 'all'])->name('all');
         Route::get('send', [\App\Http\Controllers\Admin\MessageController::class, 'send'])->name('send');
         Route::post('send-message', [\App\Http\Controllers\Admin\MessageController::class, 'post_message'])->name('send.message');
+    });
+
+    Route::group(['prefix' => 'marketing', 'as' => 'marketing.'], function () {
+        Route::get('seo', [\App\Http\Controllers\Admin\MarketingController::class, 'seo'])->name('seo');
+        Route::post('seo/create', [\App\Http\Controllers\Admin\MarketingController::class, 'postseo'])->name('seo.create');
     });
 });
 
