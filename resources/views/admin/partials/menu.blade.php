@@ -29,7 +29,10 @@
         </a>
         <ul class="submenu ">
             <li class="submenu-item ">
-                <a href="{{route('admin.marketing.seo')}}">SEO</a>
+                <a href="{{route('admin.marketing.seo.viewall')}}">View All SEO</a>
+            </li>
+            <li class="submenu-item ">
+                <a href="{{route('admin.marketing.seo.create')}}">Create SEO Details</a>
             </li>
 
         </ul>

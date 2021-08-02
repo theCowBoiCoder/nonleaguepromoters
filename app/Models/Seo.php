@@ -9,7 +9,7 @@ class Seo extends Model
 {
     use HasFactory;
 
-    protected $table = 'seo';
+    protected $table = 'seos';
 
     protected $fillable = ['route', 'meta_title', 'meta_keywords', 'meta_description'];
 }

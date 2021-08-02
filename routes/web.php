@@ -69,8 +69,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
     });
 
     Route::group(['prefix' => 'marketing', 'as' => 'marketing.'], function () {
-        Route::get('seo', [\App\Http\Controllers\Admin\MarketingController::class, 'seo'])->name('seo');
-        Route::post('seo/create', [\App\Http\Controllers\Admin\MarketingController::class, 'postseo'])->name('seo.create');
+        Route::get('seo', [\App\Http\Controllers\Admin\MarketingController::class, 'createseo'])->name('seo.create');
+        Route::post('seo/create', [\App\Http\Controllers\Admin\MarketingController::class, 'postseo'])->name('seo.create.post');
+        Route::get('seo/{seo}/edit',[\App\Http\Controllers\Admin\MarketingController::class,'editseo'])->name('seo.edit');
+        Route::post('seo/{seo}/edit/save',[\App\Http\Controllers\Admin\MarketingController::class,'editseopost'])->name('seo.edit.post');
+        Route::get('seo/{seo}/delete',[\App\Http\Controllers\Admin\MarketingController::class,'deleteseo'])->name('seo.delete');
+
+        Route::get('view-all-seo',[\App\Http\Controllers\Admin\MarketingController::class,'seo'])->name('seo.viewall');
     });
 });
 
