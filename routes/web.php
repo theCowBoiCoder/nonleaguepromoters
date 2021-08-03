@@ -77,5 +77,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
 
         Route::get('view-all-seo',[\App\Http\Controllers\Admin\MarketingController::class,'seo'])->name('seo.viewall');
     });
+
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+        Route::get('view-all', [\App\Http\Controllers\Admin\UserController::class, 'all'])->name('all');
+        Route::get('single/{user_id}', [\App\Http\Controllers\Admin\UserController::class, 'single'])->name('single');
+    });
 });
 

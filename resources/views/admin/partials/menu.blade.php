@@ -10,6 +10,17 @@
     <li class="sidebar-item  has-sub">
         <a href="#" class='sidebar-link'>
             <i class="bi bi-stack"></i>
+            <span>Users</span>
+        </a>
+        <ul class="submenu ">
+            <li class="submenu-item ">
+                <a href="{{route('admin.users.all')}}">View All</a>
+            </li>
+        </ul>
+    </li>
+    <li class="sidebar-item  has-sub">
+        <a href="#" class='sidebar-link'>
+            <i class="bi bi-stack"></i>
             <span>Messages</span>
         </a>
         <ul class="submenu ">
@@ -19,7 +30,6 @@
             <li class="submenu-item ">
                 <a href="{{route('admin.messages.all')}}">View All</a>
             </li>
-
         </ul>
     </li>
     <li class="sidebar-item  has-sub">
