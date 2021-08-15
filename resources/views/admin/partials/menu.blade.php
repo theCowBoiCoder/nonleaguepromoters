@@ -2,7 +2,7 @@
     <li class="sidebar-title">Menu</li>
 
     <li class="sidebar-item active ">
-        <a href="index.html" class='sidebar-link'>
+        <a href="#" class='sidebar-link'>
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
         </a>
@@ -15,6 +15,20 @@
         <ul class="submenu ">
             <li class="submenu-item ">
                 <a href="{{route('admin.users.all')}}">View All</a>
+            </li>
+        </ul>
+    </li>
+    <li class="sidebar-item  has-sub">
+        <a href="#" class='sidebar-link'>
+            <i class="bi bi-stack"></i>
+            <span>News</span>
+        </a>
+        <ul class="submenu ">
+            <li class="submenu-item ">
+                <a href="{{route('admin.news.create')}}">Create</a>
+            </li>
+            <li class="submenu-item ">
+                <a href="{{route('admin.news.all')}}">View All</a>
             </li>
         </ul>
     </li>

@@ -62,22 +62,35 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
     //Dashboard Routes
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
+    //News Routes
+    Route::group(['prefix' => 'news', 'as' => 'news.'], function () {
+        Route::get('view-all', [\App\Http\Controllers\Admin\NewsController::class, 'all'])->name('all');
+        Route::get('create', [\App\Http\Controllers\Admin\NewsController::class, 'create'])->name('create');
+        Route::post('create/store', [\App\Http\Controllers\Admin\NewsController::class, 'store'])->name('store');
+        Route::get('{news}/edit', [\App\Http\Controllers\Admin\NewsController::class, 'edit'])->name('edit');
+        Route::post('{news}/update', [\App\Http\Controllers\Admin\NewsController::class, 'update'])->name('update');
+        Route::delete('{news}/delete', [\App\Http\Controllers\Admin\NewsController::class, 'delete'])->name('delete');
+    });
+
+    //Message Routes
     Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {
         Route::get('view-all', [\App\Http\Controllers\Admin\MessageController::class, 'all'])->name('all');
         Route::get('send', [\App\Http\Controllers\Admin\MessageController::class, 'send'])->name('send');
         Route::post('send-message', [\App\Http\Controllers\Admin\MessageController::class, 'post_message'])->name('send.message');
     });
 
+    //Seo / Marketing Routes
     Route::group(['prefix' => 'marketing', 'as' => 'marketing.'], function () {
         Route::get('seo', [\App\Http\Controllers\Admin\MarketingController::class, 'createseo'])->name('seo.create');
         Route::post('seo/create', [\App\Http\Controllers\Admin\MarketingController::class, 'postseo'])->name('seo.create.post');
-        Route::get('seo/{seo}/edit',[\App\Http\Controllers\Admin\MarketingController::class,'editseo'])->name('seo.edit');
-        Route::post('seo/{seo}/edit/save',[\App\Http\Controllers\Admin\MarketingController::class,'editseopost'])->name('seo.edit.post');
-        Route::get('seo/{seo}/delete',[\App\Http\Controllers\Admin\MarketingController::class,'deleteseo'])->name('seo.delete');
+        Route::get('seo/{seo}/edit', [\App\Http\Controllers\Admin\MarketingController::class, 'editseo'])->name('seo.edit');
+        Route::post('seo/{seo}/edit/save', [\App\Http\Controllers\Admin\MarketingController::class, 'editseopost'])->name('seo.edit.post');
+        Route::get('seo/{seo}/delete', [\App\Http\Controllers\Admin\MarketingController::class, 'deleteseo'])->name('seo.delete');
 
-        Route::get('view-all-seo',[\App\Http\Controllers\Admin\MarketingController::class,'seo'])->name('seo.viewall');
+        Route::get('view-all-seo', [\App\Http\Controllers\Admin\MarketingController::class, 'seo'])->name('seo.viewall');
     });
 
+    //User Routes
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('view-all', [\App\Http\Controllers\Admin\UserController::class, 'all'])->name('all');
         Route::get('single/{user_id}', [\App\Http\Controllers\Admin\UserController::class, 'single'])->name('single');
