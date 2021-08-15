@@ -20,4 +20,13 @@ class Message extends Model
         'from'
     ];
 
+    public function sender(){
+        return $this->belongsTo(User::class,'sender_user_id','id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'receiver_user_id','id');
+    }
+
 }

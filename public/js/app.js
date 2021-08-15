@@ -2165,6 +2165,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2173,23 +2213,26 @@ __webpack_require__.r(__webpack_exports__);
     return {
       id: this.my_profile.id,
       name: this.my_profile.name,
-      dob: this.my_profile.player !== null ? this.my_profile.player.dob : null,
+      dob: this.my_profile.dob,
       email_address: this.my_profile.email,
       address: this.my_profile.player ? this.my_profile.player.address : null,
-      bio: this.my_profile.player ? this.my_profile.player.bio : null,
-      height: this.my_profile.player ? this.my_profile.player.height : null,
-      gender: this.my_profile.player ? this.my_profile.player.gender : null,
-      looking_for_a_club: this.my_profile.player ? this.my_profile.player.looking_for_a_club : 0,
-      preferred_foot: this.my_profile.player ? this.my_profile.player.preferred_foot : null,
-      preferred_position: this.my_profile.player ? this.my_profile.player.preferred_position : null,
+      bio: this.my_profile.bio,
+      height: this.my_profile.player != null ? this.my_profile.player.height : null,
+      gender: this.my_profile.gender,
+      looking_for_a_club: this.my_profile.player != null ? this.my_profile.player.looking_for_a_club : 0,
+      preferred_foot: this.my_profile.player != null ? this.my_profile.player.preferred_foot : null,
+      preferred_position: this.my_profile.player != null ? this.my_profile.player.preferred_position : null,
       step_free: this.my_profile.player ? this.my_profile.player.step_level : null,
-      club: this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : null,
-      contract_end_date: this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : null,
-      county: this.my_profile.player ? this.my_profile.player.county : null,
-      facebook_url: this.my_profile.player ? this.my_profile.player.facebook_url : null,
-      twitter_url: this.my_profile.player ? this.my_profile.player.twitter_url : null,
-      youtube_url: this.my_profile.player ? this.my_profile.player.youtube_url : null,
-      instagram_url: this.my_profile.player ? this.my_profile.player.instagram_url : null,
+      club: this.my_profile.player != null && this.my_profile.player.contracts ? this.my_profile.player.contracts.contracted_club : null,
+      contract_end_date: this.my_profile.player != null && this.my_profile.player.contracts ? this.my_profile.player.contracts.contact_expiry_date : null,
+      county: this.my_profile.county,
+      facebook_url: this.my_profile.facebook_url != null ? this.my_profile.facebook_url : null,
+      twitter_url: this.my_profile.twitter_url != null ? this.my_profile.twitter_url : null,
+      youtube_url: this.my_profile.youtube_url != null ? this.my_profile.youtube_url : null,
+      instagram_url: this.my_profile.instagram_url != null ? this.my_profile.instagram_url : null,
+      role: this.my_profile.staff != null ? this.my_profile.staff.role : null,
+      qualifications: this.my_profile.staff != null ? this.my_profile.staff.qualifications : null,
+      looking_for_a_club_staff: this.my_profile.staff != null ? this.my_profile.staff.looking_for_a_club : 0,
       file: '',
       got_club: false,
       errors: [],
@@ -2204,7 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
       window.scrollTo(0, 0);
     },
     previewFiles: function previewFiles(event) {
-      this.file = this.$refs.file.files[0]; //console.log(this.file);
+      this.file = this.$refs.file.files[0];
     },
     deleteAccount: function deleteAccount() {
       if (confirm('Are you sure you want to delete your account?')) {
@@ -2229,20 +2272,37 @@ __webpack_require__.r(__webpack_exports__);
 
       formData.append('email_address', this.email_address);
       formData.append('address', this.address);
-      formData.append('height', this.height);
       formData.append('gender', this.gender);
-      formData.append('preferred_foot', this.preferred_foot);
-      formData.append('preferred_position', this.preferred_position);
-      formData.append('club', this.club);
-      formData.append('step_free', this.step_free);
+
+      if (this.my_profile.player != null) {
+        formData.append('height', this.height);
+        formData.append('preferred_foot', this.preferred_foot);
+        formData.append('preferred_position', this.preferred_position);
+        formData.append('club', this.club);
+        formData.append('step_free', this.step_free);
+        formData.append('looking_for_a_club', this.looking_for_a_club);
+        formData.append('is_player', 1);
+
+        if (this.contract_end_date !== '') {
+          formData.append('contract_end_date', this.contract_end_date);
+        }
+      } else {
+        formData.append('is_player', 0);
+      }
+
       formData.append('county', this.county);
       formData.append('twitter_url', this.twitter_url);
       formData.append('facebook_url', this.facebook_url);
       formData.append('youtube_url', this.youtube_url);
       formData.append('instagram_url', this.instagram_url);
 
-      if (this.contract_end_date !== '') {
-        formData.append('contract_end_date', this.contract_end_date);
+      if (this.my_profile.staff != null) {
+        formData.append('role', this.role);
+        formData.append('qualifications', this.qualifications);
+        formData.append('looking_for_a_club', this.looking_for_a_club_staff);
+        formData.append('is_staff', 1);
+      } else {
+        formData.append('is_staff', 0);
       }
 
       formData.append('file', this.file);
@@ -2636,6 +2696,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2652,16 +2764,20 @@ __webpack_require__.r(__webpack_exports__);
       preferred_foot: 0,
       preferred_position: 0,
       region: 0,
+      staff_region: 0,
       step_free: 0,
       club: '',
       contract_end_date: '',
       file: '',
+      role: '',
+      qualifications: '',
       bio: '',
       got_club: false,
       errors: [],
       success: '',
       btnDisable: true,
-      formGo: false
+      formGo: false,
+      profile_type: []
     };
   },
   components: {
@@ -2693,6 +2809,9 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('club', this.club);
       formData.append('county', this.region);
       formData.append('step_free', this.step_free);
+      formData.append('role', this.role);
+      formData.append('qualification', this.qualifications);
+      formData.append('profile_type', this.profile_type);
 
       if (this.contract_end_date !== '') {
         formData.append('contract_end_date', this.contract_end_date.toDateString());
@@ -2721,13 +2840,219 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   computed: {
+    isStaff: function isStaff() {
+      return this.profile_type.includes("2");
+    },
+    isPlayer: function isPlayer() {
+      return this.profile_type.includes("1");
+    },
     isDisabled: function isDisabled() {
-      if (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0) {
+      if (this.profile_type === 1 && (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)) {
+        return true;
+      }
+
+      if (this.profile_type === 2 && (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.role === '' || this.qualifications === '')) {
         return true;
       }
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['regions', 'counties', 'positions'],
+  data: function data() {
+    return {
+      name: null,
+      region: 'selected',
+      county: 'selected',
+      gender: 'selected',
+      role: null,
+      contact_status: 0,
+      laravelData: {}
+    };
+  },
+  methods: {
+    getStaff: function getStaff(page, name, region, county, gender, role) {
+      var _this = this;
+
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+
+      axios.get('/staff/filter?term=' + name + '&gender=' + gender + '&region=' + region + '&county=' + county + '&page=' + page + '&role=' + role).then(function (response) {
+        return response.data;
+      }).then(function (data) {
+        _this.laravelData = data;
+      });
+    },
+    resetFilter: function resetFilter() {
+      this.name = null;
+      this.region = 'selected';
+      this.county = 'selected';
+      this.role = null;
+      this.gender = 'selected';
+      this.getStaff(null, this.name, this.region, this.county, this.role);
+    }
+  },
+  mounted: function mounted() {},
+  created: function created() {
+    this.getStaff();
+  },
+  computed: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
 
@@ -2762,6 +3087,8 @@ Vue.component('player-single-component', __webpack_require__(/*! ./components/Pl
 Vue.component('register-component', __webpack_require__(/*! ./components/RegsiterComponent */ "./resources/js/components/RegsiterComponent.vue").default);
 Vue.component('profile-component', __webpack_require__(/*! ./components/MyProfileComponent */ "./resources/js/components/MyProfileComponent.vue").default);
 Vue.component('message-component', __webpack_require__(/*! ./components/MessageComponent */ "./resources/js/components/MessageComponent.vue").default);
+Vue.component('staff-register-component', __webpack_require__(/*! ./components/StaffRegisterComponent.vue */ "./resources/js/components/StaffRegisterComponent.vue").default);
+Vue.component('staff-component', __webpack_require__(/*! ./components/StaffComponent */ "./resources/js/components/StaffComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38965,6 +39292,84 @@ component.options.__file = "resources/js/components/RegsiterComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/StaffComponent.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/StaffComponent.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StaffComponent.vue?vue&type=template&id=4af24ab0& */ "./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&");
+/* harmony import */ var _StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StaffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StaffComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffRegisterComponent.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/StaffRegisterComponent.vue ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StaffRegisterComponent_vue_vue_type_template_id_7426b9c5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StaffRegisterComponent.vue?vue&type=template&id=7426b9c5& */ "./resources/js/components/StaffRegisterComponent.vue?vue&type=template&id=7426b9c5&");
+/* harmony import */ var _StaffRegisterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StaffRegisterComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _StaffRegisterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _StaffRegisterComponent_vue_vue_type_template_id_7426b9c5___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StaffRegisterComponent_vue_vue_type_template_id_7426b9c5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StaffRegisterComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -39042,6 +39447,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegsiterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RegsiterComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RegsiterComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegsiterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/StaffComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StaffComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffRegisterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StaffRegisterComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffRegisterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -39126,6 +39563,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegsiterComponent_vue_vue_type_template_id_4dff222a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegsiterComponent_vue_vue_type_template_id_4dff222a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RegsiterComponent.vue?vue&type=template&id=4dff222a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RegsiterComponent.vue?vue&type=template&id=4dff222a&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffComponent_vue_vue_type_template_id_4af24ab0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StaffComponent.vue?vue&type=template&id=4af24ab0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StaffRegisterComponent.vue?vue&type=template&id=7426b9c5&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/StaffRegisterComponent.vue?vue&type=template&id=7426b9c5& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffRegisterComponent_vue_vue_type_template_id_7426b9c5___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffRegisterComponent_vue_vue_type_template_id_7426b9c5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StaffRegisterComponent_vue_vue_type_template_id_7426b9c5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StaffRegisterComponent.vue?vue&type=template&id=7426b9c5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=template&id=7426b9c5&");
 
 
 /***/ }),
@@ -39638,6 +40109,79 @@ var render = function() {
                 staticClass:
                   "mb-2 uppercase font-bold text-lg text-grey-darkest",
                 staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
+              [_vm._v("County *")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.county,
+                    expression: "county"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "county" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.county = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", disabled: "" } }, [
+                  _vm._v("Please Select")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.regions, function(region) {
+                  return _c(
+                    "option",
+                    {
+                      domProps: {
+                        selected: _vm.my_profile.county === region.county
+                      },
+                      model: {
+                        value: region.id,
+                        callback: function($$v) {
+                          _vm.$set(region, "id", $$v)
+                        },
+                        expression: "region.id"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(region.county) + "\n                        "
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "looking_for_a_club" }
               },
               [_vm._v("Looking For A Club")]
@@ -39686,332 +40230,473 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" }, [
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "name" }
-              },
-              [_vm._v("County *")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.my_profile.staff != null,
+              expression: "this.my_profile.staff != null"
+            }
+          ],
+          staticClass: "flex-1"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+            [
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.county,
-                    expression: "county"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "county" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.county = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0", disabled: "" } }, [
-                  _vm._v("Please Select")
-                ]),
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "looking_for_a_club_staff" }
+                  },
+                  [_vm._v("Looking For A Club")]
+                ),
                 _vm._v(" "),
-                _vm._l(_vm.regions, function(region) {
-                  return _c(
-                    "option",
-                    {
-                      domProps: {
-                        selected: _vm.my_profile.player.county === region.county
-                      },
-                      model: {
-                        value: region.id,
-                        callback: function($$v) {
-                          _vm.$set(region, "id", $$v)
-                        },
-                        expression: "region.id"
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.looking_for_a_club_staff,
+                        expression: "looking_for_a_club_staff"
                       }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(region.county) + "\n                        "
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.looking_for_a_club_staff = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "address" }
+                  },
+                  [_vm._v("Role *")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.role,
+                      expression: "role"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "text", id: "role" },
+                  domProps: { value: _vm.role },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.role = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "preferred_foot" }
+                  },
+                  [_vm._v("Qualifications *")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.qualifications,
+                      expression: "qualifications"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "text", id: "qualifications" },
+                  domProps: { value: _vm.qualifications },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.qualifications = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.my_profile.player != null,
+              expression: "this.my_profile.player != null"
+            }
+          ],
+          staticClass: "flex-1"
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+            [
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "name" }
+                  },
+                  [_vm._v("Step / Free Agent")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.step_free,
+                        expression: "step_free"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.step_free = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "0", selected: "", disabled: "" } },
+                      [_vm._v("Please Select")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "professional" } }, [
+                      _vm._v("Professional")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "semi-professional" } }, [
+                      _vm._v("Semi Professional")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "non-contract" } }, [
+                      _vm._v("Non Contract")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "amateur-contract" } }, [
+                      _vm._v("Amateur Contract")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "looking_for_a_club" }
+                  },
+                  [_vm._v("Looking For A Club")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.looking_for_a_club,
+                        expression: "looking_for_a_club"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.looking_for_a_club = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "address" }
+                  },
+                  [_vm._v("Position")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.preferred_position,
+                        expression: "preferred_position"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.preferred_position = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [
+                      _vm._v("Please Select")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.positions, function(position) {
+                      return _c(
+                        "option",
+                        {
+                          model: {
+                            value: position.name,
+                            callback: function($$v) {
+                              _vm.$set(position, "name", $$v)
+                            },
+                            expression: "position.name"
+                          }
+                        },
+                        [_vm._v(_vm._s(position.name))]
                       )
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "name" }
-              },
-              [_vm._v("Step / Free Agent")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.step_free,
-                    expression: "step_free"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.step_free = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
                 _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "preferred_foot" }
+                  },
+                  [_vm._v("Preferred Foot")]
                 ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "professional" } }, [
-                  _vm._v("Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "semi-professional" } }, [
-                  _vm._v("Semi Professional")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "non-contract" } }, [
-                  _vm._v("Non Contract")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "amateur-contract" } }, [
-                  _vm._v("Amateur Contract")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "address" }
-              },
-              [_vm._v("Position")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
+                _c(
+                  "select",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.preferred_position,
-                    expression: "preferred_position"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.preferred_position = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0" } }, [
-                  _vm._v("Please Select")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.positions, function(position) {
-                  return _c(
-                    "option",
-                    {
-                      model: {
-                        value: position.name,
-                        callback: function($$v) {
-                          _vm.$set(position, "name", $$v)
-                        },
-                        expression: "position.name"
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.preferred_foot,
+                        expression: "preferred_foot"
                       }
-                    },
-                    [_vm._v(_vm._s(position.name))]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "preferred_foot" }
-              },
-              [_vm._v("Preferred Foot")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.preferred_foot,
-                    expression: "preferred_foot"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "", id: "preferred_foot" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.preferred_foot = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { name: "", id: "preferred_foot" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.preferred_foot = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "0", selected: "", disabled: "" } },
+                      [_vm._v("Please Select")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "left" } }, [
+                      _vm._v("Left")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "right" } }, [
+                      _vm._v("Right")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
                 _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "height" }
+                  },
+                  [_vm._v("Height")]
                 ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "left" } }, [_vm._v("Left")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "right" } }, [_vm._v("Right")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "height" }
-              },
-              [_vm._v("Height")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.height,
-                  expression: "height"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "height" },
-              domProps: { value: _vm.height },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.height,
+                      expression: "height"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "text", id: "height" },
+                  domProps: { value: _vm.height },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.height = $event.target.value
+                    }
                   }
-                  _vm.height = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "profile_image" }
-              },
-              [_vm._v("Profile Picture")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              ref: "file",
-              attrs: { type: "file", id: "file", multiple: "" },
-              on: {
-                change: function($event) {
-                  return _vm.previewFiles()
-                }
-              }
-            })
-          ])
-        ])
-      ])
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                    staticStyle: { color: "orange", "font-weight": "900" },
+                    attrs: { for: "profile_image" }
+                  },
+                  [_vm._v("Profile Picture")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  ref: "file",
+                  attrs: { type: "file", id: "file", multiple: "" },
+                  on: {
+                    change: function($event) {
+                      return _vm.previewFiles()
+                    }
+                  }
+                })
+              ])
+            ]
+          )
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
@@ -40088,7 +40773,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "facebook_url" },
+              attrs: {
+                type: "text",
+                id: "facebook_url",
+                placeholder: "https://www.facebook.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.facebook_url },
               on: {
                 input: function($event) {
@@ -40120,7 +40809,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "twitter_url" },
+              attrs: {
+                type: "text",
+                id: "twitter_url",
+                placeholder: "https://www.twitter.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.twitter_url },
               on: {
                 input: function($event) {
@@ -40152,7 +40845,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "instagram_url" },
+              attrs: {
+                type: "text",
+                id: "instagram_url",
+                placeholder: "https://www.instagram.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.instagram_url },
               on: {
                 input: function($event) {
@@ -40184,7 +40881,11 @@ var render = function() {
                 }
               ],
               staticClass: "border py-2 px-3 text-grey-darkest mb-3",
-              attrs: { type: "text", id: "youtube_url" },
+              attrs: {
+                type: "text",
+                id: "youtube_url",
+                placeholder: "https://www.youtube.com/nonleaguepromoters"
+              },
               domProps: { value: _vm.youtube_url },
               on: {
                 input: function($event) {
@@ -40320,6 +41021,26 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" },
+      [
+        _c(
+          "h4",
+          {
+            staticClass:
+              "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
+            staticStyle: { color: "orange", "font-weight": "900" }
+          },
+          [_vm._v("Staff Data\n                ")]
+        )
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -40722,7 +41443,7 @@ var render = function() {
                         staticClass:
                           "border-orange border-2 uppercase pl-2 font-light p-2"
                       },
-                      [_vm._v(_vm._s(player.name))]
+                      [_vm._v(_vm._s(player.user.name))]
                     ),
                     _vm._v(" "),
                     _c(
@@ -40812,7 +41533,7 @@ var render = function() {
                           {
                             staticClass:
                               "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
-                            attrs: { href: "/player/" + player.id }
+                            attrs: { href: "/player/" + player.user.id }
                           },
                           [
                             _vm._v(
@@ -40842,7 +41563,7 @@ var render = function() {
                   },
                   [
                     _c("h3", { staticClass: "uppercase" }, [
-                      _vm._v(_vm._s(player.name))
+                      _vm._v(_vm._s(player.user.name))
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "uppercase" }, [
@@ -40882,7 +41603,7 @@ var render = function() {
                       {
                         staticClass:
                           "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
-                        attrs: { href: "/player/" + player.id }
+                        attrs: { href: "/player/" + player.user.id }
                       },
                       [
                         _vm._v(
@@ -41042,6 +41763,111 @@ var render = function() {
                 staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "name" }
               },
+              [_vm._v("Are you a *")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex" }, [
+              _c("label", { staticClass: "flex items-center" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.profile_type,
+                      expression: "profile_type"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "checkbox", id: "player", value: "1" },
+                  domProps: {
+                    checked: Array.isArray(_vm.profile_type)
+                      ? _vm._i(_vm.profile_type, "1") > -1
+                      : _vm.profile_type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.profile_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "1",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.profile_type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.profile_type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.profile_type = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-orange ml-2 text-md" }, [
+                  _vm._v("Player")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "flex items-center ml-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.profile_type,
+                      expression: "profile_type"
+                    }
+                  ],
+                  staticClass: "border py-2 px-3 text-grey-darkest",
+                  attrs: { type: "checkbox", id: "player", value: "2" },
+                  domProps: {
+                    checked: Array.isArray(_vm.profile_type)
+                      ? _vm._i(_vm.profile_type, "2") > -1
+                      : _vm.profile_type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.profile_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "2",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.profile_type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.profile_type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.profile_type = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-orange ml-2 text-md" }, [
+                  _vm._v("Staff")
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "name" }
+              },
               [_vm._v("Name *")]
             ),
             _vm._v(" "),
@@ -41063,6 +41889,41 @@ var render = function() {
                     return
                   }
                   _vm.name = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "email_address" }
+              },
+              [_vm._v("Email Address *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email_address,
+                  expression: "email_address"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "email", id: "email_address" },
+              domProps: { value: _vm.email_address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email_address = $event.target.value
                 }
               }
             })
@@ -41158,41 +42019,6 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "email_address" }
-              },
-              [_vm._v("Email Address *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.email_address,
-                  expression: "email_address"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "email", id: "email_address" },
-              domProps: { value: _vm.email_address },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.email_address = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
           _c(
             "div",
             { staticClass: "flex flex-col mb-2" },
@@ -41226,67 +42052,6 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "looking_for_a_club" }
-              },
-              [_vm._v("Looking For A Club")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.looking_for_a_club,
-                    expression: "looking_for_a_club"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "looking_for_a_club" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.looking_for_a_club = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
-                ),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
-              ]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-1" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" }, [
           _c("div", { staticClass: "flex flex-col mb-2" }, [
             _c(
               "label",
@@ -41429,166 +42194,6 @@ var render = function() {
                 staticClass:
                   "mb-2 uppercase font-bold text-lg text-grey-darkest",
                 staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "address" }
-              },
-              [_vm._v("Position *")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.preferred_position,
-                    expression: "preferred_position"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.preferred_position = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.positions, function(position) {
-                  return _c(
-                    "option",
-                    {
-                      model: {
-                        value: position.name,
-                        callback: function($$v) {
-                          _vm.$set(position, "name", $$v)
-                        },
-                        expression: "position.name"
-                      }
-                    },
-                    [_vm._v(_vm._s(position.name))]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "preferred_foot" }
-              },
-              [_vm._v("Preferred Foot *")]
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.preferred_foot,
-                    expression: "preferred_foot"
-                  }
-                ],
-                staticClass: "border py-2 px-3 text-grey-darkest",
-                attrs: { name: "", id: "preferred_foot" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.preferred_foot = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c(
-                  "option",
-                  { attrs: { value: "0", selected: "", disabled: "" } },
-                  [_vm._v("Please Select")]
-                ),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "left" } }, [_vm._v("Left")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "right" } }, [_vm._v("Right")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "both" } }, [_vm._v("Both")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
-                attrs: { for: "height" }
-              },
-              [_vm._v("Height")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.height,
-                  expression: "height"
-                }
-              ],
-              staticClass: "border py-2 px-3 text-grey-darkest",
-              attrs: { type: "text", id: "height" },
-              domProps: { value: _vm.height },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.height = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mb-2" }, [
-            _c(
-              "label",
-              {
-                staticClass:
-                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
-                staticStyle: { color: "orange", "font-weight": "900" },
                 attrs: { for: "profile_image" }
               },
               [_vm._v("Profile Picture")]
@@ -41604,9 +42209,324 @@ var render = function() {
                 }
               }
             })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "looking_for_a_club" }
+              },
+              [_vm._v("Looking For A Club")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.looking_for_a_club,
+                    expression: "looking_for_a_club"
+                  }
+                ],
+                staticClass: "border py-2 px-3 text-grey-darkest",
+                attrs: { name: "looking_for_a_club" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.looking_for_a_club = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", selected: "", disabled: "" } },
+                  [_vm._v("Please Select")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("YES")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "0" } }, [_vm._v("NO")])
+              ]
+            )
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.isPlayer
+        ? _c("div", { staticClass: "flex-1" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+              [
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "address" }
+                    },
+                    [_vm._v("Position *")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.preferred_position,
+                          expression: "preferred_position"
+                        }
+                      ],
+                      staticClass: "border py-2 px-3 text-grey-darkest",
+                      attrs: { name: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.preferred_position = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "0", selected: "", disabled: "" } },
+                        [_vm._v("Please Select")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.positions, function(position) {
+                        return _c(
+                          "option",
+                          {
+                            model: {
+                              value: position.name,
+                              callback: function($$v) {
+                                _vm.$set(position, "name", $$v)
+                              },
+                              expression: "position.name"
+                            }
+                          },
+                          [_vm._v(_vm._s(position.name))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "preferred_foot" }
+                    },
+                    [_vm._v("Preferred Foot *")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.preferred_foot,
+                          expression: "preferred_foot"
+                        }
+                      ],
+                      staticClass: "border py-2 px-3 text-grey-darkest",
+                      attrs: { name: "", id: "preferred_foot" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.preferred_foot = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "0", selected: "", disabled: "" } },
+                        [_vm._v("Please Select")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "left" } }, [
+                        _vm._v("Left")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "right" } }, [
+                        _vm._v("Right")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "both" } }, [
+                        _vm._v("Both")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "height" }
+                    },
+                    [_vm._v("Height")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.height,
+                        expression: "height"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { type: "text", id: "height" },
+                    domProps: { value: _vm.height },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.height = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isStaff
+        ? _c("div", { staticClass: "flex-1" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col w-50 px-7 lg:pl-20 lg:px-3" },
+              [
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "address" }
+                    },
+                    [_vm._v("Role *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.role,
+                        expression: "role"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { type: "text", id: "role" },
+                    domProps: { value: _vm.role },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.role = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col mb-2" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                      staticStyle: { color: "orange", "font-weight": "900" },
+                      attrs: { for: "preferred_foot" }
+                    },
+                    [_vm._v("Qualifications *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.qualifications,
+                        expression: "qualifications"
+                      }
+                    ],
+                    staticClass: "border py-2 px-3 text-grey-darkest",
+                    attrs: { type: "text", id: "qualifications" },
+                    domProps: { value: _vm.qualifications },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.qualifications = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]
+            )
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "flex flex-wrap" }, [
@@ -41776,7 +42696,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(
-                    "\n                            Register\n                        "
+                    "\n                        Register\n                    "
                   )
                 ]
               )
@@ -41817,8 +42737,644 @@ var staticRenderFns = [
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex flex-col px-7 mb-3 lg:pl-20 lg:px-3" },
+      [
+        _c(
+          "h4",
+          {
+            staticClass:
+              "mb-2 uppercase font-bold text-lg text-grey-darkest underline",
+            staticStyle: { color: "orange", "font-weight": "900" }
+          },
+          [_vm._v("Staff Data\n                ")]
+        )
+      ]
+    )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffComponent.vue?vue&type=template&id=4af24ab0& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "flex flex-col md:flex-row" }, [
+      _c("div", { staticClass: "flex-initial m-5" }, [
+        _c(
+          "h3",
+          {
+            staticClass:
+              "m-2 p-2 uppercase text-2xl mb-5 font-bold font-light font-Montserrat text-orange"
+          },
+          [_vm._v("Search\n                Filters")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Name")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.name },
+            on: {
+              keyup: function($event) {
+                return _vm.getStaff(
+                  null,
+                  _vm.name,
+                  _vm.region,
+                  _vm.county,
+                  _vm.gender,
+                  _vm.role
+                )
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Role")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.role,
+                expression: "role"
+              }
+            ],
+            staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+            attrs: { type: "text", placeholder: "Search Name Contains" },
+            domProps: { value: _vm.role },
+            on: {
+              keyup: function($event) {
+                return _vm.getStaff(
+                  null,
+                  _vm.name,
+                  _vm.region,
+                  _vm.county,
+                  _vm.gender,
+                  _vm.role
+                )
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.role = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Gender")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.gender,
+                  expression: "gender"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              attrs: { name: "", id: "gender", type: "text" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.gender = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.getStaff(
+                      null,
+                      _vm.name,
+                      _vm.region,
+                      _vm.county,
+                      _vm.gender,
+                      _vm.role
+                    )
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "selected" } }, [
+                _vm._v("Please Select")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "MALE" } }, [_vm._v("MALE")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "FEMALE" } }, [_vm._v("FEMALE")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "selected" } }, [_vm._v("BOTH")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By County")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.county,
+                  expression: "county"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              attrs: { name: "", id: "county", type: "text" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.county = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.getStaff(
+                      null,
+                      _vm.name,
+                      _vm.region,
+                      _vm.county,
+                      _vm.gender,
+                      _vm.role
+                    )
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "selected" } }, [
+                _vm._v("Please Select")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.counties, function(county) {
+                return _c(
+                  "option",
+                  {
+                    model: {
+                      value: county.id,
+                      callback: function($$v) {
+                        _vm.$set(county, "id", $$v)
+                      },
+                      expression: "county.id"
+                    }
+                  },
+                  [_vm._v(_vm._s(county.county))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2" }, [
+          _c("p", { staticClass: "mb-2 uppercase text-center text-orange" }, [
+            _vm._v("Search By Region")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.region,
+                  expression: "region"
+                }
+              ],
+              staticClass: "border-2 border-gray-600 rounded h-9 pl-2 w-full",
+              attrs: { name: "", id: "", type: "text" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.region = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.getStaff(
+                      null,
+                      _vm.name,
+                      _vm.region,
+                      _vm.county,
+                      _vm.gender,
+                      _vm.role
+                    )
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "selected" } }, [
+                _vm._v("Please Select")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.regions, function(region) {
+                return _c(
+                  "option",
+                  {
+                    model: {
+                      value: region.id,
+                      callback: function($$v) {
+                        _vm.$set(region, "id", $$v)
+                      },
+                      expression: "region.id"
+                    }
+                  },
+                  [_vm._v(_vm._s(region.region))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "m-2 p-2 text-center" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                " uppercase text-md mb-5 font-bold font-light font-Montserrat text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+              on: { click: _vm.resetFilter }
+            },
+            [_vm._v("Reset Filter")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex-initial" },
+        [
+          _c(
+            "table",
+            {
+              staticClass:
+                "table-auto border-collapse border-2 border-orange bg-white bg-opacity-95 hidden lg:block"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.laravelData.data, function(staff) {
+                  return _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-orange border-2 uppercase pl-2 font-light p-2"
+                      },
+                      [_vm._v(_vm._s(staff.user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-orange border-2 uppercase pl-2 font-light p-2"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(staff.role) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(staff.contracts.contracted_club) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      : _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [_vm._v("No Club")]
+                        ),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(staff.contracts.contact_expiry_date) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      : _c(
+                          "td",
+                          {
+                            staticClass:
+                              "border-orange border-2 uppercase pl-2 font-light p-2"
+                          },
+                          [_vm._v("No Contract")]
+                        ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border-orange border-2 uppercase pl-2 font-light p-2"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              staff.looking_for_a_club === 1 ? "YES" : "NO"
+                            ) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "border-orange border-2 p-2 text-center" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                            attrs: { href: "/staff/" + staff.id }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            View Details\n                        "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                }),
+                0
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "lg:hidden block p-4" },
+            _vm._l(_vm.laravelData.data, function(staff) {
+              return _c("div", { staticClass: "flex-1" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-white px-2 py-2 border border-orange border-2"
+                  },
+                  [
+                    _c("h3", { staticClass: "uppercase" }, [
+                      _vm._v(_vm._s(staff.user.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "uppercase" }, [
+                      _vm._v("Role : " + _vm._s(staff.role))
+                    ]),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c("p", { staticClass: "uppercase" }, [
+                          _vm._v(
+                            "Club :\n                            " +
+                              _vm._s(staff.contracts.contracted_club)
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    staff.contracts != null
+                      ? _c("p", { staticClass: "uppercase" }, [
+                          _vm._v(
+                            "Club Expiry:\n                            " +
+                              _vm._s(staff.contracts.contact_expiry_date)
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "uppercase" }, [
+                      _vm._v(
+                        "Looking For A Club :\n                            " +
+                          _vm._s(staff.looking_for_a_club === 1 ? "YES" : "NO")
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light",
+                        attrs: { href: "/staff/" + staff.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            View Details\n                        "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("pagination", {
+            attrs: {
+              data: _vm.laravelData,
+              "prev-text": "Prev",
+              "next-text": "Next",
+              "container-class": "pagination block",
+              "page-class": "page-item block"
+            },
+            on: { "pagination-change-page": _vm.getStaff }
+          })
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass:
+              "pl-2 border-orange border-2 text-left text-gray-800 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("\n                        Name\n                    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Role")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Club")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Contract Finish Date")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "border-orange border-2 uppercase lg:p-2 text-orange"
+          },
+          [_vm._v("Looking To Move")]
+        ),
+        _vm._v(" "),
+        _c("th", {
+          staticClass: "border-orange border-2 w-32 uppercase  text-orange"
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=template&id=7426b9c5&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/StaffRegisterComponent.vue?vue&type=template&id=7426b9c5& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

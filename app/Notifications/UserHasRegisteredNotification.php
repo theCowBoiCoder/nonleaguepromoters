@@ -16,10 +16,9 @@ class UserHasRegisteredNotification extends Notification
      *
      * @return void
      */
-    public function __construct($user, $player)
+    public function __construct($user)
     {
         $this->user = $user;
-        $this->player = $player;
     }
 
     /**
@@ -48,10 +47,7 @@ class UserHasRegisteredNotification extends Notification
             ->line('New users has signed up to the system')
             ->line("Name: ***{$this->user->name}***")
             ->line("EMAIL: ***{$this->user->email}***")
-            ->line("DOB: ***{$this->player->dob}***")
-            ->line("POSITION: ***{$this->player->preferred_position}***")
-            ->line("HEIGHT: ***{$this->player->height}***")
-            ->line("GENDER: ***{$this->player->gender}***");
+            ->line("DOB: ***{$this->user->dob}***");
     }
 
     /**

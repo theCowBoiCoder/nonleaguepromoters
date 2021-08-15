@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Message\Messages;
 use App\Models\Message;
 use App\Models\Player;
 use App\Models\Position;
 use App\Models\Region;
 use App\Models\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,58 +60,55 @@ class PlayerController extends Controller
 
 
         $player = Player::query();
-        if ($term != null) {
-            $player->where('name', 'LIKE', '%' . $term . '%');
-        }
-        if ($region != null) {
-            $player->where('region', $request->region);
-        }
+        $player->whereHas('user', function ($builder) use ($term, $region, $county, $request, $gender) {
+            if ($region != null) {
+                $builder->where('region', $request->region);
+            }
 
-        if ($county != null) {
-            $player->where('county', $county);
-        }
+            if ($county != null) {
+                $builder->where('county', $county);
+            }
 
-        if ($gender != null) {
-            $player->where('gender', $gender);
-        }
+            if ($gender != null) {
+                $builder->where('gender', $gender);
+            }
+
+            if ($term != null) {
+                $builder->where('name', 'LIKE', '%' . $term . '%');
+            }
+
+            $builder->where('is_public', 1);
+        });
+
 
         if ($position != null) {
             $player->where('preferred_position', $position);
         }
 
-        $player->with(['contracts']);
-        $player->where('is_public', 1);
-        $player->orderBy('youtube_url','DESC');
+        $player->with(['contracts', 'user']);
         $players = $player->paginate(15);
         return response()->json($players);
     }
 
-    public function single(Player $player)
+    public function single(Request $request)
     {
+        $player = Player::with(['user'])->where('user_id', $request->segment(2))->first();
         return view('pages.players.single', [
             'player' => $player
         ]);
     }
 
-    public function message(Player $player)
+    public function messageForm(Request $request)
     {
+        $player = Player::with(['user'])->where('user_id', $request->segment(2))->first();
         return view('pages.players.message', [
             'player' => $player
         ]);
     }
 
-    public function messageSend(Request $request)
+    public function messageSend(Request $request, $user_id): \Illuminate\Http\JsonResponse
     {
-        $player = Player::query()->find($request->segment(2));
-
-        Message::query()->create([
-            'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
-            'receiver_user_id' => $player->user_id,
-            'subject' => $request->subject,
-            'message' => encrypt($request->message),
-            'from' => $request->from_name
-        ]);
-
-        return response()->json(['success' =>  'Your Message has been sent']);
+        $response = Messages::send($user_id, $request);
+        return response()->json(['success' => $response]);
     }
 }

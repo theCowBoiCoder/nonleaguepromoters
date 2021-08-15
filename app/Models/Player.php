@@ -15,31 +15,22 @@ class Player extends Model
 
     protected $fillable = [
         'user_id',
-        'name',
-        'gender',
-        'dob',
-        'bio',
-        'address',
         'looking_for_a_club',
         'preferred_position',
         'preferred_foot',
-        'profile_image',
-        'country',
         'height',
-        'county',
-        'region',
         'step_level',
-        'twitter_url',
-        'instagram_url',
-        'youtube_url',
-        'facebook_url',
-        'is_public',
         'age'
     ];
 
     protected $guarded = ['*'];
 
     protected $appends = ['age'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 
     public function currentContract()
     {

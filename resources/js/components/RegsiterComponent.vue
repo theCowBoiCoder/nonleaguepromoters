@@ -22,8 +22,30 @@
                 <div class="flex flex-col w-50 px-5 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;" for="name">Are you a *</label>
+                        <div class="flex">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="border py-2 px-3 text-grey-darkest" id="player"
+                                       v-model="profile_type" value="1">
+                                <span class="text-orange ml-2 text-md">Player</span>
+                            </label>
+                            <label class="flex items-center ml-2">
+                                <input type="checkbox" class="border py-2 px-3 text-grey-darkest" id="player"
+                                       v-model="profile_type" value="2">
+                                <span class="text-orange ml-2 text-md">Staff</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">Name *</label>
                         <input type="text" class="border py-2 px-3 text-grey-darkest" id="name" v-model="name">
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="email_address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Email Address *</label>
+                        <input type="email" class="border py-2 px-3 text-grey-darkest" id="email_address"
+                               v-model="email_address">
                     </div>
                     <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -40,35 +62,13 @@
                             <option value="FEMALE">FEMALE</option>
                         </select>
                     </div>
-                    <div class="flex flex-col mb-2">
-                        <label for="email_address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Email Address *</label>
-                        <input type="email" class="border py-2 px-3 text-grey-darkest" id="email_address"
-                               v-model="email_address">
-                    </div>
+
                     <div class="flex flex-col mb-2">
                         <label for="dob" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Date Of Birth</label>
-                        <date-picker name="dob" :input-class="'border py-2 px-3 text-grey-darkest w-full'" v-model="dob" format="yyyy-MM-dd"></date-picker>
+                        <date-picker name="dob" :input-class="'border py-2 px-3 text-grey-darkest w-full'" v-model="dob"
+                                     format="yyyy-MM-dd"></date-picker>
                     </div>
-                    <div class="flex flex-col mb-2">
-                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Looking For A Club</label>
-                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest" v-model="looking_for_a_club">
-                            <option value="0" selected disabled>Please Select</option>
-                            <option value="1">YES</option>
-                            <option value="0">NO</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-1">
-                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
-                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
-                        style="color: orange; font-weight: 900;">Player Data
-                    </h4>
-                </div>
-                <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
                         <label class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;" for="name">County *</label>
@@ -89,6 +89,32 @@
                         </select>
                     </div>
                     <div class="flex flex-col mb-2">
+                        <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Profile Picture</label>
+                        <input type="file" id="file" ref="file" class="text-orange font-bold"
+                               v-on:change="previewFiles()" multiple>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="looking_for_a_club" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Looking For A Club</label>
+                        <select name="looking_for_a_club" class="border py-2 px-3 text-grey-darkest"
+                                v-model="looking_for_a_club">
+                            <option value="0" selected disabled>Please Select</option>
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1" v-if="isPlayer">
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
+                        style="color: orange; font-weight: 900;">Player Data
+                    </h4>
+                </div>
+                <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
+                    <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Position *</label>
                         <select name="" class="border py-2 px-3 text-grey-darkest" v-model="preferred_position">
@@ -99,7 +125,8 @@
                     <div class="flex flex-col mb-2">
                         <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Preferred Foot *</label>
-                        <select name="" id="preferred_foot" class="border py-2 px-3 text-grey-darkest" v-model="preferred_foot">
+                        <select name="" id="preferred_foot" class="border py-2 px-3 text-grey-darkest"
+                                v-model="preferred_foot">
                             <option value="0" selected disabled>Please Select</option>
                             <option value="left">Left</option>
                             <option value="right">Right</option>
@@ -112,13 +139,31 @@
                         <input type="text" class="border py-2 px-3 text-grey-darkest" id="height"
                                v-model="height">
                     </div>
+
+
+                </div>
+            </div>
+            <div class="flex-1" v-if="isStaff">
+                <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
+                    <h4 class="mb-2 uppercase font-bold text-lg text-grey-darkest underline"
+                        style="color: orange; font-weight: 900;">Staff Data
+                    </h4>
+                </div>
+                <div class="flex flex-col w-50 px-7 lg:pl-20 lg:px-3">
                     <div class="flex flex-col mb-2">
-                        <label for="profile_image" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
-                               style="color: orange; font-weight: 900;">Profile Picture</label>
-                        <input type="file" id="file" ref="file" class="text-orange font-bold"
-                               v-on:change="previewFiles()" multiple>
+                        <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Role *</label>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="role"
+                               v-model="role">
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <label for="preferred_foot" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Qualifications *</label>
+                        <input type="text" class="border py-2 px-3 text-grey-darkest" id="qualifications"
+                               v-model="qualifications">
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="flex flex-wrap">
@@ -127,7 +172,8 @@
                     <div class="flex flex-col mb-2 mt-2">
                         <label for="bio" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Bio</label>
-                        <textarea name="bio" class="border py-2 px-3 text-grey-darkest" cols="30" rows="10" v-model="bio"></textarea>
+                        <textarea name="bio" class="border py-2 px-3 text-grey-darkest" cols="30" rows="10"
+                                  v-model="bio"></textarea>
                     </div>
                 </div>
             </div>
@@ -148,14 +194,20 @@
                                      v-model="contract_end_date"></date-picker>
                     </div>
                     <div class="flex justify-center items-center bg-orange font-medium rounded">
-                            <button v-bind:class="{ 'opacity-25' : isDisabled === true}" class="inline-flex items-center px-3 py-2 font-medium rounded px-4 py-2 leading-5 bg-green-500 text-primary-100 text-white hover:text-white hover:bg-green-700" @click="register()"
-                                    style="background-color: orange; font-weight: 900; border-color: orange" :disabled='isDisabled'>
-                                <svg v-bind:class="{ 'invisible' : formGo !== true}" class=" animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Register
-                            </button>
+                        <button v-bind:class="{ 'opacity-25' : isDisabled === true}"
+                                class="inline-flex items-center px-3 py-2 font-medium rounded px-4 py-2 leading-5 bg-green-500 text-primary-100 text-white hover:text-white hover:bg-green-700"
+                                @click="register()"
+                                style="background-color: orange; font-weight: 900; border-color: orange"
+                                :disabled='isDisabled'>
+                            <svg v-bind:class="{ 'invisible' : formGo !== true}" class=" animate-spin h-5 w-5 mr-3 ..."
+                                 viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Register
+                        </button>
                     </div>
 
                 </div>
@@ -171,7 +223,7 @@ import DatePicker from 'vuejs-datepicker';
 import axios from 'axios';
 
 export default {
-    props: ['positions','regions'],
+    props: ['positions', 'regions'],
     data() {
         return {
             name: '',
@@ -184,16 +236,20 @@ export default {
             preferred_foot: 0,
             preferred_position: 0,
             region: 0,
+            staff_region: 0,
             step_free: 0,
             club: '',
             contract_end_date: '',
             file: '',
+            role: '',
+            qualifications: '',
             bio: '',
             got_club: false,
             errors: [],
             success: '',
             btnDisable: true,
-            formGo : false
+            formGo: false,
+            profile_type: []
         }
     },
 
@@ -223,6 +279,9 @@ export default {
             formData.append('club', this.club);
             formData.append('county', this.region);
             formData.append('step_free', this.step_free);
+            formData.append('role', this.role);
+            formData.append('qualification', this.qualifications);
+            formData.append('profile_type', this.profile_type);
             if (this.contract_end_date !== '') {
                 formData.append('contract_end_date', this.contract_end_date.toDateString());
             }
@@ -235,14 +294,13 @@ export default {
                 'Content-Type': 'multipart/form-data'
 
             };
-            axios.post('/register',formData).then(response => {
+            axios.post('/register', formData).then(response => {
                 if (response.status === 200) {
                     if (response.data.error) {
                         this.success = response.data.error;
                         this.formGo = false;
-                    }else{
-                        window.location.href='/';
-
+                    } else {
+                        window.location.href = '/';
                     }
 
                 }
@@ -257,9 +315,20 @@ export default {
 
     },
     computed: {
-        isDisabled: function(){
-            if(this.name === '' || this.email_address === ''
-                || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0){
+        isStaff() {
+            return this.profile_type.includes("2");
+        },
+        isPlayer() {
+            return this.profile_type.includes("1");
+        },
+        isDisabled: function () {
+            if (this.profile_type === 1 && (this.name === '' || this.email_address === ''
+                || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)) {
+                return true;
+            }
+
+            if (this.profile_type === 2 && (this.name === '' || this.email_address === ''
+                || this.gender === 0 || this.dob === '' || this.region === 0 || this.role === '' || this.qualifications === '')) {
                 return true;
             }
         }
