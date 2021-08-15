@@ -73,7 +73,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="player in laravelData.data">
-                        <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{ player.name }}</td>
+                        <td class="border-orange border-2 uppercase pl-2 font-light p-2">{{ player.user.name }}</td>
                         <td class="border-orange border-2 uppercase pl-2 font-light p-2">
                             {{ player.preferred_position }}
                         </td>
@@ -89,7 +89,7 @@
                             {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}
                         </td>
                         <td class="border-orange border-2 p-2 text-center">
-                            <a v-bind:href="'/player/'+player.id"
+                            <a v-bind:href="'/player/'+player.user.id"
                                class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                 View Details
                             </a>
@@ -101,7 +101,7 @@
                 <div class="lg:hidden block p-4">
                     <div class="flex-1" v-for="player in laravelData.data">
                         <div class="bg-white px-2 py-2 border border-orange border-2">
-                            <h3 class="uppercase">{{ player.name }}</h3>
+                            <h3 class="uppercase">{{ player.user.name }}</h3>
                             <p class="uppercase">Preferred Position : {{ player.preferred_position }}</p>
                             <p class="uppercase" v-if="player.contracts != null">Club :
                                 {{ player.contracts.contracted_club }}</p>
@@ -109,7 +109,7 @@
                                 {{ player.contracts.contact_expiry_date }}</p>
                             <p class="uppercase">Looking For A Club :
                                 {{ (player.looking_for_a_club === 1) ? 'YES' : 'NO' }}</p>
-                            <a v-bind:href="'/player/'+player.id"
+                            <a v-bind:href="'/player/'+player.user.id"
                                class="text-sm border-1 bg-orange p-1 rounded text-white uppercase font-light">
                                 View Details
                             </a>

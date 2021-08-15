@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Postmark\PostmarkClient;
 
 class UserRegisterNotification extends Notification
 {
@@ -45,6 +46,7 @@ class UserRegisterNotification extends Notification
      */
     public function toMail($notifiable)
     {
+
         return (new MailMessage)
             ->bcc('hayden@togadevelopment.co.uk')
             ->subject('Thank you for joining Non League Promoters')
