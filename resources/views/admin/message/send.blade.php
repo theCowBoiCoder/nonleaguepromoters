@@ -16,7 +16,8 @@
                             <div class="form-group">
                                 <label for="player_id">Name</label>
                                 <select class="form-select" id="player_id" name="player_id">
-                                    <option value="0" selected>Please Select</option>
+                                    <option selected>Please Select</option>
+                                    <option value="0">All</option>
                                     @foreach($players as $player)
                                         <option value="{{$player->id}}">{{$player->user->name}}</option>
                                     @endforeach

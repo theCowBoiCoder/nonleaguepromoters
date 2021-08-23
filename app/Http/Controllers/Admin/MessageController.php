@@ -32,17 +32,34 @@ class MessageController extends Controller
 
     public function post_message(Request $request)
     {
-        Message::query()->create([
-            'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
-            'receiver_user_id' => $request->player_id,
-            'subject' => $request->subject,
-            'message' => encrypt($request->message),
-            'from' => 'Non League Promoters'
-        ]);
+        if ($request->player_id == 0) {
 
-        $user = User::query()->find($request->player_id);
-        Notification::route('mail', $user->email)->notify(new MessageSendNotification());
+            foreach (Player::query()->get() as $player) {
+                Message::query()->create([
+                    'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
+                    'receiver_user_id' => $player->id,
+                    'subject' => $request->subject,
+                    'message' => encrypt($request->message),
+                    'from' => 'Non League Promoters'
+                ]);
 
-        return redirect()->back()->with('success','Message has been sent');
+                $user = User::query()->find($request->player_id);
+                Notification::route('mail', $user->email)->notify(new MessageSendNotification());
+            }
+        } else {
+            Message::query()->create([
+                'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
+                'receiver_user_id' => $request->player_id,
+                'subject' => $request->subject,
+                'message' => encrypt($request->message),
+                'from' => 'Non League Promoters'
+            ]);
+
+            $user = User::query()->find($request->player_id);
+            Notification::route('mail', $user->email)->notify(new MessageSendNotification());
+        }
+
+
+        return redirect()->back()->with('success', 'Message has been sent');
     }
 }
