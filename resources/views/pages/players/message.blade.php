@@ -13,7 +13,7 @@
                 <h3 class="uppercase text-white text-1xl lg:text-2xl bolder italic font-Roboto leading-8"
                     style="color: orange; font-weight: 900;"><a href="{{route('single',$player)}}">
                         <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
-                <message-component :player="{{$player}}"></message-component>
+                <message-component :player="{{$player}}" ></message-component>
             </div>
         </div>
     </div>

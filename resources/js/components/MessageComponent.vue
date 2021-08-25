@@ -61,7 +61,7 @@ export default {
             formData.append('from_name', this.from_user);
             formData.append('subject', this.subject);
             formData.append('message', this.message);
-            formData.append('player_id',player.id);
+            formData.append('player_id',player.user.id);
             this.success = '';
             axios.defaults.headers.common = {
                 'X-Requested-With': 'XMLHttpRequest',
