@@ -1943,6 +1943,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('from_name', this.from_user);
       formData.append('subject', this.subject);
       formData.append('message', this.message);
+      formData.append('player_id', player.id);
       this.success = '';
       (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common) = {
         'X-Requested-With': 'XMLHttpRequest',

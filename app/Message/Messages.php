@@ -15,7 +15,7 @@ class Messages
     {
         Message::query()->create([
             'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
-            'receiver_user_id' => $user_id,
+            'receiver_user_id' => $request->player_id,
             'subject' => $request->subject,
             'message' => encrypt($request->message),
             'from' => $request->from_name

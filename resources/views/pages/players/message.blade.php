@@ -9,7 +9,7 @@
             <div class="text-center pt-10 pb-10 lg:pt-20 lg:pb-20 lg:pl-20 lg:text-left">
                 @include('pages.partials.mobile_image')
                 <h1 class="uppercase text-white text-5xl lg:text-8xl bolder italic font-Roboto xs:leading-8"
-                    style="color: orange; font-weight: 900;">Send {{$player->name}} <br> A Message</h1>
+                    style="color: orange; font-weight: 900;">Send {{$player->user->name}} <br> A Message</h1>
                 <h3 class="uppercase text-white text-1xl lg:text-2xl bolder italic font-Roboto leading-8"
                     style="color: orange; font-weight: 900;"><a href="{{route('single',$player)}}">
                         <i class="fas fa-long-arrow-alt-left"></i> Back</a></h3>
