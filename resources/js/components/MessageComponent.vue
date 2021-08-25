@@ -3,7 +3,6 @@
         <div class="flex flex-col px-7 mb-3 lg:pl-20 lg:px-3">
             <h5 class="mb-2 uppercase font-bold text-lg text-grey-darkest" style="color: orange">
                 {{ success }}</h5>
-            <input type="hidden" v-model="player_id" value="{{player.id}}}">
             <div class="flex flex-col mb-2 mt-2">
                 <label for="from_user" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                        style="color: orange; font-weight: 900;">From</label>
@@ -62,7 +61,7 @@ export default {
             formData.append('from_name', this.from_user);
             formData.append('subject', this.subject);
             formData.append('message', this.message);
-            formData.append('player_id', this.player_id);
+            formData.append('player_id',player.id);
             this.success = '';
             axios.defaults.headers.common = {
                 'X-Requested-With': 'XMLHttpRequest',
