@@ -37,7 +37,7 @@ class MessageController extends Controller
             foreach (Player::query()->get() as $player) {
                 Message::query()->create([
                     'sender_user_id' => (Auth::user() != null) ? Auth::user()->id : NULL,
-                    'receiver_user_id' => $player->id,
+                    'receiver_user_id' => $player->user_id,
                     'subject' => $request->subject,
                     'message' => encrypt($request->message),
                     'from' => 'Non League Promoters'
