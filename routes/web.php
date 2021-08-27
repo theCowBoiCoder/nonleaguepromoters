@@ -28,7 +28,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
 
 Route::get('register', [\App\Http\Controllers\HomeController::class, 'register'])->name('register');
 Route::post('register', [\App\Http\Controllers\HomeController::class, 'registerUser'])->name('register.store');
-Route::post('delete', [\App\Http\Controllers\HomeController::class, 'deleteUser'])->name('delete.user');
+Route::post('delete', [\App\Http\Controllers\HomeController::class, 'deleteUser'])->name('delete.user')->middleware('auth');
 Route::get('login', [\App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('login/me', [\App\Http\Controllers\HomeController::class, 'auth'])->name('auth.login');
 Route::get('logout', [\App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
@@ -81,6 +81,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('view-all', [\App\Http\Controllers\Admin\UserController::class, 'all'])->name('all');
         Route::get('single/{user_id}', [\App\Http\Controllers\Admin\UserController::class, 'single'])->name('single');
+        Route::get('{user}/delete',[\App\Http\Controllers\Admin\UserController::class,'delete'])->name('delete');
     });
 });
 

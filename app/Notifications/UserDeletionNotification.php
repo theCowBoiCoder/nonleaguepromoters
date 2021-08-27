@@ -41,9 +41,11 @@ class UserDeletionNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->bcc('hayden@togadevelopment.co.uk')
+            ->subject('We have removed your account')
+            ->greeting("Hello {$this->user->name}")
+            ->line("We have now removed all your account details from our system")
+            ->line("Thank you for using The Non League Promoters we hope to see you soon!");
     }
 
     /**

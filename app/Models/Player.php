@@ -32,11 +32,6 @@ class Player extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
-    public function currentContract()
-    {
-
-    }
-
     public function contracts()
     {
         return $this->hasOne(PlayerContract::class, 'player_id', 'id');

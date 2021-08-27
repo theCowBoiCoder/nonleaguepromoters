@@ -9,7 +9,10 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <!-- Table with outer spacing -->
+                            @if (Session::has('success'))
+                                <div class="alert alert-success">{!! \Session::get('success') !!}</div>
+                        @endif
+                        <!-- Table with outer spacing -->
                             <div class="table-responsive">
                                 <table class="table table-lg">
                                     <thead>
@@ -37,7 +40,8 @@
                                             <td>
                                                 <a href="" class="btn btn-sm btn-warning">Send Password Reset</a>
                                                 <a href="" class="btn btn-sm btn-info">Edit</a>
-                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                                <a href="{{route('admin.users.delete',$user)}}"
+                                                   class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
