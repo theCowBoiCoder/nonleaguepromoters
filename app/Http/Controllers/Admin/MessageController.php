@@ -43,7 +43,7 @@ class MessageController extends Controller
                     'from' => 'Non League Promoters'
                 ]);
 
-                $user = User::query()->find($request->player_id);
+                $user = User::query()->find($player->user_id);
                 Notification::route('mail', $user->email)->notify(new MessageSendNotification());
             }
         } else {
