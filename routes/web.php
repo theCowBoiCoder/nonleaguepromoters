@@ -83,5 +83,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
         Route::get('single/{user_id}', [\App\Http\Controllers\Admin\UserController::class, 'single'])->name('single');
         Route::get('{user}/delete',[\App\Http\Controllers\Admin\UserController::class,'delete'])->name('delete');
     });
+
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
 
