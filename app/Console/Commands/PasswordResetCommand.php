@@ -41,8 +41,11 @@ class PasswordResetCommand extends Command
      */
     public function handle()
     {
-        $users = User::query()->find(155);
-        Notification::route('mail', $users->email)->notify(new PasswordNotification($users->id));
+        $users = User::query()->where('password_been_changed', 0)->get();
+        foreach ($users as $user) {
+            Notification::route('mail', $user->email)->notify(new PasswordNotification($user->id));
+        }
+
 
     }
 }
