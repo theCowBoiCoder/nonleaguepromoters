@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Models\Region;
 use App\Models\Staff;
 use App\Models\User;
+use App\Notifications\PasswordNotification;
 use App\Notifications\UserDeletionNotification;
 use App\Notifications\UserHasRegisteredNotification;
 use App\Notifications\UserPasswordResetNotification;
@@ -71,8 +72,7 @@ class HomeController extends Controller
         if ($user != null) {
             //Send password Reset Email
             $message = "Your new password has been sent to $user->email";
-            $password = Str::random(8);
-            Notification::route('mail', $user->email)->notify(new UserPasswordResetNotification($user, $password));
+            Notification::route('mail', $user->email)->notify(new PasswordNotification($user->id));
             $user->password_been_changed = 0;
             $user->save();
         } else {
