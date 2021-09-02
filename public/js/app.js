@@ -1929,6 +1929,7 @@ __webpack_require__.r(__webpack_exports__);
       subject: '',
       message: '',
       from_user: '',
+      player_id: '',
       btnDisable: true,
       formGo: false,
       success: ''
@@ -1943,7 +1944,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('from_name', this.from_user);
       formData.append('subject', this.subject);
       formData.append('message', this.message);
-      formData.append('player_id', player.id);
+      formData.append('player_id', player.user_id);
       this.success = '';
       (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common) = {
         'X-Requested-With': 'XMLHttpRequest',
@@ -2749,6 +2750,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2758,6 +2765,7 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       dob: '',
       email_address: '',
+      password: '',
       address: '',
       height: '',
       gender: 0,
@@ -2800,6 +2808,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       formData.append('email_address', this.email_address);
+      formData.append('password', this.password);
       formData.append('address', this.address);
       formData.append('height', this.height);
       formData.append('gender', this.gender);
@@ -2848,11 +2857,11 @@ __webpack_require__.r(__webpack_exports__);
       return this.profile_type.includes("1");
     },
     isDisabled: function isDisabled() {
-      if (this.profile_type === 1 && (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)) {
+      if (this.profile_type === 1 && (this.name === '' || this.email_address === '' || this.password === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)) {
         return true;
       }
 
-      if (this.profile_type === 2 && (this.name === '' || this.email_address === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.role === '' || this.qualifications === '')) {
+      if (this.profile_type === 2 && (this.name === '' || this.email_address === '' || this.password === '' || this.gender === 0 || this.dob === '' || this.region === 0 || this.role === '' || this.qualifications === '')) {
         return true;
       }
     }
@@ -41925,6 +41934,41 @@ var render = function() {
                     return
                   }
                   _vm.email_address = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "mb-2 uppercase font-bold text-lg text-grey-darkest",
+                staticStyle: { color: "orange", "font-weight": "900" },
+                attrs: { for: "password" }
+              },
+              [_vm._v("Password *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass: "border py-2 px-3 text-grey-darkest",
+              attrs: { type: "password", id: "password" },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
                 }
               }
             })

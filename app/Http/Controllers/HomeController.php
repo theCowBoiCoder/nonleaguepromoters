@@ -100,11 +100,10 @@ class HomeController extends Controller
 
         $profile_types = is_array($request->profile_type) ? explode(',', $request->profile_type) : $request->profile_type;
         $region = Region::query()->where('county', $request->county)->first();
-        $password = Str::random(8);
         $user = User::query()->create([
             'name' => $request->name,
             'email' => $request->email_address,
-            'password' => Hash::make($password),
+            'password' => Hash::make($request->password),
             'gender' => $request->gender,
             'dob' => Carbon::parse($request->dob)->toDateString(),
             'county' => $region->county,
@@ -152,11 +151,11 @@ class HomeController extends Controller
         }
 
 
-        Auth::attempt(['email' => $request->email, 'password' => $password]);
+        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
         if (env('APP_ENV') != 'local') {
             //Send the Notifications
             Notification::route('mail', 'nonleagueguys@gmail.com')->notify(new UserHasRegisteredNotification($user));
-            Notification::route('mail', $user->email)->notify(new UserRegisterNotification($user, $password));
+            Notification::route('mail', $user->email)->notify(new UserRegisterNotification($user));
         }
 
         return response()->json(['message' => 'Thanks You Have Now Registered']);
@@ -171,11 +170,11 @@ class HomeController extends Controller
     public function auth(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = User::query()->where('email', $request->email)->first();
-            if ($user->password_been_changed == 0) {
-                //Send to change password
-                return redirect()->route('password.change', $user);
-            }
+//            $user = User::query()->where('email', $request->email)->first();
+//            if ($user->password_been_changed == 0) {
+//                //Send to change password
+//                return redirect()->route('password.change', $user);
+//            }
 
             return redirect('/')->with('logged_in', 'Welcome back');
         }

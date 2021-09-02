@@ -6,24 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Postmark\PostmarkClient;
 
-class UserRegisterNotification extends Notification
+class PasswordNotification extends Notification
 {
     use Queueable;
-
-    private $password;
-    private $user;
 
     /**
      * Create a new notification instance.
      *
-     * @param $user
-     * @param $password
+     * @return void
      */
-    public function __construct($user)
+    public function __construct($user_id)
     {
-        $this->user = $user;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -41,16 +36,18 @@ class UserRegisterNotification extends Notification
      * Get the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
-
+        $url = url('password-change/' . $this->user_id);
         return (new MailMessage)
             ->bcc('hayden@togadevelopment.co.uk')
-            ->subject('Thank you for joining Non League Promoters')
-            ->greeting("Hello {$this->user->name}")
-            ->line('Welcome and thank you for joining Non League Promoters');
+            ->subject('Password Generation')
+            ->greeting('We are really sorry!!')
+            ->line('We have noticed a slight issue with our password generation, we apologies for this inconvenience')
+            ->action('Change Password', $url)
+            ->line('By clicking this button you will be asked to set your password.');
     }
 
     /**

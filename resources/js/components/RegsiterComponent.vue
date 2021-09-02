@@ -48,6 +48,12 @@
                                v-model="email_address">
                     </div>
                     <div class="flex flex-col mb-2">
+                        <label for="password" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+                               style="color: orange; font-weight: 900;">Password *</label>
+                        <input type="password" class="border py-2 px-3 text-grey-darkest" id="password"
+                               v-model="password">
+                    </div>
+                    <div class="flex flex-col mb-2">
                         <label for="address" class="mb-2 uppercase font-bold text-lg text-grey-darkest"
                                style="color: orange; font-weight: 900;">Address</label>
                         <input type="text" class="border py-2 px-3 text-grey-darkest" name="address" id="address"
@@ -229,6 +235,7 @@ export default {
             name: '',
             dob: '',
             email_address: '',
+            password: '',
             address: '',
             height: '',
             gender: 0,
@@ -269,6 +276,7 @@ export default {
                 formData.append('dob', this.dob.toDateString());
             }
             formData.append('email_address', this.email_address);
+            formData.append('password', this.password);
             formData.append('address', this.address);
             formData.append('height', this.height);
             formData.append('gender', this.gender);
@@ -322,12 +330,12 @@ export default {
             return this.profile_type.includes("1");
         },
         isDisabled: function () {
-            if (this.profile_type === 1 && (this.name === '' || this.email_address === ''
+            if (this.profile_type === 1 && (this.name === '' || this.email_address === '' || this.password === ''
                 || this.gender === 0 || this.dob === '' || this.region === 0 || this.preferred_foot === 0 || this.preferred_position === 0)) {
                 return true;
             }
 
-            if (this.profile_type === 2 && (this.name === '' || this.email_address === ''
+            if (this.profile_type === 2 && (this.name === '' || this.email_address === '' || this.password === ''
                 || this.gender === 0 || this.dob === '' || this.region === 0 || this.role === '' || this.qualifications === '')) {
                 return true;
             }
